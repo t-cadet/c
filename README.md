@@ -2,13 +2,13 @@
 
 A collection of standalone header-only C libraries for use in my libc-free projects.
 
-# Contents
+## Contents
 
 (see the top of each header file for more details)
 
 * **linux.h**: Cross-architecture Linux API
 
-# Getting Started
+## Getting Started
 
 Get a header file:
 ```bash
@@ -24,7 +24,7 @@ Include it in your project:
 #include "c/linux.h" // use as implementation file
 ```
 
-# Examples
+## Examples
 
 See `*_demo` functions in `*_demo.c` files.
 
