@@ -103,11 +103,6 @@ long llseek(int fd, long long offset, int whence) {
 #endif
 }
 
-void exit(int status) {
-  Syscall1_linux(NR_exit_linux, status, 0);
-  __builtin_unreachable();
-}
-
 // Helpers
 unsigned long Size_chars(const char* chars) {
   unsigned long size = 0;
@@ -120,7 +115,7 @@ unsigned long Size_chars(const char* chars) {
 void _Assert(int condition, const char* message) {
   if (!condition) {
     write(STDERR, message, Size_chars(message));
-    exit(1);
+    exit_linux(1);
   }
 }
 
@@ -187,10 +182,10 @@ void Syscall6_test() {
         Print(STDERR, "Test A: Passed: Kernel received flag 0xFF and rejected it.\n");
     } else if (retFail >= 0) {
         Print(STDERR, "Test A: FAILED: Syscall succeeded! Arg 6 was likely lost/zeroed.\n");
-        exit(1);
+        exit_linux(1);
     } else {
         Print(STDERR, "Test A: warning: Failed with unexpected error: ");
-        exit(retFail);
+        exit_linux(retFail);
     }
   }
 
@@ -213,7 +208,7 @@ void Syscall6_test() {
     if (ret < 0) {
         Print(STDERR, "Test B: Syscall failed\n");
         Cleanup(srcname, dstname, fdIn, fdOut);
-        exit(1);
+        exit_linux(1);
     } else if (ret != len - 10) {
         Print(STDERR, "Test B: Syscall succeeded but copied incomplete bytes\n");
     } else {
@@ -269,7 +264,9 @@ int main(void) {
   Print(STDOUT, "\n");
 
   Syscall6_test();
-  exit(42);
+  exit_linux(42);
+
+  SyscallWrapper_demo();
 
   return 0;
 }
