@@ -88,16 +88,10 @@
 /*║*/ #define NR_setsid_linux                       BY_ARCH_linux(      112,      157,      157,       66,       66,      157) /*║*/
 /*║*/ #define NR_set_tid_address_linux              BY_ARCH_linux(      218,       96,       96,      258,      256,       96) /*║*/
 /*╟──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╢*/
-/*║                                2b. Process control, personality, and miscellaneous attributes                                ║*/
+/*║                                             2b. Process control and personality                                              ║*/
 /*╟──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╢*/
 /*║*/ #define NR_prctl_linux                        BY_ARCH_linux(      157,      167,      167,      172,      172,      167) /*║*/
 /*║*/ #define NR_personality_linux                  BY_ARCH_linux(      135,       92,       92,      136,      136,       92) /*║*/
-/*║*/ #define NR_arch_prctl_linux                   BY_ARCH_linux(      158,     void,     void,      384,     void,     void) /*║*/
-/*║*/ #define NR_modify_ldt_linux                   BY_ARCH_linux(      154,     void,     void,      123,     void,     void) /*║*/
-/*║*/ #define NR_set_thread_area_linux              BY_ARCH_linux(      205,     void,     void,      243,     void,     void) /*║*/
-/*║*/ #define NR_get_thread_area_linux              BY_ARCH_linux(      211,     void,     void,      244,     void,     void) /*║*/
-/*║*/ #define NR_set_tls_linux                      BY_ARCH_linux(     void,     void,     void,     void, 0x0f0005,     void) /*║*/
-/*║*/ #define NR_get_tls_linux                      BY_ARCH_linux(     void,     void,     void,     void, 0x0f0006,     void) /*║*/
 /*╠══════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════╣*/
 /*║                                                  3. SCHEDULING & PRIORITIES                                                  ║*/
 /*╠══════════════════════════════════════════════════════════════╦═════════╤═════════╤═════════╤═════════╤═════════╤═════════════╣*/
@@ -782,6 +776,7 @@
 /*║*/ #define NR_uname_linux                        BY_ARCH_linux(       63,      160,      160,      122,      122,      160) /*║*/
 /*║*/ #define NR_olduname_linux                     BY_ARCH_linux(     void,     void,     void,      109,     void,     void) /*║*/
 /*║*/ #define NR_oldolduname_linux                  BY_ARCH_linux(     void,     void,     void,       59,     void,     void) /*║*/
+/*║*/ #define NR_gethostname_linux                  BY_ARCH_linux(     void,     void,     void,     void,     void,     void) /*║*/
 /*║*/ #define NR_sethostname_linux                  BY_ARCH_linux(      170,      161,      161,       74,       74,      161) /*║*/
 /*║*/ #define NR_setdomainname_linux                BY_ARCH_linux(      171,      162,      162,      121,      121,      162) /*║*/
 /*╟──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╢*/
@@ -875,17 +870,26 @@
 /*╠══════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════╣*/
 /*║                                             28. ARCHITECTURE-SPECIFIC OPERATIONS                                             ║*/
 /*╠══════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════╣*/
-/*║                                             28a. RISC-V architecture operations                                              ║*/
+/*║                                               28a. x86 architecture operations                                               ║*/
+/*╟──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╢*/
+/*║*/ #define NR_arch_prctl_linux                   BY_ARCH_linux(      158,     void,     void,      384,     void,     void) /*║*/
+/*║*/ #define NR_modify_ldt_linux                   BY_ARCH_linux(      154,     void,     void,      123,     void,     void) /*║*/
+/*║*/ #define NR_set_thread_area_linux              BY_ARCH_linux(      205,     void,     void,      243,     void,     void) /*║*/
+/*║*/ #define NR_get_thread_area_linux              BY_ARCH_linux(      211,     void,     void,      244,     void,     void) /*║*/
+/*║*/ #define NR_vm86_linux                         BY_ARCH_linux(     void,     void,     void,      166,     void,     void) /*║*/
+/*║*/ #define NR_vm86old_linux                      BY_ARCH_linux(     void,     void,     void,      113,     void,     void) /*║*/
+/*╟──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╢*/
+/*║                                               28b. ARM architecture operations                                               ║*/
+/*╟──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╢*/
+/*║*/ #define NR_set_tls_linux                      BY_ARCH_linux(     void,     void,     void,     void, 0x0f0005,     void) /*║*/
+/*║*/ #define NR_get_tls_linux                      BY_ARCH_linux(     void,     void,     void,     void, 0x0f0006,     void) /*║*/
+/*╟──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╢*/
+/*║                                             28c. RISC-V architecture operations                                              ║*/
 /*╟──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╢*/
 /*║*/ #define NR_riscv_flush_icache_linux           BY_ARCH_linux(     void,     void,      259,     void,     void,      259) /*║*/
 /*║*/ #define NR_riscv_hwprobe_linux                BY_ARCH_linux(     void,     void,      258,     void,     void,      258) /*║*/
 /*╟──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╢*/
-/*║                                               28b. x86 architecture operations                                               ║*/
-/*╟──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╢*/
-/*║*/ #define NR_vm86_linux                         BY_ARCH_linux(     void,     void,     void,      166,     void,     void) /*║*/
-/*║*/ #define NR_vm86old_linux                      BY_ARCH_linux(     void,     void,     void,      113,     void,     void) /*║*/
-/*╟──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╢*/
-/*║                                             28c. Intel MPX support (deprecated)                                              ║*/
+/*║                                             28d. Intel MPX support (deprecated)                                              ║*/
 /*╟──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╢*/
 /*║*/ #define NR_mpx_linux                          BY_ARCH_linux(     void,     void,     void,       56,     void,     void) /*║*/
 /*╠══════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════╣*/
@@ -929,6 +933,42 @@
 /*║                   generated by https://github.com/t-cadet/c-resources/blob/main/linux/get_syscall_tables.c                   ║*/
 /*╚══════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════╝*/
 
+#define EPERM_linux            1
+#define ENOENT_linux           2
+#define ESRCH_linux            3
+#define EINTR_linux            4
+#define EIO_linux              5
+#define ENXIO_linux            6
+#define E2BIG_linux            7
+#define ENOEXEC_linux          8
+#define EBADF_linux            9
+#define ECHILD_linux           10
+#define EAGAIN_linux           11
+#define ENOMEM_linux           12
+#define EACCES_linux           13
+#define EFAULT_linux           14
+#define ENOTBLK_linux          15
+#define EBUSY_linux            16
+#define EEXIST_linux           17
+#define EXDEV_linux            18
+#define ENODEV_linux           19
+#define ENOTDIR_linux          20
+#define EISDIR_linux           21
+#define EINVAL_linux           22
+#define ENFILE_linux           23
+#define EMFILE_linux           24
+#define ENOTTY_linux           25
+#define ETXTBSY_linux          26
+#define EFBIG_linux            27
+#define ENOSPC_linux           28
+#define ESPIPE_linux           29
+#define EROFS_linux            30
+#define EMLINK_linux           31
+#define EPIPE_linux            32
+#define EDOM_linux             33
+#define ERANGE_linux           34
+#define ENOSYS_linux           38
+
 #define CSIGNAL_linux              0x000000ff
 #define CLONE_VM_linux             0x00000100
 #define CLONE_FS_linux             0x00000200
@@ -962,28 +1002,39 @@
 #define CLONE_ARGS_SIZE_VER1_linux 80
 #define CLONE_ARGS_SIZE_VER2_linux 88
 
-#define SCHED_NORMAL_linux   0
-#define SCHED_FIFO_linux     1
-#define SCHED_RR_linux       2
-#define SCHED_BATCH_linux    3
-// SCHED_ISO_linux: reserved
-#define SCHED_IDLE_linux     5
-#define SCHED_DEADLINE_linux 6
-#define SCHED_EXT_linux      7
-#define SCHED_RESET_ON_FORK_linux 0x40000000
+#define SCHED_NORMAL_linux                    0
+#define SCHED_FIFO_linux                      1
+#define SCHED_RR_linux                        2
+#define SCHED_BATCH_linux                     3
+#define SCHED_IDLE_linux                      5
+#define SCHED_DEADLINE_linux                  6
+#define SCHED_EXT_linux                       7
 
-#define SCHED_FLAG_RESET_ON_FORK_linux  0x01
-#define SCHED_FLAG_RECLAIM_linux        0x02
-#define SCHED_FLAG_DL_OVERRUN_linux     0x04
-#define SCHED_FLAG_KEEP_POLICY_linux    0x08
-#define SCHED_FLAG_KEEP_PARAMS_linux    0x10
-#define SCHED_FLAG_UTIL_CLAMP_MIN_linux 0x20
-#define SCHED_FLAG_UTIL_CLAMP_MAX_linux 0x40
-#define SCHED_FLAG_KEEP_ALL_linux (SCHED_FLAG_KEEP_POLICY_linux | SCHED_FLAG_KEEP_PARAMS_linux)
-#define SCHED_FLAG_UTIL_CLAMP_linux (SCHED_FLAG_UTIL_CLAMP_MIN_linux | SCHED_FLAG_UTIL_CLAMP_MAX_linux)
-#define SCHED_FLAG_ALL (SCHED_FLAG_RESET_ON_FORK_linux| SCHED_FLAG_RECLAIM_linux | SCHED_FLAG_DL_OVERRUN_linux | SCHED_FLAG_KEEP_ALL_linux | SCHED_FLAG_UTIL_CLAMP_linux)
+#define SCHED_RESET_ON_FORK_linux             0x40000000
 
-#define AT_FDCWD_linux -100
+#define SCHED_FLAG_RESET_ON_FORK_linux        0x01
+#define SCHED_FLAG_RECLAIM_linux              0x02
+#define SCHED_FLAG_DL_OVERRUN_linux           0x04
+#define SCHED_FLAG_KEEP_POLICY_linux          0x08
+#define SCHED_FLAG_KEEP_PARAMS_linux          0x10
+#define SCHED_FLAG_UTIL_CLAMP_MIN_linux       0x20
+#define SCHED_FLAG_UTIL_CLAMP_MAX_linux       0x40
+
+#define SCHED_FLAG_KEEP_ALL_linux             (SCHED_FLAG_KEEP_POLICY_linux | SCHED_FLAG_KEEP_PARAMS_linux)
+#define SCHED_FLAG_UTIL_CLAMP_linux           (SCHED_FLAG_UTIL_CLAMP_MIN_linux | SCHED_FLAG_UTIL_CLAMP_MAX_linux)
+#define SCHED_FLAG_ALL_linux                  (SCHED_FLAG_RESET_ON_FORK_linux | SCHED_FLAG_RECLAIM_linux | SCHED_FLAG_DL_OVERRUN_linux | SCHED_FLAG_KEEP_ALL_linux | SCHED_FLAG_UTIL_CLAMP_linux)
+
+#define SCHED_ATTR_SIZE_VER0_linux            48
+#define SCHED_ATTR_SIZE_VER1_linux            56
+
+#define PRIO_MIN_linux                        (-20)
+#define PRIO_MAX_linux                        20
+
+#define PRIO_PROCESS_linux                    0
+#define PRIO_PGRP_linux                       1
+#define PRIO_USER_linux                       2
+
+#define AT_FDCWD_linux                        -100
 
 #define AT_SYMLINK_NOFOLLOW_linux 0x100
 #define AT_SYMLINK_FOLLOW_linux   0x400
@@ -1203,6 +1254,336 @@
 #define SIGEV_THREAD_linux    2
 #define SIGEV_THREAD_ID_linux 4
 
+#define PR_SET_PDEATHSIG_linux      1
+#define PR_GET_PDEATHSIG_linux      2
+#define PR_GET_DUMPABLE_linux       3
+#define PR_SET_DUMPABLE_linux       4
+#define PR_GET_UNALIGN_linux        5
+#define PR_SET_UNALIGN_linux        6
+
+#define PR_UNALIGN_NOPRINT_linux    1
+#define PR_UNALIGN_SIGBUS_linux     2
+
+#define PR_GET_KEEPCAPS_linux       7
+#define PR_SET_KEEPCAPS_linux       8
+#define PR_GET_FPEMU_linux          9
+#define PR_SET_FPEMU_linux         10
+
+#define PR_FPEMU_NOPRINT_linux      1
+#define PR_FPEMU_SIGFPE_linux       2
+
+#define PR_GET_FPEXC_linux         11
+#define PR_SET_FPEXC_linux         12
+
+#define PR_FP_EXC_SW_ENABLE_linux    0x80
+#define PR_FP_EXC_DIV_linux          0x010000
+#define PR_FP_EXC_OVF_linux          0x020000
+#define PR_FP_EXC_UND_linux          0x040000
+#define PR_FP_EXC_RES_linux          0x080000
+#define PR_FP_EXC_INV_linux          0x100000
+#define PR_FP_EXC_DISABLED_linux     0
+#define PR_FP_EXC_NONRECOV_linux     1
+#define PR_FP_EXC_ASYNC_linux        2
+#define PR_FP_EXC_PRECISE_linux      3
+
+#define PR_GET_TIMING_linux       13
+#define PR_SET_TIMING_linux       14
+
+#define PR_TIMING_STATISTICAL_linux    0
+#define PR_TIMING_TIMESTAMP_linux      1
+
+#define PR_SET_NAME_linux       15
+#define PR_GET_NAME_linux       16
+#define PR_GET_ENDIAN_linux     19
+#define PR_SET_ENDIAN_linux     20
+
+#define PR_ENDIAN_BIG_linux          0
+#define PR_ENDIAN_LITTLE_linux       1
+#define PR_ENDIAN_PPC_LITTLE_linux   2
+
+#define PR_GET_SECCOMP_linux                  21
+#define PR_SET_SECCOMP_linux                  22
+#define PR_CAPBSET_READ_linux                 23
+#define PR_CAPBSET_DROP_linux                 24
+#define PR_GET_TSC_linux                      25
+#define PR_SET_TSC_linux                      26
+
+#define PR_TSC_ENABLE_linux                   1
+#define PR_TSC_SIGSEGV_linux                  2
+
+#define PR_GET_SECUREBITS_linux               27
+#define PR_SET_SECUREBITS_linux               28
+#define PR_SET_TIMERSLACK_linux               29
+#define PR_GET_TIMERSLACK_linux               30
+#define PR_TASK_PERF_EVENTS_DISABLE_linux     31
+#define PR_TASK_PERF_EVENTS_ENABLE_linux      32
+#define PR_MCE_KILL_linux                     33
+
+#define PR_MCE_KILL_CLEAR_linux               0
+#define PR_MCE_KILL_SET_linux                 1
+#define PR_MCE_KILL_LATE_linux                0
+#define PR_MCE_KILL_EARLY_linux               1
+#define PR_MCE_KILL_DEFAULT_linux             2
+
+#define PR_MCE_KILL_GET_linux                 34
+#define PR_SET_MM_linux                       35
+
+#define PR_SET_MM_START_CODE_linux            1
+#define PR_SET_MM_END_CODE_linux              2
+#define PR_SET_MM_START_DATA_linux            3
+#define PR_SET_MM_END_DATA_linux              4
+#define PR_SET_MM_START_STACK_linux           5
+#define PR_SET_MM_START_BRK_linux             6
+#define PR_SET_MM_BRK_linux                   7
+#define PR_SET_MM_ARG_START_linux             8
+#define PR_SET_MM_ARG_END_linux               9
+#define PR_SET_MM_ENV_START_linux             10
+#define PR_SET_MM_ENV_END_linux               11
+#define PR_SET_MM_AUXV_linux                  12
+#define PR_SET_MM_EXE_FILE_linux              13
+#define PR_SET_MM_MAP_linux                   14
+#define PR_SET_MM_MAP_SIZE_linux              15
+
+#define PR_SET_PTRACER_linux                  0x59616d61
+#define PR_SET_PTRACER_ANY_linux              ((unsigned long)-1)
+#define PR_SET_CHILD_SUBREAPER_linux          36
+#define PR_GET_CHILD_SUBREAPER_linux          37
+#define PR_SET_NO_NEW_PRIVS_linux             38
+#define PR_GET_NO_NEW_PRIVS_linux             39
+#define PR_GET_TID_ADDRESS_linux              40
+#define PR_SET_THP_DISABLE_linux              41
+
+#define PR_THP_DISABLE_EXCEPT_ADVISED_linux   (1 << 1)
+
+#define PR_GET_THP_DISABLE_linux              42
+#define PR_MPX_ENABLE_MANAGEMENT_linux        43
+#define PR_MPX_DISABLE_MANAGEMENT_linux       44
+#define PR_SET_FP_MODE_linux                  45
+#define PR_GET_FP_MODE_linux                  46
+
+#define PR_FP_MODE_FR_linux                   (1 << 0)
+#define PR_FP_MODE_FRE_linux                  (1 << 1)
+
+#define PR_CAP_AMBIENT_linux                  47
+#define PR_CAP_AMBIENT_IS_SET_linux           1
+#define PR_CAP_AMBIENT_RAISE_linux            2
+#define PR_CAP_AMBIENT_LOWER_linux            3
+#define PR_CAP_AMBIENT_CLEAR_ALL_linux        4
+
+#ifdef __aarch64__
+#define PR_SVE_SET_VL_linux                   50
+#define PR_SVE_SET_VL_ONEXEC_linux            (1 << 18)
+#define PR_SVE_GET_VL_linux                   51
+#define PR_SVE_VL_LEN_MASK_linux              0xffff
+#define PR_SVE_VL_INHERIT_linux               (1 << 17)
+#endif
+
+#define PR_GET_SPECULATION_CTRL_linux         52
+#define PR_SET_SPECULATION_CTRL_linux         53
+
+#define PR_SPEC_STORE_BYPASS_linux            0
+#define PR_SPEC_INDIRECT_BRANCH_linux         1
+#define PR_SPEC_L1D_FLUSH_linux               2
+#define PR_SPEC_NOT_AFFECTED_linux            0
+#define PR_SPEC_PRCTL_linux                   (1UL << 0)
+#define PR_SPEC_ENABLE_linux                  (1UL << 1)
+#define PR_SPEC_DISABLE_linux                 (1UL << 2)
+#define PR_SPEC_FORCE_DISABLE_linux           (1UL << 3)
+#define PR_SPEC_DISABLE_NOEXEC_linux          (1UL << 4)
+
+#ifdef __aarch64__
+#define PR_PAC_RESET_KEYS_linux               54
+
+#define PR_PAC_APIAKEY_linux                  (1UL << 0)
+#define PR_PAC_APIBKEY_linux                  (1UL << 1)
+#define PR_PAC_APDAKEY_linux                  (1UL << 2)
+#define PR_PAC_APDBKEY_linux                  (1UL << 3)
+#define PR_PAC_APGAKEY_linux                  (1UL << 4)
+#endif
+
+#if defined(__aarch64__) || defined(__riscv)
+#define PR_SET_TAGGED_ADDR_CTRL_linux         55
+#define PR_GET_TAGGED_ADDR_CTRL_linux         56
+
+#define PR_TAGGED_ADDR_ENABLE_linux           (1UL << 0)
+#endif
+
+#ifdef __aarch64__
+#define PR_MTE_TCF_NONE_linux                 0UL
+#define PR_MTE_TCF_SYNC_linux                 (1UL << 1)
+#define PR_MTE_TCF_ASYNC_linux                (1UL << 2)
+#define PR_MTE_TCF_MASK_linux                 (PR_MTE_TCF_SYNC_linux | PR_MTE_TCF_ASYNC_linux)
+#define PR_MTE_TAG_SHIFT_linux                3
+#define PR_MTE_TAG_MASK_linux                 (0xffffUL << PR_MTE_TAG_SHIFT_linux)
+#define PR_MTE_STORE_ONLY_linux               (1UL << 19)
+#endif
+
+#ifdef __riscv
+#define PR_PMLEN_SHIFT_linux                  24
+#define PR_PMLEN_MASK_linux                   (0x7fUL << PR_PMLEN_SHIFT_linux)
+#endif
+
+#define PR_SET_IO_FLUSHER_linux               57
+#define PR_GET_IO_FLUSHER_linux               58
+#define PR_SET_SYSCALL_USER_DISPATCH_linux    59
+
+#define PR_SYS_DISPATCH_OFF_linux             0
+#define PR_SYS_DISPATCH_EXCLUSIVE_ON_linux    1
+#define PR_SYS_DISPATCH_INCLUSIVE_ON_linux    2
+#define SYSCALL_DISPATCH_FILTER_ALLOW_linux   0
+#define SYSCALL_DISPATCH_FILTER_BLOCK_linux   1
+
+#ifdef __aarch64__
+#define PR_PAC_SET_ENABLED_KEYS_linux         60
+#define PR_PAC_GET_ENABLED_KEYS_linux         61
+#endif
+
+#define PR_SCHED_CORE_linux                   62
+
+#define PR_SCHED_CORE_GET_linux               0
+#define PR_SCHED_CORE_CREATE_linux            1
+#define PR_SCHED_CORE_SHARE_TO_linux          2
+#define PR_SCHED_CORE_SHARE_FROM_linux        3
+#define PR_SCHED_CORE_MAX_linux               4
+#define PR_SCHED_CORE_SCOPE_THREAD_linux      0
+
+#define PR_SCHED_CORE_SCOPE_THREAD_GROUP_linux 1
+#define PR_SCHED_CORE_SCOPE_PROCESS_GROUP_linux 2
+
+#ifdef __aarch64__
+#define PR_SME_SET_VL_linux                   63
+#define PR_SME_SET_VL_ONEXEC_linux            (1 << 18)
+#define PR_SME_GET_VL_linux                   64
+#define PR_SME_VL_LEN_MASK_linux              0xffff
+#define PR_SME_VL_INHERIT_linux               (1 << 17)
+#endif
+
+#define PR_SET_MDWE_linux                     65
+
+#define PR_MDWE_REFUSE_EXEC_GAIN_linux        (1UL << 0)
+#define PR_MDWE_NO_INHERIT_linux              (1UL << 1)
+
+#define PR_GET_MDWE_linux                     66
+#define PR_SET_VMA_linux                      0x53564d41
+
+#define PR_SET_VMA_ANON_NAME_linux            0
+
+#define PR_GET_AUXV_linux                     0x41555856
+#define PR_SET_MEMORY_MERGE_linux             67
+#define PR_GET_MEMORY_MERGE_linux             68
+
+#ifdef __riscv
+#define PR_RISCV_V_SET_CONTROL_linux          69
+#define PR_RISCV_V_GET_CONTROL_linux          70
+
+#define PR_RISCV_V_VSTATE_CTRL_DEFAULT_linux  0
+#define PR_RISCV_V_VSTATE_CTRL_OFF_linux      1
+#define PR_RISCV_V_VSTATE_CTRL_ON_linux       2
+#define PR_RISCV_V_VSTATE_CTRL_INHERIT_linux  (1 << 4)
+#define PR_RISCV_V_VSTATE_CTRL_CUR_MASK_linux 0x3
+#define PR_RISCV_V_VSTATE_CTRL_NEXT_MASK_linux 0xc
+#define PR_RISCV_V_VSTATE_CTRL_MASK_linux     0x1f
+
+#define PR_RISCV_SET_ICACHE_FLUSH_CTX_linux   71
+
+#define PR_RISCV_CTX_SW_FENCEI_ON_linux       0
+#define PR_RISCV_CTX_SW_FENCEI_OFF_linux      1
+#define PR_RISCV_SCOPE_PER_PROCESS_linux      0
+#define PR_RISCV_SCOPE_PER_THREAD_linux       1
+#endif
+
+#define PR_GET_SHADOW_STACK_STATUS_linux      74
+#define PR_SET_SHADOW_STACK_STATUS_linux      75
+
+#define PR_SHADOW_STACK_ENABLE_linux          (1UL << 0)
+#define PR_SHADOW_STACK_WRITE_linux           (1UL << 1)
+#define PR_SHADOW_STACK_PUSH_linux            (1UL << 2)
+
+#define PR_LOCK_SHADOW_STACK_STATUS_linux     76
+#define PR_TIMER_CREATE_RESTORE_IDS_linux     77
+
+#define PR_TIMER_CREATE_RESTORE_IDS_OFF_linux 0
+#define PR_TIMER_CREATE_RESTORE_IDS_ON_linux  1
+#define PR_TIMER_CREATE_RESTORE_IDS_GET_linux 2
+
+#define PR_FUTEX_HASH_linux                   78
+
+#define PR_FUTEX_HASH_SET_SLOTS_linux         1
+#define PR_FUTEX_HASH_GET_SLOTS_linux         2
+
+#define UNAME26_linux               0x0020000
+#define ADDR_NO_RANDOMIZE_linux     0x0040000
+#define FDPIC_FUNCPTRS_linux        0x0080000
+#define MMAP_PAGE_ZERO_linux        0x0100000
+#define ADDR_COMPAT_LAYOUT_linux    0x0200000
+#define READ_IMPLIES_EXEC_linux     0x0400000
+#define ADDR_LIMIT_32BIT_linux      0x0800000
+#define SHORT_INODE_linux           0x1000000
+#define WHOLE_SECONDS_linux         0x2000000
+#define STICKY_TIMEOUTS_linux       0x4000000
+#define ADDR_LIMIT_3GB_linux        0x8000000
+
+#define PER_LINUX_linux         0x0000
+#define PER_LINUX_32BIT_linux   (0x0000 | ADDR_LIMIT_32BIT_linux)
+#define PER_LINUX_FDPIC_linux   (0x0000 | FDPIC_FUNCPTRS_linux)
+#define PER_SVR4_linux          (0x0001 | STICKY_TIMEOUTS_linux | MMAP_PAGE_ZERO_linux)
+#define PER_SVR3_linux          (0x0002 | STICKY_TIMEOUTS_linux | SHORT_INODE_linux)
+#define PER_SCOSVR3_linux       (0x0003 | STICKY_TIMEOUTS_linux | WHOLE_SECONDS_linux | SHORT_INODE_linux)
+#define PER_OSR5_linux          (0x0003 | STICKY_TIMEOUTS_linux | WHOLE_SECONDS_linux)
+#define PER_WYSEV386_linux      (0x0004 | STICKY_TIMEOUTS_linux | SHORT_INODE_linux)
+#define PER_ISCR4_linux         (0x0005 | STICKY_TIMEOUTS_linux)
+#define PER_BSD_linux           0x0006
+#define PER_SUNOS_linux         (0x0006 | STICKY_TIMEOUTS_linux)
+#define PER_XENIX_linux         (0x0007 | STICKY_TIMEOUTS_linux | SHORT_INODE_linux)
+#define PER_LINUX32_linux       0x0008
+#define PER_LINUX32_3GB_linux   (0x0008 | ADDR_LIMIT_3GB_linux)
+#define PER_IRIX32_linux        (0x0009 | STICKY_TIMEOUTS_linux)
+#define PER_IRIXN32_linux       (0x000a | STICKY_TIMEOUTS_linux)
+#define PER_IRIX64_linux        (0x000b | STICKY_TIMEOUTS_linux)
+#define PER_RISCOS_linux        0x000c
+#define PER_SOLARIS_linux       (0x000d | STICKY_TIMEOUTS_linux)
+#define PER_UW7_linux           (0x000e | STICKY_TIMEOUTS_linux | MMAP_PAGE_ZERO_linux)
+#define PER_OSF4_linux          0x000f
+#define PER_HPUX_linux          0x0010
+#define PER_MASK_linux          0x00ff
+
+#if defined(__x86_64__) || defined(__i386__)
+#define ARCH_SET_GS_linux                     0x1001
+#define ARCH_SET_FS_linux                     0x1002
+#define ARCH_GET_FS_linux                     0x1003
+#define ARCH_GET_GS_linux                     0x1004
+#define ARCH_GET_CPUID_linux                  0x1011
+#define ARCH_SET_CPUID_linux                  0x1012
+#define ARCH_GET_XCOMP_SUPP_linux             0x1021
+#define ARCH_GET_XCOMP_PERM_linux             0x1022
+#define ARCH_REQ_XCOMP_PERM_linux             0x1023
+#define ARCH_GET_XCOMP_GUEST_PERM_linux       0x1024
+#define ARCH_REQ_XCOMP_GUEST_PERM_linux       0x1025
+#define ARCH_XCOMP_TILECFG_linux              17
+#define ARCH_XCOMP_TILEDATA_linux             18
+#define ARCH_MAP_VDSO_X32_linux               0x2001
+#define ARCH_MAP_VDSO_32_linux                0x2002
+#define ARCH_MAP_VDSO_64_linux                0x2003
+#define ARCH_GET_UNTAG_MASK_linux             0x4001
+#define ARCH_ENABLE_TAGGED_ADDR_linux         0x4002
+#define ARCH_GET_MAX_TAG_BITS_linux           0x4003
+#define ARCH_FORCE_TAGGED_SVA_linux           0x4004
+#define ARCH_SHSTK_ENABLE_linux               0x5001
+#define ARCH_SHSTK_DISABLE_linux              0x5002
+#define ARCH_SHSTK_LOCK_linux                 0x5003
+#define ARCH_SHSTK_UNLOCK_linux               0x5004
+#define ARCH_SHSTK_STATUS_linux               0x5005
+#define ARCH_SHSTK_SHSTK_linux                (1ULL << 0)
+#define ARCH_SHSTK_WRSS_linux                 (1ULL << 1)
+
+#define LDT_ENTRIES_linux      8192
+#define LDT_ENTRY_SIZE_linux   8
+
+#define MODIFY_LDT_CONTENTS_DATA_linux     0
+#define MODIFY_LDT_CONTENTS_STACK_linux    1
+#define MODIFY_LDT_CONTENTS_CODE_linux     2
+#endif
+
 typedef struct {
   unsigned long long flags;
   unsigned long long pidfd;
@@ -1379,6 +1760,67 @@ typedef struct {
 #define sigev_notify_attributes_linux _sigev_un._sigev_thread._attribute
 #define sigev_notify_thread_id_linux  _sigev_un._tid
 
+typedef struct {
+  unsigned long long start_code;
+  unsigned long long end_code;
+  unsigned long long start_data;
+  unsigned long long end_data;
+  unsigned long long start_brk;
+  unsigned long long brk;
+  unsigned long long start_stack;
+  unsigned long long arg_start;
+  unsigned long long arg_end;
+  unsigned long long env_start;
+  unsigned long long env_end;
+  unsigned long long *auxv;
+  unsigned int auxv_size;
+  unsigned int exe_fd;
+} prctl_mm_map_linux;
+
+#if defined(__x86_64__) || defined(__i386__)
+typedef struct {
+  unsigned int  entry_number;
+  unsigned int  base_addr;
+  unsigned int  limit;
+  unsigned int  seg_32bit:1;
+  unsigned int  contents:2;
+  unsigned int  read_exec_only:1;
+  unsigned int  limit_in_pages:1;
+  unsigned int  seg_not_present:1;
+  unsigned int  useable:1;
+#ifdef __x86_64__
+  unsigned int  lm:1;
+#endif
+} user_desc_linux;
+#endif
+
+typedef struct {
+  int sched_priority;
+} sched_param_linux;
+
+typedef struct {
+  unsigned int       size;
+  unsigned int       sched_policy;
+  unsigned long long sched_flags;
+  int                sched_nice;
+  unsigned int       sched_priority;
+  unsigned long long sched_runtime;
+  unsigned long long sched_deadline;
+  unsigned long long sched_period;
+  unsigned int       sched_util_min;
+  unsigned int       sched_util_max;
+} sched_attr_linux;
+
+typedef struct {
+  long long tv_sec;
+  long long tv_nsec;
+} __kernel_timespec_linux;
+
+typedef struct {
+  long tv_sec;
+  long tv_nsec;
+} __kernel_old_timespec_linux;
+
 #define Syscall0_linux(number, ret2)                   _Syscall0_linux(number, (long*)(ret2))
 #define Syscall1_linux(number, a, ret2)                _Syscall1_linux(number, (long)(a), (long*)(ret2))
 #define Syscall2_linux(number, a, b, ret2)             _Syscall2_linux(number, (long)(a), (long)(b), (long*)(ret2))
@@ -1409,7 +1851,6 @@ __attribute__((noreturn)) void exit_group_linux(int error_code);
 long wait4_linux(int pid, int *stat_addr, int options, rusage_linux *ru);
 long waitid_linux(int which, int pid, siginfo_t_linux *infop, int options, rusage_linux *ru);
 long waitpid_linux(int pid, int *stat_addr, int options);
-#if 0 // WIP
 //
 // 2. PROCESS ATTRIBUTES & CONTROL
 //
@@ -1423,34 +1864,29 @@ long getpgrp_linux(void);
 long getsid_linux(int pid);
 long setsid_linux(void);
 long set_tid_address_linux(int *tidptr);
-// 2b. Process control, personality, and miscellaneous attributes
+// 2b. Process control and personality
 long prctl_linux(int option, unsigned long arg2, unsigned long arg3, unsigned long arg4, unsigned long arg5);
 long personality_linux(unsigned int personality);
-long arch_prctl_linux(int option, unsigned long addr);
-long modify_ldt_linux(int func, void *ptr, unsigned long bytecount);
-long set_thread_area_linux(user_desc *u_info);
-long get_thread_area_linux(user_desc *u_info);
-long set_tls_linux(unsigned long val);
-long get_tls_linux(void);
 //
 // 3. SCHEDULING & PRIORITIES
 //
-long sched_setscheduler_linux(int pid, int policy, sched_param *param);
+long sched_setscheduler_linux(int pid, int policy, sched_param_linux *param);
 long sched_getscheduler_linux(int pid);
-long sched_setparam_linux(int pid, sched_param *param);
-long sched_getparam_linux(int pid, sched_param *param);
-long sched_setattr_linux(int pid, sched_attr *attr, unsigned int flags);
-long sched_getattr_linux(int pid, sched_attr *attr, unsigned int size, unsigned int flags);
+long sched_setparam_linux(int pid, sched_param_linux *param);
+long sched_getparam_linux(int pid, sched_param_linux *param);
+long sched_setattr_linux(int pid, sched_attr_linux *attr, unsigned int flags);
+long sched_getattr_linux(int pid, sched_attr_linux *attr, unsigned int size, unsigned int flags);
 long sched_yield_linux(void);
 long sched_get_priority_max_linux(int policy);
 long sched_get_priority_min_linux(int policy);
-long sched_rr_get_interval_linux(int pid, __kernel_timespec *interval);
-long sched_rr_get_interval_time64_linux(int pid, __kernel_timespec *interval);
+// Disabled wrapper: long sched_rr_get_interval_linux(int pid, __kernel_old_timespec_linux *interval);
+long sched_rr_get_interval_time64_linux(int pid, __kernel_timespec_linux *interval);
 long sched_setaffinity_linux(int pid, unsigned int len, unsigned long *user_mask_ptr);
 long sched_getaffinity_linux(int pid, unsigned int len, unsigned long *user_mask_ptr);
 long nice_linux(int increment);
 long setpriority_linux(int which, int who, int niceval);
 long getpriority_linux(int which, int who);
+#if 0 // WIP
 //
 // 4. MEMORY MANAGEMENT
 //
@@ -1558,18 +1994,18 @@ long ioctl_linux(unsigned int fd, unsigned int cmd, unsigned long arg);
 // 6c. I/O Multiplexing
 long select_linux(int n, fd_set *inp, fd_set *outp, fd_set *exp, __kernel_old_timeval *tvp);
 long _newselect_linux(int n, fd_set *inp, fd_set *outp, fd_set *exp, __kernel_old_timeval *tvp);
-long pselect6_linux(int n, fd_set *inp, fd_set *outp, fd_set *exp, __kernel_timespec *tsp, void *sig);
-long pselect6_time64_linux(int n, fd_set *inp, fd_set *outp, fd_set *exp, __kernel_timespec *tsp, void *sig);
+// Disabled wrapper: pselect6_linux(int n, fd_set *inp, fd_set *outp, fd_set *exp, __kernel_old_timespec_linux *tsp, void *sig);
+long pselect6_time64_linux(int n, fd_set *inp, fd_set *outp, fd_set *exp, __kernel_timespec_linux *tsp, void *sig);
 long poll_linux(pollfd *ufds, unsigned int nfds, int timeout);
-long ppoll_linux(pollfd *, unsigned int, __kernel_timespec *, const sigset_t *, unsigned long);
-long ppoll_time64_linux(pollfd *ufds, unsigned int nfds, __kernel_timespec *tsp, const sigset_t *sigmask, unsigned long sigsetsize);
+// Disabled wrapper: ppoll_linux(pollfd *, unsigned int, __kernel_old_timespec_linux *, const sigset_t *, unsigned long);
+long ppoll_time64_linux(pollfd *ufds, unsigned int nfds, __kernel_timespec_linux *tsp, const sigset_t *sigmask, unsigned long sigsetsize);
 // 6d. Scalable I/O event notification
 long epoll_create_linux(int size);
 long epoll_create1_linux(int flags);
 long epoll_ctl_linux(int epfd, int op, int fd, epoll_event *event);
 long epoll_wait_linux(int epfd, epoll_event *events, int maxevents, int timeout);
 long epoll_pwait_linux(int epfd, epoll_event *events, int maxevents, int timeout, const sigset_t *sigmask, unsigned long sigsetsize);
-long epoll_pwait2_linux(int epfd, epoll_event *events, int maxevents, const __kernel_timespec *timeout, const sigset_t *sigmask, unsigned long sigsetsize);
+long epoll_pwait2_linux(int epfd, epoll_event *events, int maxevents, const __kernel_timespec_linux *timeout, const sigset_t *sigmask, unsigned long sigsetsize);
 long epoll_ctl_old_linux(int epfd, int op, int fd, epoll_event *event);
 long epoll_wait_old_linux(int epfd, epoll_event *events, int maxevents, int timeout);
 //
@@ -1607,8 +2043,8 @@ long file_setattr_linux(int dfd, const char *filename, file_attr *attr, unsigned
 long utime_linux(char *filename, utimbuf *times);
 long utimes_linux(char *filename, __kernel_old_timeval *utimes);
 long futimesat_linux(int dfd, const char *filename, __kernel_old_timeval *utimes);
-long utimensat_linux(int dfd, const char *filename, __kernel_timespec *utimes, int flags);
-long utimensat_time64_linux(int dfd, const char *filename, __kernel_timespec *t, int flags);
+// Disabled wrapper: utimensat_linux(int dfd, const char *filename, __kernel_old_timespec_linux *utimes, int flags);
+long utimensat_time64_linux(int dfd, const char *filename, __kernel_timespec_linux *t, int flags);
 // 7d. Testing file accessibility
 long access_linux(const char *filename, int mode);
 long faccessat_linux(int dfd, const char *filename, int mode);
@@ -1724,8 +2160,8 @@ long rt_sigpending_linux(sigset_t *set, unsigned long sigsetsize);
 long sigsuspend_linux(old_sigset_t mask);
 long rt_sigsuspend_linux(sigset_t *unewset, unsigned long sigsetsize);
 long pause_linux(void);
-long rt_sigtimedwait_linux(const sigset_t *uthese, siginfo_t *uinfo, const __kernel_timespec *uts, unsigned long sigsetsize);
-long rt_sigtimedwait_time64_linux(compat_sigset_t *uthese, compat_siginfo *uinfo, __kernel_timespec *uts, compat_size_t sigsetsize);
+// Disabled wrapper: rt_sigtimedwait_linux(const sigset_t *uthese, siginfo_t *uinfo, const __kernel_old_timespec_linux *uts, unsigned long sigsetsize);
+long rt_sigtimedwait_time64_linux(compat_sigset_t *uthese, compat_siginfo *uinfo, __kernel_timespec_linux *uts, compat_size_t sigsetsize);
 // 11e. Alternate signal stack and return from handlers
 long sigaltstack_linux(const sigaltstack *uss, sigaltstack *uoss);
 long sigreturn_linux(pt_regs *regs);
@@ -1755,23 +2191,23 @@ long msgctl_linux(int msqid, int cmd, msqid_ds *buf);
 long semget_linux(key_t key, int nsems, int semflg);
 long semop_linux(int semid, sembuf *sops, unsigned nsops);
 long semctl_linux(int semid, int semnum, int cmd, unsigned long arg);
-long semtimedop_linux(int semid, sembuf *sops, unsigned nsops, const __kernel_timespec *timeout);
-long semtimedop_time64_linux(int semid, sembuf *tsops, unsigned int nsops, const __kernel_timespec *timeout);
+// Disabled wrapper: semtimedop_linux(int semid, sembuf *sops, unsigned nsops, const __kernel_old_timespec_linux *timeout);
+long semtimedop_time64_linux(int semid, sembuf *tsops, unsigned int nsops, const __kernel_timespec_linux *timeout);
 // 13d. POSIX Message Queues
 long mq_open_linux(const char *name, int oflag, umode_t mode, mq_attr *attr);
 long mq_unlink_linux(const char *name);
-long mq_timedsend_linux(mqd_t mqdes, const char *msg_ptr, unsigned long msg_len, unsigned int msg_prio, const __kernel_timespec *abs_timeout);
-long mq_timedsend_time64_linux(mqd_t mqdes, const char *u_msg_ptr, unsigned long msg_len, unsigned int msg_prio, const __kernel_timespec *u_abs_timeout);
-long mq_timedreceive_linux(mqd_t mqdes, char *msg_ptr, unsigned long msg_len, unsigned int *msg_prio, const __kernel_timespec *abs_timeout);
-long mq_timedreceive_time64_linux(mqd_t mqdes, char *u_msg_ptr, unsigned long msg_len, unsigned int *u_msg_prio, const __kernel_timespec *u_abs_timeout);
+// Disabled wrapper: mq_timedsend_linux(mqd_t mqdes, const char *msg_ptr, unsigned long msg_len, unsigned int msg_prio, const __kernel_old_timespec_linux *abs_timeout);
+long mq_timedsend_time64_linux(mqd_t mqdes, const char *u_msg_ptr, unsigned long msg_len, unsigned int msg_prio, const __kernel_timespec_linux *u_abs_timeout);
+// Disabled wrapper: mq_timedreceive_linux(mqd_t mqdes, char *msg_ptr, unsigned long msg_len, unsigned int *msg_prio, const __kernel_old_timespec_linux *abs_timeout);
+long mq_timedreceive_time64_linux(mqd_t mqdes, char *u_msg_ptr, unsigned long msg_len, unsigned int *u_msg_prio, const __kernel_timespec_linux *u_abs_timeout);
 long mq_notify_linux(mqd_t mqdes, const sigevent *notification);
 long mq_getsetattr_linux(mqd_t mqdes, const mq_attr *mqstat, mq_attr *omqstat);
 // 13e. Synchronization Primitives - Futexes
-long futex_linux(u32 *uaddr, int op, u32 val, const __kernel_timespec *utime, u32 *uaddr2, u32 val3);
-long futex_time64_linux(u32 *uaddr, int op, u32 val, const __kernel_timespec *utime, u32 *uaddr2, u32 val3);
-long futex_wait_linux(void *uaddr, unsigned long val, unsigned long mask, unsigned int flags, __kernel_timespec *timespec, clockid_t clockid);
+// Disabled wrapper: futex_linux(u32 *uaddr, int op, u32 val, const __kernel_old_timespec_linux *utime, u32 *uaddr2, u32 val3);
+long futex_time64_linux(u32 *uaddr, int op, u32 val, const __kernel_timespec_linux *utime, u32 *uaddr2, u32 val3);
+long futex_wait_linux(void *uaddr, unsigned long val, unsigned long mask, unsigned int flags, __kernel_timespec_linux *timespec, clockid_t clockid);
 long futex_wake_linux(void *uaddr, unsigned long mask, int nr, unsigned int flags);
-long futex_waitv_linux(futex_waitv *waiters, unsigned int nr_futexes, unsigned int flags, __kernel_timespec *timeout, clockid_t clockid);
+long futex_waitv_linux(futex_waitv *waiters, unsigned int nr_futexes, unsigned int flags, __kernel_timespec_linux *timeout, clockid_t clockid);
 long futex_requeue_linux(futex_waitv *waiters, unsigned int flags, int nr_wake, int nr_requeue);
 long set_robust_list_linux(robust_list_head *head, unsigned long len);
 long get_robust_list_linux(int pid, robust_list_head * *head_ptr, unsigned long *len_ptr);
@@ -1799,8 +2235,8 @@ long sendmmsg_linux(int fd, mmsghdr *msg, unsigned int vlen, unsigned flags);
 long recv_linux(int fd, void *ubuf, unsigned long size, unsigned int flags);
 long recvfrom_linux(int fd, void *ubuf, unsigned long size, unsigned int flags, sockaddr *addr, int *addr_len);
 long recvmsg_linux(int fd, user_msghdr *msg, unsigned flags);
-long recvmmsg_linux(int fd, mmsghdr *msg, unsigned int vlen, unsigned flags, __kernel_timespec *timeout);
-long recvmmsg_time64_linux(int fd, mmsghdr *mmsg, unsigned int vlen, unsigned int flags, __kernel_timespec *timeout);
+// Disabled wrapper: recvmmsg_linux(int fd, mmsghdr *msg, unsigned int vlen, unsigned flags, __kernel_old_timespec_linux *timeout);
+long recvmmsg_time64_linux(int fd, mmsghdr *mmsg, unsigned int vlen, unsigned int flags, __kernel_timespec_linux *timeout);
 // 14c. Getting and setting socket options
 long getsockopt_linux(int fd, int level, int optname, char *optval, int *optlen);
 long setsockopt_linux(int fd, int level, int optname, char *optval, int optlen);
@@ -1814,9 +2250,9 @@ long io_setup_linux(unsigned nr_reqs, aio_context_t *ctx);
 long io_destroy_linux(aio_context_t ctx);
 long io_submit_linux(aio_context_t ctx_id, long nr, iocb * *iocbpp);
 long io_cancel_linux(aio_context_t ctx_id, iocb *iocb, io_event *result);
-long io_getevents_linux(aio_context_t ctx_id, long min_nr, long nr, io_event *events, __kernel_timespec *timeout);
-long io_pgetevents_linux(aio_context_t ctx_id, long min_nr, long nr, io_event *events, __kernel_timespec *timeout, const __aio_sigset *sig);
-long io_pgetevents_time64_linux(aio_context_t ctx_id, long min_nr, long nr, io_event *events, __kernel_timespec *timeout, const __aio_sigset *sig);
+long io_getevents_linux(aio_context_t ctx_id, long min_nr, long nr, io_event *events, __kernel_timespec_linux *timeout);
+// Disabled wrapper: io_pgetevents_linux(aio_context_t ctx_id, long min_nr, long nr, io_event *events, __kernel_old_timespec_linux *timeout, const __aio_sigset *sig);
+long io_pgetevents_time64_linux(aio_context_t ctx_id, long min_nr, long nr, io_event *events, __kernel_timespec_linux *timeout, const __aio_sigset *sig);
 // 15b. io_uring: high-performance asynchronous I/O
 long io_uring_setup_linux(u32 entries, io_uring_params *p);
 long io_uring_enter_linux(unsigned int fd, u32 to_submit, u32 min_complete, u32 flags, const void *argp, unsigned long argsz);
@@ -1827,40 +2263,40 @@ long io_uring_register_linux(unsigned int fd, unsigned int op, void *arg, unsign
 // 16a. Reading current time from various clocks
 long time_linux(__kernel_old_time_t *tloc);
 long gettimeofday_linux(__kernel_old_timeval *tv, timezone *tz);
-long clock_gettime_linux(clockid_t which_clock, __kernel_timespec *tp);
-long clock_gettime64_linux(clockid_t which_clock, __kernel_timespec *tp);
-long clock_getres_linux(clockid_t which_clock, __kernel_timespec *tp);
-long clock_getres_time64_linux(clockid_t which_clock, __kernel_timespec *tp);
+// Disabled wrapper: clock_gettime_linux(clockid_t which_clock, __kernel_old_timespec_linux *tp);
+long clock_gettime64_linux(clockid_t which_clock, __kernel_timespec_linux *tp);
+// Disabled wrapper: clock_getres_linux(clockid_t which_clock, __kernel_old_timespec_linux *tp);
+long clock_getres_time64_linux(clockid_t which_clock, __kernel_timespec_linux *tp);
 // 16b. Setting system time and adjusting clocks
 long settimeofday_linux(__kernel_old_timeval *tv, timezone *tz);
-long clock_settime_linux(clockid_t which_clock, const __kernel_timespec *tp);
-long clock_settime64_linux(clockid_t which_clock, const __kernel_timespec *tp);
+// Disabled wrapper: clock_settime_linux(clockid_t which_clock, const __kernel_old_timespec_linux *tp);
+long clock_settime64_linux(clockid_t which_clock, const __kernel_timespec_linux *tp);
 long stime_linux(__kernel_old_time_t *tptr);
 long adjtimex_linux(__kernel_timex *txc_p);
 long clock_adjtime_linux(clockid_t which_clock, __kernel_timex *tx);
 long clock_adjtime64_linux(clockid_t which_clock, __kernel_timex *tx);
 // 16c. Suspending execution for a period of time
-long nanosleep_linux(__kernel_timespec *rqtp, __kernel_timespec *rmtp);
-long clock_nanosleep_linux(clockid_t which_clock, int flags, const __kernel_timespec *rqtp, __kernel_timespec *rmtp);
-long clock_nanosleep_time64_linux(clockid_t which_clock, int flags, const __kernel_timespec *rqtp, __kernel_timespec *rmtp);
+long nanosleep_linux(__kernel_timespec_linux *rqtp, __kernel_timespec_linux *rmtp);
+// Disabled wrapper: clock_nanosleep_linux(clockid_t which_clock, int flags, const __kernel_old_timespec_linux *rqtp, __kernel_old_timespec_linux *rmtp);
+long clock_nanosleep_time64_linux(clockid_t which_clock, int flags, const __kernel_timespec_linux *rqtp, __kernel_timespec_linux *rmtp);
 // 16d. Setting periodic or one-shot timers
 long alarm_linux(unsigned int seconds);
 long setitimer_linux(int which, __kernel_old_itimerval *value, __kernel_old_itimerval *ovalue);
 long getitimer_linux(int which, __kernel_old_itimerval *value);
 // 16e. Per-process timers with precise control
 long timer_create_linux(clockid_t which_clock, sigevent *timer_event_spec, timer_t * created_timer_id);
-long timer_settime_linux(timer_t timer_id, int flags, const __kernel_itimerspec *new_setting, __kernel_itimerspec *old_setting);
-long timer_settime64_linux(timer_t timerid, int flags, const __kernel_timespec *new_setting, __kernel_timespec *old_setting);
-long timer_gettime_linux(timer_t timer_id, __kernel_itimerspec *setting);
-long timer_gettime64_linux(timer_t timerid, __kernel_timespec *setting);
+// Disabled wrapper: long timer_settime_linux(timer_t timer_id, int flags, const __kernel_itimerspec *new_setting, __kernel_itimerspec *old_setting);
+long timer_settime64_linux(timer_t timerid, int flags, const __kernel_timespec_linux *new_setting, __kernel_timespec_linux *old_setting);
+// Disabled wrapper: long timer_gettime_linux(timer_t timer_id, __kernel_itimerspec *setting);
+long timer_gettime64_linux(timer_t timerid, __kernel_timespec_linux *setting);
 long timer_getoverrun_linux(timer_t timer_id);
 long timer_delete_linux(timer_t timer_id);
 // 16f. Timers accessible via file descriptors
 long timerfd_create_linux(int clockid, int flags);
-long timerfd_settime_linux(int ufd, int flags, const __kernel_itimerspec *utmr, __kernel_itimerspec *otmr);
-long timerfd_settime64_linux(int ufd, int flags, const __kernel_timespec *utmr, __kernel_timespec *otmr);
-long timerfd_gettime_linux(int ufd, __kernel_itimerspec *otmr);
-long timerfd_gettime64_linux(int ufd, __kernel_timespec *otmr);
+// Disabled wrapper: long timerfd_settime_linux(int ufd, int flags, const __kernel_itimerspec *utmr, __kernel_itimerspec *otmr);
+long timerfd_settime64_linux(int ufd, int flags, const __kernel_timespec_linux *utmr, __kernel_timespec_linux *otmr);
+// Disabled wrapper: long timerfd_gettime_linux(int ufd, __kernel_itimerspec *otmr);
+long timerfd_gettime64_linux(int ufd, __kernel_timespec_linux *otmr);
 //
 // 17. RANDOM NUMBERS
 //
@@ -2027,13 +2463,20 @@ long cachestat_linux(unsigned int fd, cachestat_range *cstat_range, cachestat *c
 //
 // 28. ARCHITECTURE-SPECIFIC OPERATIONS
 //
-// 28a. RISC-V architecture operations
-long riscv_flush_icache_linux(uintptr_t start, uintptr_t end, uintptr_t flags);
-long riscv_hwprobe_linux(riscv_hwprobe *pairs, unsigned long pair_count, unsigned long cpu_count, unsigned long *cpumask, unsigned int flags);
-// 28b. x86 architecture operations
+// 28a. x86 architecture operations
+long arch_prctl_linux(int option, unsigned long addr);
+long modify_ldt_linux(int func, void *ptr, unsigned long bytecount);
+long set_thread_area_linux(user_desc *u_info);
+long get_thread_area_linux(user_desc *u_info);
 long vm86_linux(unsigned long cmd, unsigned long arg);
 long vm86old_linux(vm86_struct *user_vm86);
-// 28c. Intel MPX support (deprecated)
+// 28b. ARM architecture operations
+long set_tls_linux(unsigned long val);
+long get_tls_linux(void);
+// 28c. RISC-V architecture operations
+long riscv_flush_icache_linux(uintptr_t start, uintptr_t end, uintptr_t flags);
+long riscv_hwprobe_linux(riscv_hwprobe *pairs, unsigned long pair_count, unsigned long cpu_count, unsigned long *cpumask, unsigned int flags);
+// 28d. Intel MPX support (deprecated)
 long mpx_linux(void);
 //
 // 29. ADVANCED EXECUTION CONTROL
@@ -2764,7 +3207,6 @@ long waitid_linux(int which, int pid, siginfo_t_linux *infop, int options, rusag
 long waitpid_linux(int pid, int *stat_addr, int options) {
   return wait4_linux(pid, stat_addr, options, 0);
 }
-#if 0 // WIP
 //
 // 2. PROCESS ATTRIBUTES & CONTROL
 //
@@ -2785,7 +3227,7 @@ long setpgid_linux(int pid, int pgid) {
   return Syscall2_linux(NR_setpgid_linux, pid, pgid, 0);
 }
 long getpgrp_linux(void) {
-  return Syscall0_linux(NR_getpgrp_linux, 0);
+  return getpgid_linux(0);
 }
 long getsid_linux(int pid) {
   return Syscall1_linux(NR_getsid_linux, pid, 0);
@@ -2796,50 +3238,32 @@ long setsid_linux(void) {
 long set_tid_address_linux(int *tidptr) {
   return Syscall1_linux(NR_set_tid_address_linux, tidptr, 0);
 }
-// 2b. Process control, personality, and miscellaneous attributes
+// 2b. Process control and personality
 long prctl_linux(int option, unsigned long arg2, unsigned long arg3, unsigned long arg4, unsigned long arg5) {
   return Syscall5_linux(NR_prctl_linux, option, arg2, arg3, arg4, arg5, 0);
 }
 long personality_linux(unsigned int personality) {
   return Syscall1_linux(NR_personality_linux, personality, 0);
 }
-long arch_prctl_linux(int option, unsigned long addr) {
-  return Syscall2_linux(NR_arch_prctl_linux, option, addr, 0);
-}
-long modify_ldt_linux(int func, void *ptr, unsigned long bytecount) {
-  return Syscall3_linux(NR_modify_ldt_linux, func, ptr, bytecount, 0);
-}
-long set_thread_area_linux(user_desc *u_info) {
-  return Syscall1_linux(NR_set_thread_area_linux, u_info, 0);
-}
-long get_thread_area_linux(user_desc *u_info) {
-  return Syscall1_linux(NR_get_thread_area_linux, u_info, 0);
-}
-long set_tls_linux(unsigned long val) {
-  return Syscall1_linux(NR_set_tls_linux, val, 0);
-}
-long get_tls_linux(void) {
-  return Syscall0_linux(NR_get_tls_linux, 0);
-}
 //
 // 3. SCHEDULING & PRIORITIES
 //
-long sched_setscheduler_linux(int pid, int policy, sched_param *param) {
+long sched_setscheduler_linux(int pid, int policy, sched_param_linux *param) {
   return Syscall3_linux(NR_sched_setscheduler_linux, pid, policy, param, 0);
 }
 long sched_getscheduler_linux(int pid) {
   return Syscall1_linux(NR_sched_getscheduler_linux, pid, 0);
 }
-long sched_setparam_linux(int pid, sched_param *param) {
+long sched_setparam_linux(int pid, sched_param_linux *param) {
   return Syscall2_linux(NR_sched_setparam_linux, pid, param, 0);
 }
-long sched_getparam_linux(int pid, sched_param *param) {
+long sched_getparam_linux(int pid, sched_param_linux *param) {
   return Syscall2_linux(NR_sched_getparam_linux, pid, param, 0);
 }
-long sched_setattr_linux(int pid, sched_attr *attr, unsigned int flags) {
+long sched_setattr_linux(int pid, sched_attr_linux *attr, unsigned int flags) {
   return Syscall3_linux(NR_sched_setattr_linux, pid, attr, flags, 0);
 }
-long sched_getattr_linux(int pid, sched_attr *attr, unsigned int size, unsigned int flags) {
+long sched_getattr_linux(int pid, sched_attr_linux *attr, unsigned int size, unsigned int flags) {
   return Syscall4_linux(NR_sched_getattr_linux, pid, attr, size, flags, 0);
 }
 long sched_yield_linux(void) {
@@ -2851,11 +3275,13 @@ long sched_get_priority_max_linux(int policy) {
 long sched_get_priority_min_linux(int policy) {
   return Syscall1_linux(NR_sched_get_priority_min_linux, policy, 0);
 }
-long sched_rr_get_interval_linux(int pid, __kernel_timespec *interval) {
+// Disabled wrapper: long sched_rr_get_interval_linux(int pid, __kernel_old_timespec_linux *interval);
+long sched_rr_get_interval_time64_linux(int pid, __kernel_timespec_linux *interval) {
+#if defined(__x86_64__) || (defined(__riscv) && (__riscv_xlen == 64))
   return Syscall2_linux(NR_sched_rr_get_interval_linux, pid, interval, 0);
-}
-long sched_rr_get_interval_time64_linux(int pid, __kernel_timespec *interval) {
+#else
   return Syscall2_linux(NR_sched_rr_get_interval_time64_linux, pid, interval, 0);
+#endif
 }
 long sched_setaffinity_linux(int pid, unsigned int len, unsigned long *user_mask_ptr) {
   return Syscall3_linux(NR_sched_setaffinity_linux, pid, len, user_mask_ptr, 0);
@@ -2864,7 +3290,9 @@ long sched_getaffinity_linux(int pid, unsigned int len, unsigned long *user_mask
   return Syscall3_linux(NR_sched_getaffinity_linux, pid, len, user_mask_ptr, 0);
 }
 long nice_linux(int increment) {
-  return Syscall1_linux(NR_nice_linux, increment, 0);
+  long ret = getpriority_linux(PRIO_PROCESS_linux, 0);
+  if (ret < 0) return ret;
+  return setpriority_linux(PRIO_PROCESS_linux, 0, (int)(20 - ret + increment));
 }
 long setpriority_linux(int which, int who, int niceval) {
   return Syscall3_linux(NR_setpriority_linux, which, who, niceval, 0);
@@ -2872,6 +3300,7 @@ long setpriority_linux(int which, int who, int niceval) {
 long getpriority_linux(int which, int who) {
   return Syscall2_linux(NR_getpriority_linux, which, who, 0);
 }
+#if 0 // WIP
 //
 // 4. MEMORY MANAGEMENT
 //
@@ -3143,19 +3572,15 @@ long select_linux(int n, fd_set *inp, fd_set *outp, fd_set *exp, __kernel_old_ti
 long _newselect_linux(int n, fd_set *inp, fd_set *outp, fd_set *exp, __kernel_old_timeval *tvp) {
   return Syscall5_linux(NR__newselect_linux, n, inp, outp, exp, tvp, 0);
 }
-long pselect6_linux(int n, fd_set *inp, fd_set *outp, fd_set *exp, __kernel_timespec *tsp, void *sig) {
-  return Syscall6_linux(NR_pselect6_linux, n, inp, outp, exp, tsp, sig, 0);
-}
-long pselect6_time64_linux(int n, fd_set *inp, fd_set *outp, fd_set *exp, __kernel_timespec *tsp, void *sig) {
+// Disabled wrapper: pselect6_linux(int n, fd_set *inp, fd_set *outp, fd_set *exp, __kernel_old_timespec_linux *tsp, void *sig);
+long pselect6_time64_linux(int n, fd_set *inp, fd_set *outp, fd_set *exp, __kernel_timespec_linux *tsp, void *sig) {
   return Syscall6_linux(NR_pselect6_time64_linux, n, inp, outp, exp, tsp, sig, 0);
 }
 long poll_linux(pollfd *ufds, unsigned int nfds, int timeout) {
   return Syscall3_linux(NR_poll_linux, ufds, nfds, timeout, 0);
 }
-long ppoll_linux(pollfd *, unsigned int, __kernel_timespec *, const sigset_t *, unsigned long) {
-  return Syscall4_linux(NR_ppoll_linux, , int, , , 0);
-}
-long ppoll_time64_linux(pollfd *ufds, unsigned int nfds, __kernel_timespec *tsp, const sigset_t *sigmask, unsigned long sigsetsize) {
+// Disabled wrapper: ppoll_linux(pollfd *, unsigned int, __kernel_old_timespec_linux *, const sigset_t *, unsigned long);
+long ppoll_time64_linux(pollfd *ufds, unsigned int nfds, __kernel_timespec_linux *tsp, const sigset_t *sigmask, unsigned long sigsetsize) {
   return Syscall5_linux(NR_ppoll_time64_linux, ufds, nfds, tsp, sigmask, sigsetsize, 0);
 }
 // 6d. Scalable I/O event notification
@@ -3174,7 +3599,7 @@ long epoll_wait_linux(int epfd, epoll_event *events, int maxevents, int timeout)
 long epoll_pwait_linux(int epfd, epoll_event *events, int maxevents, int timeout, const sigset_t *sigmask, unsigned long sigsetsize) {
   return Syscall6_linux(NR_epoll_pwait_linux, epfd, events, maxevents, timeout, sigmask, sigsetsize, 0);
 }
-long epoll_pwait2_linux(int epfd, epoll_event *events, int maxevents, const __kernel_timespec *timeout, const sigset_t *sigmask, unsigned long sigsetsize) {
+long epoll_pwait2_linux(int epfd, epoll_event *events, int maxevents, const __kernel_timespec_linux *timeout, const sigset_t *sigmask, unsigned long sigsetsize) {
   return Syscall6_linux(NR_epoll_pwait2_linux, epfd, events, maxevents, timeout, sigmask, sigsetsize, 0);
 }
 long epoll_ctl_old_linux(int epfd, int op, int fd, epoll_event *event) {
@@ -3276,10 +3701,8 @@ long utimes_linux(char *filename, __kernel_old_timeval *utimes) {
 long futimesat_linux(int dfd, const char *filename, __kernel_old_timeval *utimes) {
   return Syscall3_linux(NR_futimesat_linux, dfd, filename, utimes, 0);
 }
-long utimensat_linux(int dfd, const char *filename, __kernel_timespec *utimes, int flags) {
-  return Syscall4_linux(NR_utimensat_linux, dfd, filename, utimes, flags, 0);
-}
-long utimensat_time64_linux(int dfd, const char *filename, __kernel_timespec *t, int flags) {
+// Disabled wrapper: utimensat_linux(int dfd, const char *filename, __kernel_old_timespec_linux *utimes, int flags);
+long utimensat_time64_linux(int dfd, const char *filename, __kernel_timespec_linux *t, int flags) {
   return Syscall4_linux(NR_utimensat_time64_linux, dfd, filename, t, flags, 0);
 }
 // 7d. Testing file accessibility
@@ -3571,10 +3994,8 @@ long rt_sigsuspend_linux(sigset_t *unewset, unsigned long sigsetsize) {
 long pause_linux(void) {
   return Syscall0_linux(NR_pause_linux, 0);
 }
-long rt_sigtimedwait_linux(const sigset_t *uthese, siginfo_t *uinfo, const __kernel_timespec *uts, unsigned long sigsetsize) {
-  return Syscall4_linux(NR_rt_sigtimedwait_linux, uthese, uinfo, uts, sigsetsize, 0);
-}
-long rt_sigtimedwait_time64_linux(compat_sigset_t *uthese, compat_siginfo *uinfo, __kernel_timespec *uts, compat_size_t sigsetsize) {
+// Disabled wrapper: rt_sigtimedwait_linux(const sigset_t *uthese, siginfo_t *uinfo, const __kernel_old_timespec_linux *uts, unsigned long sigsetsize);
+long rt_sigtimedwait_time64_linux(compat_sigset_t *uthese, compat_siginfo *uinfo, __kernel_timespec_linux *uts, compat_size_t sigsetsize) {
   return Syscall4_linux(NR_rt_sigtimedwait_time64_linux, uthese, uinfo, uts, sigsetsize, 0);
 }
 // 11e. Alternate signal stack and return from handlers
@@ -3642,10 +4063,8 @@ long semop_linux(int semid, sembuf *sops, unsigned nsops) {
 long semctl_linux(int semid, int semnum, int cmd, unsigned long arg) {
   return Syscall4_linux(NR_semctl_linux, semid, semnum, cmd, arg, 0);
 }
-long semtimedop_linux(int semid, sembuf *sops, unsigned nsops, const __kernel_timespec *timeout) {
-  return Syscall4_linux(NR_semtimedop_linux, semid, sops, nsops, timeout, 0);
-}
-long semtimedop_time64_linux(int semid, sembuf *tsops, unsigned int nsops, const __kernel_timespec *timeout) {
+// Disabled wrapper: semtimedop_linux(int semid, sembuf *sops, unsigned nsops, const __kernel_old_timespec_linux *timeout);
+long semtimedop_time64_linux(int semid, sembuf *tsops, unsigned int nsops, const __kernel_timespec_linux *timeout) {
   return Syscall4_linux(NR_semtimedop_time64_linux, semid, tsops, nsops, timeout, 0);
 }
 // 13d. POSIX Message Queues
@@ -3655,16 +4074,12 @@ long mq_open_linux(const char *name, int oflag, umode_t mode, mq_attr *attr) {
 long mq_unlink_linux(const char *name) {
   return Syscall1_linux(NR_mq_unlink_linux, name, 0);
 }
-long mq_timedsend_linux(mqd_t mqdes, const char *msg_ptr, unsigned long msg_len, unsigned int msg_prio, const __kernel_timespec *abs_timeout) {
-  return Syscall5_linux(NR_mq_timedsend_linux, mqdes, msg_ptr, msg_len, msg_prio, abs_timeout, 0);
-}
-long mq_timedsend_time64_linux(mqd_t mqdes, const char *u_msg_ptr, unsigned long msg_len, unsigned int msg_prio, const __kernel_timespec *u_abs_timeout) {
+// Disabled wrapper: mq_timedsend_linux(mqd_t mqdes, const char *msg_ptr, unsigned long msg_len, unsigned int msg_prio, const __kernel_old_timespec_linux *abs_timeout);
+long mq_timedsend_time64_linux(mqd_t mqdes, const char *u_msg_ptr, unsigned long msg_len, unsigned int msg_prio, const __kernel_timespec_linux *u_abs_timeout) {
   return Syscall5_linux(NR_mq_timedsend_time64_linux, mqdes, u_msg_ptr, msg_len, msg_prio, u_abs_timeout, 0);
 }
-long mq_timedreceive_linux(mqd_t mqdes, char *msg_ptr, unsigned long msg_len, unsigned int *msg_prio, const __kernel_timespec *abs_timeout) {
-  return Syscall5_linux(NR_mq_timedreceive_linux, mqdes, msg_ptr, msg_len, msg_prio, abs_timeout, 0);
-}
-long mq_timedreceive_time64_linux(mqd_t mqdes, char *u_msg_ptr, unsigned long msg_len, unsigned int *u_msg_prio, const __kernel_timespec *u_abs_timeout) {
+// Disabled wrapper: mq_timedreceive_linux(mqd_t mqdes, char *msg_ptr, unsigned long msg_len, unsigned int *msg_prio, const __kernel_old_timespec_linux *abs_timeout);
+long mq_timedreceive_time64_linux(mqd_t mqdes, char *u_msg_ptr, unsigned long msg_len, unsigned int *u_msg_prio, const __kernel_timespec_linux *u_abs_timeout) {
   return Syscall5_linux(NR_mq_timedreceive_time64_linux, mqdes, u_msg_ptr, msg_len, u_msg_prio, u_abs_timeout, 0);
 }
 long mq_notify_linux(mqd_t mqdes, const sigevent *notification) {
@@ -3674,19 +4089,17 @@ long mq_getsetattr_linux(mqd_t mqdes, const mq_attr *mqstat, mq_attr *omqstat) {
   return Syscall3_linux(NR_mq_getsetattr_linux, mqdes, mqstat, omqstat, 0);
 }
 // 13e. Synchronization Primitives - Futexes
-long futex_linux(u32 *uaddr, int op, u32 val, const __kernel_timespec *utime, u32 *uaddr2, u32 val3) {
-  return Syscall6_linux(NR_futex_linux, uaddr, op, val, utime, uaddr2, val3, 0);
-}
-long futex_time64_linux(u32 *uaddr, int op, u32 val, const __kernel_timespec *utime, u32 *uaddr2, u32 val3) {
+// Disabled wrapper: futex_linux(u32 *uaddr, int op, u32 val, const __kernel_old_timespec_linux *utime, u32 *uaddr2, u32 val3);
+long futex_time64_linux(u32 *uaddr, int op, u32 val, const __kernel_timespec_linux *utime, u32 *uaddr2, u32 val3) {
   return Syscall6_linux(NR_futex_time64_linux, uaddr, op, val, utime, uaddr2, val3, 0);
 }
-long futex_wait_linux(void *uaddr, unsigned long val, unsigned long mask, unsigned int flags, __kernel_timespec *timespec, clockid_t clockid) {
+long futex_wait_linux(void *uaddr, unsigned long val, unsigned long mask, unsigned int flags, __kernel_timespec_linux *timespec, clockid_t clockid) {
   return Syscall6_linux(NR_futex_wait_linux, uaddr, val, mask, flags, timespec, clockid, 0);
 }
 long futex_wake_linux(void *uaddr, unsigned long mask, int nr, unsigned int flags) {
   return Syscall4_linux(NR_futex_wake_linux, uaddr, mask, nr, flags, 0);
 }
-long futex_waitv_linux(futex_waitv *waiters, unsigned int nr_futexes, unsigned int flags, __kernel_timespec *timeout, clockid_t clockid) {
+long futex_waitv_linux(futex_waitv *waiters, unsigned int nr_futexes, unsigned int flags, __kernel_timespec_linux *timeout, clockid_t clockid) {
   return Syscall5_linux(NR_futex_waitv_linux, waiters, nr_futexes, flags, timeout, clockid, 0);
 }
 long futex_requeue_linux(futex_waitv *waiters, unsigned int flags, int nr_wake, int nr_requeue) {
@@ -3758,10 +4171,8 @@ long recvfrom_linux(int fd, void *ubuf, unsigned long size, unsigned int flags, 
 long recvmsg_linux(int fd, user_msghdr *msg, unsigned flags) {
   return Syscall3_linux(NR_recvmsg_linux, fd, msg, flags, 0);
 }
-long recvmmsg_linux(int fd, mmsghdr *msg, unsigned int vlen, unsigned flags, __kernel_timespec *timeout) {
-  return Syscall5_linux(NR_recvmmsg_linux, fd, msg, vlen, flags, timeout, 0);
-}
-long recvmmsg_time64_linux(int fd, mmsghdr *mmsg, unsigned int vlen, unsigned int flags, __kernel_timespec *timeout) {
+// Disabled wrapper: recvmmsg_linux(int fd, mmsghdr *msg, unsigned int vlen, unsigned flags, __kernel_old_timespec_linux *timeout);
+long recvmmsg_time64_linux(int fd, mmsghdr *mmsg, unsigned int vlen, unsigned int flags, __kernel_timespec_linux *timeout) {
   return Syscall5_linux(NR_recvmmsg_time64_linux, fd, mmsg, vlen, flags, timeout, 0);
 }
 // 14c. Getting and setting socket options
@@ -3793,13 +4204,11 @@ long io_submit_linux(aio_context_t ctx_id, long nr, iocb * *iocbpp) {
 long io_cancel_linux(aio_context_t ctx_id, iocb *iocb, io_event *result) {
   return Syscall3_linux(NR_io_cancel_linux, ctx_id, iocb, result, 0);
 }
-long io_getevents_linux(aio_context_t ctx_id, long min_nr, long nr, io_event *events, __kernel_timespec *timeout) {
+long io_getevents_linux(aio_context_t ctx_id, long min_nr, long nr, io_event *events, __kernel_timespec_linux *timeout) {
   return Syscall5_linux(NR_io_getevents_linux, ctx_id, min_nr, nr, events, timeout, 0);
 }
-long io_pgetevents_linux(aio_context_t ctx_id, long min_nr, long nr, io_event *events, __kernel_timespec *timeout, const __aio_sigset *sig) {
-  return Syscall6_linux(NR_io_pgetevents_linux, ctx_id, min_nr, nr, events, timeout, sig, 0);
-}
-long io_pgetevents_time64_linux(aio_context_t ctx_id, long min_nr, long nr, io_event *events, __kernel_timespec *timeout, const __aio_sigset *sig) {
+// Disabled wrapper: io_pgetevents_linux(aio_context_t ctx_id, long min_nr, long nr, io_event *events, __kernel_old_timespec_linux *timeout, const __aio_sigset *sig);
+long io_pgetevents_time64_linux(aio_context_t ctx_id, long min_nr, long nr, io_event *events, __kernel_timespec_linux *timeout, const __aio_sigset *sig) {
   return Syscall6_linux(NR_io_pgetevents_time64_linux, ctx_id, min_nr, nr, events, timeout, sig, 0);
 }
 // 15b. io_uring: high-performance asynchronous I/O
@@ -3822,26 +4231,20 @@ long time_linux(__kernel_old_time_t *tloc) {
 long gettimeofday_linux(__kernel_old_timeval *tv, timezone *tz) {
   return Syscall2_linux(NR_gettimeofday_linux, tv, tz, 0);
 }
-long clock_gettime_linux(clockid_t which_clock, __kernel_timespec *tp) {
-  return Syscall2_linux(NR_clock_gettime_linux, which_clock, tp, 0);
-}
-long clock_gettime64_linux(clockid_t which_clock, __kernel_timespec *tp) {
+// Disabled wrapper: clock_gettime_linux(clockid_t which_clock, __kernel_old_timespec_linux *tp);
+long clock_gettime64_linux(clockid_t which_clock, __kernel_timespec_linux *tp) {
   return Syscall2_linux(NR_clock_gettime64_linux, which_clock, tp, 0);
 }
-long clock_getres_linux(clockid_t which_clock, __kernel_timespec *tp) {
-  return Syscall2_linux(NR_clock_getres_linux, which_clock, tp, 0);
-}
-long clock_getres_time64_linux(clockid_t which_clock, __kernel_timespec *tp) {
+// Disabled wrapper: clock_getres_linux(clockid_t which_clock, __kernel_old_timespec_linux *tp);
+long clock_getres_time64_linux(clockid_t which_clock, __kernel_timespec_linux *tp) {
   return Syscall2_linux(NR_clock_getres_time64_linux, which_clock, tp, 0);
 }
 // 16b. Setting system time and adjusting clocks
 long settimeofday_linux(__kernel_old_timeval *tv, timezone *tz) {
   return Syscall2_linux(NR_settimeofday_linux, tv, tz, 0);
 }
-long clock_settime_linux(clockid_t which_clock, const __kernel_timespec *tp) {
-  return Syscall2_linux(NR_clock_settime_linux, which_clock, tp, 0);
-}
-long clock_settime64_linux(clockid_t which_clock, const __kernel_timespec *tp) {
+// Disabled wrapper: clock_settime_linux(clockid_t which_clock, const __kernel_old_timespec_linux *tp);
+long clock_settime64_linux(clockid_t which_clock, const __kernel_timespec_linux *tp) {
   return Syscall2_linux(NR_clock_settime64_linux, which_clock, tp, 0);
 }
 long stime_linux(__kernel_old_time_t *tptr) {
@@ -3857,13 +4260,11 @@ long clock_adjtime64_linux(clockid_t which_clock, __kernel_timex *tx) {
   return Syscall2_linux(NR_clock_adjtime64_linux, which_clock, tx, 0);
 }
 // 16c. Suspending execution for a period of time
-long nanosleep_linux(__kernel_timespec *rqtp, __kernel_timespec *rmtp) {
+long nanosleep_linux(__kernel_timespec_linux *rqtp, __kernel_timespec_linux *rmtp) {
   return Syscall2_linux(NR_nanosleep_linux, rqtp, rmtp, 0);
 }
-long clock_nanosleep_linux(clockid_t which_clock, int flags, const __kernel_timespec *rqtp, __kernel_timespec *rmtp) {
-  return Syscall4_linux(NR_clock_nanosleep_linux, which_clock, flags, rqtp, rmtp, 0);
-}
-long clock_nanosleep_time64_linux(clockid_t which_clock, int flags, const __kernel_timespec *rqtp, __kernel_timespec *rmtp) {
+// Disabled wrapper: clock_nanosleep_linux(clockid_t which_clock, int flags, const __kernel_old_timespec_linux *rqtp, __kernel_old_timespec_linux *rmtp);
+long clock_nanosleep_time64_linux(clockid_t which_clock, int flags, const __kernel_timespec_linux *rqtp, __kernel_timespec_linux *rmtp) {
   return Syscall4_linux(NR_clock_nanosleep_time64_linux, which_clock, flags, rqtp, rmtp, 0);
 }
 // 16d. Setting periodic or one-shot timers
@@ -3880,16 +4281,12 @@ long getitimer_linux(int which, __kernel_old_itimerval *value) {
 long timer_create_linux(clockid_t which_clock, sigevent *timer_event_spec, timer_t * created_timer_id) {
   return Syscall3_linux(NR_timer_create_linux, which_clock, timer_event_spec, created_timer_id, 0);
 }
-long timer_settime_linux(timer_t timer_id, int flags, const __kernel_itimerspec *new_setting, __kernel_itimerspec *old_setting) {
-  return Syscall4_linux(NR_timer_settime_linux, timer_id, flags, new_setting, old_setting, 0);
-}
-long timer_settime64_linux(timer_t timerid, int flags, const __kernel_timespec *new_setting, __kernel_timespec *old_setting) {
+// Disabled wrapper: long timer_settime_linux(timer_t timer_id, int flags, const __kernel_itimerspec *new_setting, __kernel_itimerspec *old_setting);
+long timer_settime64_linux(timer_t timerid, int flags, const __kernel_timespec_linux *new_setting, __kernel_timespec_linux *old_setting) {
   return Syscall4_linux(NR_timer_settime64_linux, timerid, flags, new_setting, old_setting, 0);
 }
-long timer_gettime_linux(timer_t timer_id, __kernel_itimerspec *setting) {
-  return Syscall2_linux(NR_timer_gettime_linux, timer_id, setting, 0);
-}
-long timer_gettime64_linux(timer_t timerid, __kernel_timespec *setting) {
+// Disabled wrapper: long timer_gettime_linux(timer_t timer_id, __kernel_itimerspec *setting);
+long timer_gettime64_linux(timer_t timerid, __kernel_timespec_linux *setting) {
   return Syscall2_linux(NR_timer_gettime64_linux, timerid, setting, 0);
 }
 long timer_getoverrun_linux(timer_t timer_id) {
@@ -3902,16 +4299,12 @@ long timer_delete_linux(timer_t timer_id) {
 long timerfd_create_linux(int clockid, int flags) {
   return Syscall2_linux(NR_timerfd_create_linux, clockid, flags, 0);
 }
-long timerfd_settime_linux(int ufd, int flags, const __kernel_itimerspec *utmr, __kernel_itimerspec *otmr) {
-  return Syscall4_linux(NR_timerfd_settime_linux, ufd, flags, utmr, otmr, 0);
-}
-long timerfd_settime64_linux(int ufd, int flags, const __kernel_timespec *utmr, __kernel_timespec *otmr) {
+// Disabled wrapper: long timerfd_settime_linux(int ufd, int flags, const __kernel_itimerspec *utmr, __kernel_itimerspec *otmr);
+long timerfd_settime64_linux(int ufd, int flags, const __kernel_timespec_linux *utmr, __kernel_timespec_linux *otmr) {
   return Syscall4_linux(NR_timerfd_settime64_linux, ufd, flags, utmr, otmr, 0);
 }
-long timerfd_gettime_linux(int ufd, __kernel_itimerspec *otmr) {
-  return Syscall2_linux(NR_timerfd_gettime_linux, ufd, otmr, 0);
-}
-long timerfd_gettime64_linux(int ufd, __kernel_timespec *otmr) {
+// Disabled wrapper: long timerfd_gettime_linux(int ufd, __kernel_itimerspec *otmr);
+long timerfd_gettime64_linux(int ufd, __kernel_timespec_linux *otmr) {
   return Syscall2_linux(NR_timerfd_gettime64_linux, ufd, otmr, 0);
 }
 //
@@ -4278,21 +4671,40 @@ long cachestat_linux(unsigned int fd, cachestat_range *cstat_range, cachestat *c
 //
 // 28. ARCHITECTURE-SPECIFIC OPERATIONS
 //
-// 28a. RISC-V architecture operations
-long riscv_flush_icache_linux(uintptr_t start, uintptr_t end, uintptr_t flags) {
-  return Syscall3_linux(NR_riscv_flush_icache_linux, start, end, flags, 0);
+// 28a. x86 architecture operations
+long arch_prctl_linux(int option, unsigned long addr) {
+  return Syscall2_linux(NR_arch_prctl_linux, option, addr, 0);
 }
-long riscv_hwprobe_linux(riscv_hwprobe *pairs, unsigned long pair_count, unsigned long cpu_count, unsigned long *cpumask, unsigned int flags) {
-  return Syscall5_linux(NR_riscv_hwprobe_linux, pairs, pair_count, cpu_count, cpumask, flags, 0);
+long modify_ldt_linux(int func, void *ptr, unsigned long bytecount) {
+  return Syscall3_linux(NR_modify_ldt_linux, func, ptr, bytecount, 0);
 }
-// 28b. x86 architecture operations
+long set_thread_area_linux(user_desc *u_info) {
+  return Syscall1_linux(NR_set_thread_area_linux, u_info, 0);
+}
+long get_thread_area_linux(user_desc *u_info) {
+  return Syscall1_linux(NR_get_thread_area_linux, u_info, 0);
+}
 long vm86_linux(unsigned long cmd, unsigned long arg) {
   return Syscall2_linux(NR_vm86_linux, cmd, arg, 0);
 }
 long vm86old_linux(vm86_struct *user_vm86) {
   return Syscall1_linux(NR_vm86old_linux, user_vm86, 0);
 }
-// 28c. Intel MPX support (deprecated)
+// 28b. ARM architecture operations
+long set_tls_linux(unsigned long val) {
+  return Syscall1_linux(NR_set_tls_linux, val, 0);
+}
+long get_tls_linux(void) {
+  return Syscall0_linux(NR_get_tls_linux, 0);
+}
+// 28c. RISC-V architecture operations
+long riscv_flush_icache_linux(uintptr_t start, uintptr_t end, uintptr_t flags) {
+  return Syscall3_linux(NR_riscv_flush_icache_linux, start, end, flags, 0);
+}
+long riscv_hwprobe_linux(riscv_hwprobe *pairs, unsigned long pair_count, unsigned long cpu_count, unsigned long *cpumask, unsigned int flags) {
+  return Syscall5_linux(NR_riscv_hwprobe_linux, pairs, pair_count, cpu_count, cpumask, flags, 0);
+}
+// 28d. Intel MPX support (deprecated)
 long mpx_linux(void) {
   return Syscall0_linux(NR_mpx_linux, 0);
 }
