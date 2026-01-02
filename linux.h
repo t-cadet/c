@@ -1034,7 +1034,7 @@
 #define PRIO_PGRP_linux                       1
 #define PRIO_USER_linux                       2
 
-#define AT_FDCWD_linux                        -100
+#define AT_FDCWD_linux  -100
 
 #define AT_SYMLINK_NOFOLLOW_linux 0x100
 #define AT_SYMLINK_FOLLOW_linux   0x400
@@ -1584,6 +1584,171 @@
 #define MODIFY_LDT_CONTENTS_CODE_linux     2
 #endif
 
+#define PROT_NONE_linux           0x0
+#define PROT_READ_linux           0x1
+#define PROT_WRITE_linux          0x2
+#define PROT_EXEC_linux           0x4
+#define PROT_SEM_linux            0x8
+#ifdef __aarch64__
+#define PROT_BTI_linux            0x10
+#define PROT_MTE_linux            0x20
+#endif
+#define PROT_GROWSDOWN_linux      0x01000000
+#define PROT_GROWSUP_linux        0x02000000
+
+#define MAP_SHARED_linux          0x01
+#define MAP_PRIVATE_linux         0x02
+#define MAP_SHARED_VALIDATE_linux 0x03
+#define MAP_TYPE_linux            0x0f
+#define MAP_FIXED_linux           0x10
+#define MAP_ANONYMOUS_linux       0x20
+#ifdef __x86_64__
+#define MAP_32BIT_linux           0x40
+#endif
+#define MAP_GROWSDOWN_linux       0x0100
+#define MAP_DENYWRITE_linux       0x0800
+#define MAP_EXECUTABLE_linux      0x1000
+#define MAP_LOCKED_linux          0x2000
+#define MAP_NORESERVE_linux       0x4000
+#define MAP_POPULATE_linux        0x008000
+#define MAP_NONBLOCK_linux        0x010000
+#define MAP_STACK_linux           0x020000
+#define MAP_HUGETLB_linux         0x040000
+#define MAP_SYNC_linux            0x080000
+#define MAP_FIXED_NOREPLACE_linux 0x100000
+#define MAP_UNINITIALIZED_linux   0x4000000
+
+#define MAP_HUGE_SHIFT_linux      26
+#define MAP_HUGE_MASK_linux       0x3f
+#define MAP_HUGE_16KB_linux       (14U << MAP_HUGE_SHIFT_linux)
+#define MAP_HUGE_64KB_linux       (16U << MAP_HUGE_SHIFT_linux)
+#define MAP_HUGE_512KB_linux      (19U << MAP_HUGE_SHIFT_linux)
+#define MAP_HUGE_1MB_linux        (20U << MAP_HUGE_SHIFT_linux)
+#define MAP_HUGE_2MB_linux        (21U << MAP_HUGE_SHIFT_linux)
+#define MAP_HUGE_8MB_linux        (23U << MAP_HUGE_SHIFT_linux)
+#define MAP_HUGE_16MB_linux       (24U << MAP_HUGE_SHIFT_linux)
+#define MAP_HUGE_32MB_linux       (25U << MAP_HUGE_SHIFT_linux)
+#define MAP_HUGE_256MB_linux      (28U << MAP_HUGE_SHIFT_linux)
+#define MAP_HUGE_512MB_linux      (29U << MAP_HUGE_SHIFT_linux)
+#define MAP_HUGE_1GB_linux        (30U << MAP_HUGE_SHIFT_linux)
+#define MAP_HUGE_2GB_linux        (31U << MAP_HUGE_SHIFT_linux)
+#define MAP_HUGE_16GB_linux       (34U << MAP_HUGE_SHIFT_linux)
+
+#define MREMAP_MAYMOVE_linux      1
+#define MREMAP_FIXED_linux        2
+#define MREMAP_DONTUNMAP_linux    4
+
+#define MADV_NORMAL_linux          0
+#define MADV_RANDOM_linux          1
+#define MADV_SEQUENTIAL_linux      2
+#define MADV_WILLNEED_linux        3
+#define MADV_DONTNEED_linux        4
+#define MADV_FREE_linux            8
+#define MADV_REMOVE_linux          9
+#define MADV_DONTFORK_linux        10
+#define MADV_DOFORK_linux          11
+#define MADV_MERGEABLE_linux       12
+#define MADV_UNMERGEABLE_linux     13
+#define MADV_HUGEPAGE_linux        14
+#define MADV_NOHUGEPAGE_linux      15
+#define MADV_DONTDUMP_linux        16
+#define MADV_DODUMP_linux          17
+#define MADV_WIPEONFORK_linux      18
+#define MADV_KEEPONFORK_linux      19
+#define MADV_COLD_linux            20
+#define MADV_PAGEOUT_linux         21
+#define MADV_POPULATE_READ_linux   22
+#define MADV_POPULATE_WRITE_linux  23
+#define MADV_DONTNEED_LOCKED_linux 24
+#define MADV_COLLAPSE_linux        25
+#define MADV_HWPOISON_linux        100
+#define MADV_SOFT_OFFLINE_linux    101
+#define MADV_GUARD_INSTALL_linux   102
+#define MADV_GUARD_REMOVE_linux    103
+
+#define MLOCK_ONFAULT_linux       0x01
+
+#define MCL_CURRENT_linux         1
+#define MCL_FUTURE_linux          2
+#define MCL_ONFAULT_linux         4
+
+#define MS_ASYNC_linux            1
+#define MS_INVALIDATE_linux       2
+#define MS_SYNC_linux             4
+
+#define PKEY_UNRESTRICTED_linux    0x0
+#define PKEY_DISABLE_ACCESS_linux  0x1
+#define PKEY_DISABLE_WRITE_linux   0x2
+#ifdef __aarch64__
+#define PKEY_DISABLE_EXECUTE_linux 0x4
+#define PKEY_DISABLE_READ_linux    0x8
+#define PKEY_ACCESS_MASK_linux     (PKEY_DISABLE_ACCESS_linux | PKEY_DISABLE_WRITE_linux | PKEY_DISABLE_READ_linux | PKEY_DISABLE_EXECUTE_linux)
+#else
+#define PKEY_ACCESS_MASK_linux     (PKEY_DISABLE_ACCESS_linux | PKEY_DISABLE_WRITE_linux)
+#endif
+
+#define MPOL_DEFAULT_linux             0
+#define MPOL_PREFERRED_linux           1
+#define MPOL_BIND_linux                2
+#define MPOL_INTERLEAVE_linux          3
+#define MPOL_LOCAL_linux               4
+#define MPOL_PREFERRED_MANY_linux      5
+#define MPOL_WEIGHTED_INTERLEAVE_linux 6
+#define MPOL_MAX_linux                 7
+
+#define MPOL_F_STATIC_NODES_linux     (1 << 15)
+#define MPOL_F_RELATIVE_NODES_linux   (1 << 14)
+#define MPOL_F_NUMA_BALANCING_linux   (1 << 13)
+
+#define MPOL_F_NODE_linux             (1 << 0)
+#define MPOL_F_ADDR_linux             (1 << 1)
+#define MPOL_F_MEMS_ALLOWED_linux     (1 << 2)
+
+#define MPOL_MF_STRICT_linux          (1 << 0)
+#define MPOL_MF_MOVE_linux            (1 << 1)
+#define MPOL_MF_MOVE_ALL_linux        (1 << 2)
+#define MPOL_MF_LAZY_linux            (1 << 3)
+
+#define MFD_CLOEXEC_linux             0x0001U
+#define MFD_ALLOW_SEALING_linux       0x0002U
+#define MFD_HUGETLB_linux             0x0004U
+#define MFD_NOEXEC_SEAL_linux         0x0008U
+#define MFD_EXEC_linux                0x0010U
+
+#define MFD_HUGE_SHIFT_linux          26
+#define MFD_HUGE_MASK_linux           0x3f
+#define MFD_HUGE_64KB_linux           (16U << MFD_HUGE_SHIFT_linux)
+#define MFD_HUGE_512KB_linux          (19U << MFD_HUGE_SHIFT_linux)
+#define MFD_HUGE_1MB_linux            (20U << MFD_HUGE_SHIFT_linux)
+#define MFD_HUGE_2MB_linux            (21U << MFD_HUGE_SHIFT_linux)
+#define MFD_HUGE_8MB_linux            (23U << MFD_HUGE_SHIFT_linux)
+#define MFD_HUGE_16MB_linux           (24U << MFD_HUGE_SHIFT_linux)
+#define MFD_HUGE_32MB_linux           (25U << MFD_HUGE_SHIFT_linux)
+#define MFD_HUGE_256MB_linux          (28U << MFD_HUGE_SHIFT_linux)
+#define MFD_HUGE_512MB_linux          (29U << MFD_HUGE_SHIFT_linux)
+#define MFD_HUGE_1GB_linux            (30U << MFD_HUGE_SHIFT_linux)
+#define MFD_HUGE_2GB_linux            (31U << MFD_HUGE_SHIFT_linux)
+#define MFD_HUGE_16GB_linux           (34U << MFD_HUGE_SHIFT_linux)
+
+#define SHADOW_STACK_SET_TOKEN_linux  (1ULL << 0)
+#define SHADOW_STACK_SET_MARKER_linux (1ULL << 1)
+
+#define UFFD_USER_MODE_ONLY_linux     1
+
+#define MEMBARRIER_CMD_QUERY_linux                                0
+#define MEMBARRIER_CMD_GLOBAL_linux                               (1 << 0)
+#define MEMBARRIER_CMD_GLOBAL_EXPEDITED_linux                     (1 << 1)
+#define MEMBARRIER_CMD_REGISTER_GLOBAL_EXPEDITED_linux            (1 << 2)
+#define MEMBARRIER_CMD_PRIVATE_EXPEDITED_linux                    (1 << 3)
+#define MEMBARRIER_CMD_REGISTER_PRIVATE_EXPEDITED_linux           (1 << 4)
+#define MEMBARRIER_CMD_PRIVATE_EXPEDITED_SYNC_CORE_linux          (1 << 5)
+#define MEMBARRIER_CMD_REGISTER_PRIVATE_EXPEDITED_SYNC_CORE_linux (1 << 6)
+#define MEMBARRIER_CMD_PRIVATE_EXPEDITED_RSEQ_linux               (1 << 7)
+#define MEMBARRIER_CMD_REGISTER_PRIVATE_EXPEDITED_RSEQ_linux      (1 << 8)
+#define MEMBARRIER_CMD_GET_REGISTRATIONS_linux                    (1 << 9)
+
+#define MEMBARRIER_CMD_FLAG_CPU_linux                             (1 << 0)
+
 typedef struct {
   unsigned long long flags;
   unsigned long long pidfd;
@@ -1821,6 +1986,40 @@ typedef struct {
   long tv_nsec;
 } __kernel_old_timespec_linux;
 
+typedef struct {
+  void *iov_base;
+  unsigned long iov_len;
+} iovec_linux;
+
+typedef struct {
+  unsigned char event;
+  unsigned char reserved1;
+  unsigned short reserved2;
+  unsigned int reserved3;
+  union {
+    struct {
+      unsigned long long flags;
+      unsigned long long address;
+      union {
+        unsigned int ptid;
+      } feat;
+    } pagefault;
+    struct {
+      unsigned int ufd;
+    } fork;
+    struct {
+      unsigned long long from;
+      unsigned long long to;
+      unsigned long long len;
+    } remap;
+    struct {
+      unsigned long long start;
+      unsigned long long end;
+    } remove;
+    unsigned long long reserved;
+  } arg;
+} __attribute__((packed)) uffd_msg_linux;
+
 #define Syscall0_linux(number, ret2)                   _Syscall0_linux(number, (long*)(ret2))
 #define Syscall1_linux(number, a, ret2)                _Syscall1_linux(number, (long)(a), (long*)(ret2))
 #define Syscall2_linux(number, a, b, ret2)             _Syscall2_linux(number, (long)(a), (long)(b), (long*)(ret2))
@@ -1886,13 +2085,12 @@ long sched_getaffinity_linux(int pid, unsigned int len, unsigned long *user_mask
 long nice_linux(int increment);
 long setpriority_linux(int which, int who, int niceval);
 long getpriority_linux(int which, int who);
-#if 0 // WIP
 //
 // 4. MEMORY MANAGEMENT
 //
 // 4a. Memory mapping, allocation, and unmapping
 long brk_linux(unsigned long brk);
-long mmap_linux(unsigned long addr, unsigned long len, unsigned long prot, unsigned long flags, unsigned long fd, unsigned long off);
+long mmap_linux(unsigned long addr, unsigned long len, unsigned long prot, unsigned long flags, unsigned long fd, unsigned long long off);
 long mmap2_linux(unsigned long addr, unsigned long len, unsigned long prot, unsigned long flags, unsigned long fd, unsigned long pgoff);
 long munmap_linux(unsigned long addr, unsigned long len);
 long mremap_linux(unsigned long addr, unsigned long old_len, unsigned long new_len, unsigned long flags, unsigned long new_addr);
@@ -1901,7 +2099,7 @@ long remap_file_pages_linux(unsigned long start, unsigned long size, unsigned lo
 long mprotect_linux(unsigned long start, unsigned long len, unsigned long prot);
 long pkey_mprotect_linux(unsigned long start, unsigned long len, unsigned long prot, int pkey);
 long madvise_linux(unsigned long start, unsigned long len, int behavior);
-long process_madvise_linux(int pidfd, const iovec *vec, unsigned long vlen, int behavior, unsigned int flags);
+long process_madvise_linux(int pidfd, const iovec_linux *vec, unsigned long vlen, int behavior, unsigned int flags);
 long mlock_linux(unsigned long start, unsigned long len);
 long mlock2_linux(unsigned long start, unsigned long len, int flags);
 long munlock_linux(unsigned long start, unsigned long len);
@@ -1919,7 +2117,9 @@ long migrate_pages_linux(int pid, unsigned long maxnode, const unsigned long *fr
 long move_pages_linux(int pid, unsigned long nr_pages, const void * *pages, const int *nodes, int *status, int flags);
 // 4d. Anonymous file-backed memory regions
 long memfd_create_linux(const char *uname_ptr, unsigned int flags);
+#if !defined(__arm__)
 long memfd_secret_linux(unsigned int flags);
+#endif
 // 4e. Memory protection key management
 long pkey_alloc_linux(unsigned long flags, unsigned long init_val);
 long pkey_free_linux(int pkey);
@@ -1929,6 +2129,7 @@ long map_shadow_stack_linux(unsigned long addr, unsigned long size, unsigned int
 long userfaultfd_linux(int flags);
 long process_mrelease_linux(int pidfd, unsigned int flags);
 long membarrier_linux(int cmd, unsigned int flags, int cpu_id);
+#if 0 // WIP
 //
 // 5. FILE I/O OPERATIONS
 //
@@ -1944,14 +2145,14 @@ long name_to_handle_at_linux(int dfd, const char *name, file_handle *handle, voi
 // 5b. Reading and writing file data
 long read_linux(unsigned int fd, char *buf, unsigned long count);
 long write_linux(unsigned int fd, const char *buf, unsigned long count);
-long readv_linux(unsigned long fd, const iovec *vec, unsigned long vlen);
-long writev_linux(unsigned long fd, const iovec *vec, unsigned long vlen);
+long readv_linux(unsigned long fd, const iovec_linux *vec, unsigned long vlen);
+long writev_linux(unsigned long fd, const iovec_linux *vec, unsigned long vlen);
 long pread64_linux(unsigned int fd, char *buf, unsigned long count, loff_t pos);
 long pwrite64_linux(unsigned int fd, const char *buf, unsigned long count, loff_t pos);
-long preadv_linux(unsigned long fd, const iovec *vec, unsigned long vlen, unsigned long pos_l, unsigned long pos_h);
-long pwritev_linux(unsigned long fd, const iovec *vec, unsigned long vlen, unsigned long pos_l, unsigned long pos_h);
-long preadv2_linux(unsigned long fd, const iovec *vec, unsigned long vlen, unsigned long pos_l, unsigned long pos_h, rwf_t flags);
-long pwritev2_linux(unsigned long fd, const iovec *vec, unsigned long vlen, unsigned long pos_l, unsigned long pos_h, rwf_t flags);
+long preadv_linux(unsigned long fd, const iovec_linux *vec, unsigned long vlen, unsigned long pos_l, unsigned long pos_h);
+long pwritev_linux(unsigned long fd, const iovec_linux *vec, unsigned long vlen, unsigned long pos_l, unsigned long pos_h);
+long preadv2_linux(unsigned long fd, const iovec_linux *vec, unsigned long vlen, unsigned long pos_l, unsigned long pos_h, rwf_t flags);
+long pwritev2_linux(unsigned long fd, const iovec_linux *vec, unsigned long vlen, unsigned long pos_l, unsigned long pos_h, rwf_t flags);
 // 5c. Seeking and truncating files
 long lseek_linux(unsigned int fd, off_t offset, unsigned int whence);
 long llseek_linux(unsigned int fd, unsigned long offset_high, unsigned long offset_low, loff_t *result, unsigned int whence);
@@ -1965,7 +2166,7 @@ long sendfile_linux(int out_fd, int in_fd, off_t *offset, unsigned long count);
 long sendfile64_linux(int out_fd, int in_fd, loff_t *offset, unsigned long count);
 long splice_linux(int fd_in, loff_t *off_in, int fd_out, loff_t *off_out, unsigned long len, unsigned int flags);
 long tee_linux(int fdin, int fdout, unsigned long len, unsigned int flags);
-long vmsplice_linux(int fd, const iovec *iov, unsigned long nr_segs, unsigned int flags);
+long vmsplice_linux(int fd, const iovec_linux *iov, unsigned long nr_segs, unsigned int flags);
 long copy_file_range_linux(int fd_in, loff_t *off_in, int fd_out, loff_t *off_out, unsigned long len, unsigned int flags);
 // 5e. I/O hints and space allocation
 long fadvise64_linux(int fd, loff_t offset, unsigned long len, int advice);
@@ -2390,8 +2591,8 @@ long pidfd_open_linux(int pid, unsigned int flags);
 long pidfd_getfd_linux(int pidfd, int fd, unsigned int flags);
 long pidfd_send_signal_linux(int pidfd, int sig, siginfo_t *info, unsigned int flags);
 // 22c. Process memory access
-long process_vm_readv_linux(int pid, const iovec *lvec, unsigned long liovcnt, const iovec *rvec, unsigned long riovcnt, unsigned long flags);
-long process_vm_writev_linux(int pid, const iovec *lvec, unsigned long liovcnt, const iovec *rvec, unsigned long riovcnt, unsigned long flags);
+long process_vm_readv_linux(int pid, const iovec_linux *lvec, unsigned long liovcnt, const iovec_linux *rvec, unsigned long riovcnt, unsigned long flags);
+long process_vm_writev_linux(int pid, const iovec_linux *lvec, unsigned long liovcnt, const iovec_linux *rvec, unsigned long riovcnt, unsigned long flags);
 // 22d. Process tracing
 long ptrace_linux(long request, long pid, unsigned long addr, unsigned long data);
 //
@@ -3300,7 +3501,6 @@ long setpriority_linux(int which, int who, int niceval) {
 long getpriority_linux(int which, int who) {
   return Syscall2_linux(NR_getpriority_linux, which, who, 0);
 }
-#if 0 // WIP
 //
 // 4. MEMORY MANAGEMENT
 //
@@ -3308,11 +3508,19 @@ long getpriority_linux(int which, int who) {
 long brk_linux(unsigned long brk) {
   return Syscall1_linux(NR_brk_linux, brk, 0);
 }
-long mmap_linux(unsigned long addr, unsigned long len, unsigned long prot, unsigned long flags, unsigned long fd, unsigned long off) {
+long mmap_linux(unsigned long addr, unsigned long len, unsigned long prot, unsigned long flags, unsigned long fd, unsigned long long off) {
+#if defined(__x86_64__) || defined(__aarch64__) || (defined(__riscv) && (__riscv_xlen == 64))
   return Syscall6_linux(NR_mmap_linux, addr, len, prot, flags, fd, off, 0);
+#else
+  return Syscall6_linux(NR_mmap2_linux, addr, len, prot, flags, fd, off / 4096, 0);
+#endif
 }
 long mmap2_linux(unsigned long addr, unsigned long len, unsigned long prot, unsigned long flags, unsigned long fd, unsigned long pgoff) {
+#if defined(__x86_64__) || defined(__aarch64__) || (defined(__riscv) && (__riscv_xlen == 64))
+  return Syscall6_linux(NR_mmap_linux, addr, len, prot, flags, fd, pgoff * 4096, 0);
+#else
   return Syscall6_linux(NR_mmap2_linux, addr, len, prot, flags, fd, pgoff, 0);
+#endif
 }
 long munmap_linux(unsigned long addr, unsigned long len) {
   return Syscall2_linux(NR_munmap_linux, addr, len, 0);
@@ -3333,7 +3541,7 @@ long pkey_mprotect_linux(unsigned long start, unsigned long len, unsigned long p
 long madvise_linux(unsigned long start, unsigned long len, int behavior) {
   return Syscall3_linux(NR_madvise_linux, start, len, behavior, 0);
 }
-long process_madvise_linux(int pidfd, const iovec *vec, unsigned long vlen, int behavior, unsigned int flags) {
+long process_madvise_linux(int pidfd, const iovec_linux *vec, unsigned long vlen, int behavior, unsigned int flags) {
   return Syscall5_linux(NR_process_madvise_linux, pidfd, vec, vlen, behavior, flags, 0);
 }
 long mlock_linux(unsigned long start, unsigned long len) {
@@ -3383,9 +3591,11 @@ long move_pages_linux(int pid, unsigned long nr_pages, const void * *pages, cons
 long memfd_create_linux(const char *uname_ptr, unsigned int flags) {
   return Syscall2_linux(NR_memfd_create_linux, uname_ptr, flags, 0);
 }
+#if !defined(__arm__)
 long memfd_secret_linux(unsigned int flags) {
   return Syscall1_linux(NR_memfd_secret_linux, flags, 0);
 }
+#endif
 // 4e. Memory protection key management
 long pkey_alloc_linux(unsigned long flags, unsigned long init_val) {
   return Syscall2_linux(NR_pkey_alloc_linux, flags, init_val, 0);
@@ -3407,6 +3617,7 @@ long process_mrelease_linux(int pidfd, unsigned int flags) {
 long membarrier_linux(int cmd, unsigned int flags, int cpu_id) {
   return Syscall3_linux(NR_membarrier_linux, cmd, flags, cpu_id, 0);
 }
+#if 0 // WIP
 //
 // 5. FILE I/O OPERATIONS
 //
@@ -3442,10 +3653,10 @@ long read_linux(unsigned int fd, char *buf, unsigned long count) {
 long write_linux(unsigned int fd, const char *buf, unsigned long count) {
   return Syscall3_linux(NR_write_linux, fd, buf, count, 0);
 }
-long readv_linux(unsigned long fd, const iovec *vec, unsigned long vlen) {
+long readv_linux(unsigned long fd, const iovec_linux *vec, unsigned long vlen) {
   return Syscall3_linux(NR_readv_linux, fd, vec, vlen, 0);
 }
-long writev_linux(unsigned long fd, const iovec *vec, unsigned long vlen) {
+long writev_linux(unsigned long fd, const iovec_linux *vec, unsigned long vlen) {
   return Syscall3_linux(NR_writev_linux, fd, vec, vlen, 0);
 }
 long pread64_linux(unsigned int fd, char *buf, unsigned long count, loff_t pos) {
@@ -3454,16 +3665,16 @@ long pread64_linux(unsigned int fd, char *buf, unsigned long count, loff_t pos) 
 long pwrite64_linux(unsigned int fd, const char *buf, unsigned long count, loff_t pos) {
   return Syscall4_linux(NR_pwrite64_linux, fd, buf, count, pos, 0);
 }
-long preadv_linux(unsigned long fd, const iovec *vec, unsigned long vlen, unsigned long pos_l, unsigned long pos_h) {
+long preadv_linux(unsigned long fd, const iovec_linux *vec, unsigned long vlen, unsigned long pos_l, unsigned long pos_h) {
   return Syscall5_linux(NR_preadv_linux, fd, vec, vlen, pos_l, pos_h, 0);
 }
-long pwritev_linux(unsigned long fd, const iovec *vec, unsigned long vlen, unsigned long pos_l, unsigned long pos_h) {
+long pwritev_linux(unsigned long fd, const iovec_linux *vec, unsigned long vlen, unsigned long pos_l, unsigned long pos_h) {
   return Syscall5_linux(NR_pwritev_linux, fd, vec, vlen, pos_l, pos_h, 0);
 }
-long preadv2_linux(unsigned long fd, const iovec *vec, unsigned long vlen, unsigned long pos_l, unsigned long pos_h, rwf_t flags) {
+long preadv2_linux(unsigned long fd, const iovec_linux *vec, unsigned long vlen, unsigned long pos_l, unsigned long pos_h, rwf_t flags) {
   return Syscall6_linux(NR_preadv2_linux, fd, vec, vlen, pos_l, pos_h, flags, 0);
 }
-long pwritev2_linux(unsigned long fd, const iovec *vec, unsigned long vlen, unsigned long pos_l, unsigned long pos_h, rwf_t flags) {
+long pwritev2_linux(unsigned long fd, const iovec_linux *vec, unsigned long vlen, unsigned long pos_l, unsigned long pos_h, rwf_t flags) {
   return Syscall6_linux(NR_pwritev2_linux, fd, vec, vlen, pos_l, pos_h, flags, 0);
 }
 // 5c. Seeking and truncating files
@@ -3501,7 +3712,7 @@ long splice_linux(int fd_in, loff_t *off_in, int fd_out, loff_t *off_out, unsign
 long tee_linux(int fdin, int fdout, unsigned long len, unsigned int flags) {
   return Syscall4_linux(NR_tee_linux, fdin, fdout, len, flags, 0);
 }
-long vmsplice_linux(int fd, const iovec *iov, unsigned long nr_segs, unsigned int flags) {
+long vmsplice_linux(int fd, const iovec_linux *iov, unsigned long nr_segs, unsigned int flags) {
   return Syscall4_linux(NR_vmsplice_linux, fd, iov, nr_segs, flags, 0);
 }
 long copy_file_range_linux(int fd_in, loff_t *off_in, int fd_out, loff_t *off_out, unsigned long len, unsigned int flags) {
@@ -4522,10 +4733,10 @@ long pidfd_send_signal_linux(int pidfd, int sig, siginfo_t *info, unsigned int f
   return Syscall4_linux(NR_pidfd_send_signal_linux, pidfd, sig, info, flags, 0);
 }
 // 22c. Process memory access
-long process_vm_readv_linux(int pid, const iovec *lvec, unsigned long liovcnt, const iovec *rvec, unsigned long riovcnt, unsigned long flags) {
+long process_vm_readv_linux(int pid, const iovec_linux *lvec, unsigned long liovcnt, const iovec_linux *rvec, unsigned long riovcnt, unsigned long flags) {
   return Syscall6_linux(NR_process_vm_readv_linux, pid, lvec, liovcnt, rvec, riovcnt, flags, 0);
 }
-long process_vm_writev_linux(int pid, const iovec *lvec, unsigned long liovcnt, const iovec *rvec, unsigned long riovcnt, unsigned long flags) {
+long process_vm_writev_linux(int pid, const iovec_linux *lvec, unsigned long liovcnt, const iovec_linux *rvec, unsigned long riovcnt, unsigned long flags) {
   return Syscall6_linux(NR_process_vm_writev_linux, pid, lvec, liovcnt, rvec, riovcnt, flags, 0);
 }
 // 22d. Process tracing
