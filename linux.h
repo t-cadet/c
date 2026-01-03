@@ -1039,11 +1039,6 @@
 #define PRIO_PGRP_linux                       1
 #define PRIO_USER_linux                       2
 
-#define AT_SYMLINK_NOFOLLOW_linux 0x100
-#define AT_SYMLINK_FOLLOW_linux   0x400
-#define AT_NO_AUTOMOUNT_linux     0x800
-#define AT_EMPTY_PATH_linux       0x1000
-
 #define EXIT_SUCCESS_linux 0
 #define EXIT_FAILURE_linux 1
 
@@ -1763,10 +1758,10 @@
 #define O_APPEND_linux              00002000
 #define O_NONBLOCK_linux            00004000
 #define O_DSYNC_linux               00010000
-#define O_DIRECT_linux              BY_ARCH_linux(00040000, 00040000, 00040000, 00040000, 0200000, 00040000)
-#define O_LARGEFILE_linux           BY_ARCH_linux(00100000, 00100000, 00100000, 00100000, 0400000, 00100000)
-#define O_DIRECTORY_linux           BY_ARCH_linux(00200000, 00200000, 00200000, 00200000, 0040000, 00200000)
-#define O_NOFOLLOW_linux            BY_ARCH_linux(00400000, 00400000, 00400000, 00400000, 0100000, 00400000)
+#define O_DIRECT_linux              BY_ARCH_linux(00040000, 0200000, 00040000, 00040000, 0200000, 00040000)
+#define O_LARGEFILE_linux           BY_ARCH_linux(00100000, 0400000, 00100000, 00100000, 0400000, 00100000)
+#define O_DIRECTORY_linux           BY_ARCH_linux(00200000, 0040000, 00200000, 00200000, 0040000, 00200000)
+#define O_NOFOLLOW_linux            BY_ARCH_linux(00400000, 0100000, 00400000, 00400000, 0100000, 00400000)
 #define O_NOATIME_linux             01000000
 #define O_CLOEXEC_linux             02000000
 #define __O_SYNC_linux              04000000
@@ -1836,6 +1831,484 @@
 #define SYNC_FILE_RANGE_WRITE_linux          2
 #define SYNC_FILE_RANGE_WAIT_AFTER_linux     4
 #define SYNC_FILE_RANGE_WRITE_AND_WAIT_linux (SYNC_FILE_RANGE_WRITE_linux | SYNC_FILE_RANGE_WAIT_BEFORE_linux | SYNC_FILE_RANGE_WAIT_AFTER_linux)
+
+#define F_DUPFD_linux               0
+#define F_GETFD_linux               1
+#define F_SETFD_linux               2
+#define F_GETFL_linux               3
+#define F_SETFL_linux               4
+#define F_GETLK_linux               5
+#define F_SETLK_linux               6
+#define F_SETLKW_linux              7
+#define F_SETOWN_linux              8
+#define F_GETOWN_linux              9
+#define F_SETSIG_linux              10
+#define F_GETSIG_linux              11
+#define F_GETLK64_linux             12
+#define F_SETLK64_linux             13
+#define F_SETLKW64_linux            14
+#define F_SETOWN_EX_linux           15
+#define F_GETOWN_EX_linux           16
+#define F_GETOWNER_UIDS_linux       17
+#define F_OFD_GETLK_linux           36
+#define F_OFD_SETLK_linux           37
+#define F_OFD_SETLKW_linux          38
+
+#define F_OWNER_TID_linux           0
+#define F_OWNER_PID_linux           1
+#define F_OWNER_PGRP_linux          2
+#define F_OWNER_GID_linux           2
+
+#define FD_CLOEXEC_linux            1
+
+#define F_RDLCK_linux               0
+#define F_WRLCK_linux               1
+#define F_UNLCK_linux               2
+#define F_EXLCK_linux               4
+#define F_SHLCK_linux               8
+
+#define LOCK_SH_linux               1
+#define LOCK_EX_linux               2
+#define LOCK_NB_linux               4
+#define LOCK_UN_linux               8
+#define LOCK_MAND_linux             32
+#define LOCK_READ_linux             64
+#define LOCK_WRITE_linux            128
+#define LOCK_RW_linux               192
+
+#define F_LINUX_SPECIFIC_BASE_linux 1024
+#define F_SETLEASE_linux            (F_LINUX_SPECIFIC_BASE_linux + 0)
+#define F_GETLEASE_linux            (F_LINUX_SPECIFIC_BASE_linux + 1)
+#define F_NOTIFY_linux              (F_LINUX_SPECIFIC_BASE_linux + 2)
+#define F_DUPFD_QUERY_linux         (F_LINUX_SPECIFIC_BASE_linux + 3)
+#define F_CREATED_QUERY_linux       (F_LINUX_SPECIFIC_BASE_linux + 4)
+#define F_CANCELLK_linux            (F_LINUX_SPECIFIC_BASE_linux + 5)
+#define F_DUPFD_CLOEXEC_linux       (F_LINUX_SPECIFIC_BASE_linux + 6)
+#define F_SETPIPE_SZ_linux          (F_LINUX_SPECIFIC_BASE_linux + 7)
+#define F_GETPIPE_SZ_linux          (F_LINUX_SPECIFIC_BASE_linux + 8)
+#define F_ADD_SEALS_linux           (F_LINUX_SPECIFIC_BASE_linux + 9)
+#define F_GET_SEALS_linux           (F_LINUX_SPECIFIC_BASE_linux + 10)
+#define F_GET_RW_HINT_linux         (F_LINUX_SPECIFIC_BASE_linux + 11)
+#define F_SET_RW_HINT_linux         (F_LINUX_SPECIFIC_BASE_linux + 12)
+#define F_GET_FILE_RW_HINT_linux    (F_LINUX_SPECIFIC_BASE_linux + 13)
+#define F_SET_FILE_RW_HINT_linux    (F_LINUX_SPECIFIC_BASE_linux + 14)
+#define F_GETDELEG_linux            (F_LINUX_SPECIFIC_BASE_linux + 15)
+#define F_SETDELEG_linux            (F_LINUX_SPECIFIC_BASE_linux + 16)
+
+#define F_SEAL_SEAL_linux           0x0001
+#define F_SEAL_SHRINK_linux         0x0002
+#define F_SEAL_GROW_linux           0x0004
+#define F_SEAL_WRITE_linux          0x0008
+#define F_SEAL_FUTURE_WRITE_linux   0x0010
+#define F_SEAL_EXEC_linux           0x0020
+
+#define RWH_WRITE_LIFE_NOT_SET_linux 0
+#define RWH_WRITE_LIFE_NONE_linux    1
+#define RWH_WRITE_LIFE_SHORT_linux   2
+#define RWH_WRITE_LIFE_MEDIUM_linux  3
+#define RWH_WRITE_LIFE_LONG_linux    4
+#define RWH_WRITE_LIFE_EXTREME_linux 5
+#define RWF_WRITE_LIFE_NOT_SET_linux RWH_WRITE_LIFE_NOT_SET_linux
+
+#define DN_ACCESS_linux             0x00000001
+#define DN_MODIFY_linux             0x00000002
+#define DN_CREATE_linux             0x00000004
+#define DN_DELETE_linux             0x00000008
+#define DN_RENAME_linux             0x00000010
+#define DN_ATTRIB_linux             0x00000020
+#define DN_MULTISHOT_linux          0x80000000
+
+#define _IOC_NRBITS_linux       8
+#define _IOC_TYPEBITS_linux     8
+#define _IOC_SIZEBITS_linux     14
+#define _IOC_DIRBITS_linux      2
+
+#define _IOC_NRMASK_linux       ((1 << _IOC_NRBITS_linux)-1)
+#define _IOC_TYPEMASK_linux     ((1 << _IOC_TYPEBITS_linux)-1)
+#define _IOC_SIZEMASK_linux     ((1 << _IOC_SIZEBITS_linux)-1)
+#define _IOC_DIRMASK_linux      ((1 << _IOC_DIRBITS_linux)-1)
+
+#define _IOC_NRSHIFT_linux      0
+#define _IOC_TYPESHIFT_linux    (_IOC_NRSHIFT_linux+_IOC_NRBITS_linux)
+#define _IOC_SIZESHIFT_linux    (_IOC_TYPESHIFT_linux+_IOC_TYPEBITS_linux)
+#define _IOC_DIRSHIFT_linux     (_IOC_SIZESHIFT_linux+_IOC_SIZEBITS_linux)
+
+#define _IOC_NONE_linux         0U
+#define _IOC_WRITE_linux        1U
+#define _IOC_READ_linux         2U
+
+#define _IOC_linux(dir,type,nr,size) \
+        (((dir)  << _IOC_DIRSHIFT_linux) | \
+         ((type) << _IOC_TYPESHIFT_linux) | \
+         ((nr)   << _IOC_NRSHIFT_linux) | \
+         ((size) << _IOC_SIZESHIFT_linux))
+
+#define _IO_linux(type,nr)            _IOC_linux(_IOC_NONE_linux,(type),(nr),0)
+#define _IOR_linux(type,nr,size)      _IOC_linux(_IOC_READ_linux,(type),(nr),(size))
+#define _IOW_linux(type,nr,size)      _IOC_linux(_IOC_WRITE_linux,(type),(nr),(size))
+#define _IOWR_linux(type,nr,size)     _IOC_linux(_IOC_READ_linux|_IOC_WRITE_linux,(type),(nr),(size))
+
+#define TCGETS_linux            0x5401
+#define TCSETS_linux            0x5402
+#define TCSETSW_linux           0x5403
+#define TCSETSF_linux           0x5404
+#define TCGETA_linux            0x5405
+#define TCSETA_linux            0x5406
+#define TCSETAW_linux           0x5407
+#define TCSETAF_linux           0x5408
+#define TCSBRK_linux            0x5409
+#define TCXONC_linux            0x540A
+#define TCFLSH_linux            0x540B
+#define TIOCEXCL_linux          0x540C
+#define TIOCNXCL_linux          0x540D
+#define TIOCSCTTY_linux         0x540E
+#define TIOCGPGRP_linux         0x540F
+#define TIOCSPGRP_linux         0x5410
+#define TIOCOUTQ_linux          0x5411
+#define TIOCSTI_linux           0x5412
+#define TIOCGWINSZ_linux        0x5413
+#define TIOCSWINSZ_linux        0x5414
+#define TIOCMGET_linux          0x5415
+#define TIOCMBIS_linux          0x5416
+#define TIOCMBIC_linux          0x5417
+#define TIOCMSET_linux          0x5418
+
+#define FIONREAD_linux          0x541B
+#define TIOCINQ_linux           FIONREAD_linux
+#define TIOCLINUX_linux         0x541C
+#define TIOCCONS_linux          0x541D
+#define TIOCGSERIAL_linux       0x541E
+#define TIOCSSERIAL_linux       0x541F
+#define TIOCPKT_linux           0x5420
+#define FIONBIO_linux           0x5421
+#define TIOCNOTTY_linux         0x5422
+#define TIOCSETD_linux          0x5423
+#define TIOCGETD_linux          0x5424
+#define TCSBRKP_linux           0x5425
+#define TIOCSBRK_linux          0x5427
+#define TIOCCBRK_linux          0x5428
+#define TIOCGSID_linux          0x5429
+#define TCGETS2_linux           _IOR_linux('T', 0x2A, sizeof(struct termios2_linux))
+#define TCSETS2_linux           _IOW_linux('T', 0x2B, sizeof(struct termios2_linux))
+#define TCSETSW2_linux          _IOW_linux('T', 0x2C, sizeof(struct termios2_linux))
+#define TCSETSF2_linux          _IOW_linux('T', 0x2D, sizeof(struct termios2_linux))
+#define TIOCGPTN_linux          _IOR_linux('T', 0x30, sizeof(unsigned int))
+#define TIOCSPTLCK_linux        _IOW_linux('T', 0x31, sizeof(int))
+#define TIOCGDEV_linux          _IOR_linux('T', 0x32, sizeof(unsigned int))
+#define TIOCSIG_linux           _IOW_linux('T', 0x36, sizeof(int))
+#define TIOCVHANGUP_linux       0x5437
+#define TIOCGPKT_linux          _IOR_linux('T', 0x38, sizeof(int))
+#define TIOCGPTLCK_linux        _IOR_linux('T', 0x39, sizeof(int))
+#define TIOCGEXCL_linux         _IOR_linux('T', 0x40, sizeof(int))
+#define TIOCGPTPEER_linux       _IO_linux('T', 0x41)
+
+#define FIONCLEX_linux          0x5450
+#define FIOCLEX_linux           0x5451
+#define FIOASYNC_linux          0x5452
+
+#ifdef __arm__
+#define FIOQSIZE_linux          0x545E
+#else
+#define FIOQSIZE_linux          0x5460
+#endif
+
+#define FS_IOC_GETFLAGS_linux           _IOR_linux('f', 1, sizeof(long))
+#define FS_IOC_SETFLAGS_linux           _IOW_linux('f', 2, sizeof(long))
+#define FS_IOC_GETVERSION_linux         _IOR_linux('v', 1, sizeof(long))
+#define FS_IOC_SETVERSION_linux         _IOW_linux('v', 2, sizeof(long))
+#define FS_IOC_FSGETXATTR_linux         _IOR_linux('X', 31, sizeof(struct fsxattr_linux))
+#define FS_IOC_FSSETXATTR_linux         _IOW_linux('X', 32, sizeof(struct fsxattr_linux))
+
+#define FS_SECRM_FL_linux               0x00000001
+#define FS_UNRM_FL_linux                0x00000002
+#define FS_COMPR_FL_linux               0x00000004
+#define FS_SYNC_FL_linux                0x00000008
+#define FS_IMMUTABLE_FL_linux           0x00000010
+#define FS_APPEND_FL_linux              0x00000020
+#define FS_NODUMP_FL_linux              0x00000040
+#define FS_NOATIME_FL_linux             0x00000080
+#define FS_DIRTY_FL_linux               0x00000100
+#define FS_COMPRBLK_FL_linux            0x00000200
+#define FS_NOCOMP_FL_linux              0x00000400
+#define FS_ENCRYPT_FL_linux             0x00000800
+#define FS_BTREE_FL_linux               0x00001000
+#define FS_INDEX_FL_linux               0x00001000
+#define FS_IMAGIC_FL_linux              0x00002000
+#define FS_JOURNAL_DATA_FL_linux        0x00004000
+#define FS_NOTAIL_FL_linux              0x00008000
+#define FS_DIRSYNC_FL_linux             0x00010000
+#define FS_TOPDIR_FL_linux              0x00020000
+#define FS_HUGE_FILE_FL_linux           0x00040000
+#define FS_EXTENTS_FL_linux             0x00080000
+#define FS_VERITY_FL_linux              0x00100000
+#define FS_EA_INODE_FL_linux            0x00200000
+#define FS_EOFBLOCKS_FL_linux           0x00400000
+#define FS_NOCOW_FL_linux               0x00800000
+#define FS_DAX_FL_linux                 0x02000000
+#define FS_INLINE_DATA_FL_linux         0x10000000
+#define FS_PROJINHERIT_FL_linux         0x20000000
+#define FS_CASEFOLD_FL_linux            0x40000000
+#define FS_RESERVED_FL_linux            0x80000000
+
+#define VINTR_linux             0
+#define VQUIT_linux             1
+#define VERASE_linux            2
+#define VKILL_linux             3
+#define VEOF_linux              4
+#define VTIME_linux             5
+#define VMIN_linux              6
+#define VSWTC_linux             7
+#define VSTART_linux            8
+#define VSTOP_linux             9
+#define VSUSP_linux             10
+#define VEOL_linux              11
+#define VREPRINT_linux          12
+#define VDISCARD_linux          13
+#define VWERASE_linux           14
+#define VLNEXT_linux            15
+#define VEOL2_linux             16
+
+#define IGNBRK_linux    0000001
+#define BRKINT_linux    0000002
+#define IGNPAR_linux    0000004
+#define PARMRK_linux    0000010
+#define INPCK_linux     0000020
+#define ISTRIP_linux    0000040
+#define INLCR_linux     0000100
+#define IGNCR_linux     0000200
+#define ICRNL_linux     0000400
+#define IUCLC_linux     0001000
+#define IXON_linux      0002000
+#define IXANY_linux     0004000
+#define IXOFF_linux     0010000
+#define IMAXBEL_linux   0020000
+#define IUTF8_linux     0040000
+
+#define OPOST_linux     0000001
+#define OLCUC_linux     0000002
+#define ONLCR_linux     0000004
+#define OCRNL_linux     0000010
+#define ONOCR_linux     0000020
+#define ONLRET_linux    0000040
+#define OFILL_linux     0000100
+#define OFDEL_linux     0000200
+
+#define B0_linux        0000000
+#define B50_linux       0000001
+#define B75_linux       0000002
+#define B110_linux      0000003
+#define B134_linux      0000004
+#define B150_linux      0000005
+#define B200_linux      0000006
+#define B300_linux      0000007
+#define B600_linux      0000010
+#define B1200_linux     0000011
+#define B1800_linux     0000012
+#define B2400_linux     0000013
+#define B4800_linux     0000014
+#define B9600_linux     0000015
+#define B19200_linux    0000016
+#define B38400_linux    0000017
+
+#define B57600_linux    0010001
+#define B115200_linux   0010002
+#define B230400_linux   0010003
+#define B460800_linux   0010004
+#define B500000_linux   0010005
+#define B576000_linux   0010006
+#define B921600_linux   0010007
+#define B1000000_linux  0010010
+#define B1152000_linux  0010011
+#define B1500000_linux  0010012
+#define B2000000_linux  0010013
+#define B2500000_linux  0010014
+#define B3000000_linux  0010015
+#define B3500000_linux  0010016
+#define B4000000_linux  0010017
+
+#define CSIZE_linux     0000060
+#define CS5_linux       0000000
+#define CS6_linux       0000020
+#define CS7_linux       0000040
+#define CS8_linux       0000060
+#define CSTOPB_linux    0000100
+#define CREAD_linux     0000200
+#define PARENB_linux    0000400
+#define PARODD_linux    0001000
+#define HUPCL_linux     0002000
+#define CLOCAL_linux    0004000
+
+#define ISIG_linux      0000001
+#define ICANON_linux    0000002
+#define XCASE_linux     0000004
+#define ECHO_linux      0000010
+#define ECHOE_linux     0000020
+#define ECHOK_linux     0000040
+#define ECHONL_linux    0000100
+#define NOFLSH_linux    0000200
+#define TOSTOP_linux    0000400
+#define ECHOCTL_linux   0001000
+#define ECHOPRT_linux   0002000
+#define ECHOKE_linux    0004000
+#define FLUSHO_linux    0010000
+#define PENDIN_linux    0040000
+#define IEXTEN_linux    0100000
+
+#define TCSANOW_linux   0
+#define TCSADRAIN_linux 1
+#define TCSAFLUSH_linux 2
+
+#define POLLIN_linux            0x0001
+#define POLLPRI_linux           0x0002
+#define POLLOUT_linux           0x0004
+#define POLLERR_linux           0x0008
+#define POLLHUP_linux           0x0010
+#define POLLNVAL_linux          0x0020
+#define POLLRDNORM_linux        0x0040
+#define POLLRDBAND_linux        0x0080
+#define POLLWRNORM_linux        0x0100
+#define POLLWRBAND_linux        0x0200
+#define POLLMSG_linux           0x0400
+#define POLLREMOVE_linux        0x1000
+#define POLLRDHUP_linux         0x2000
+
+#define EPOLL_CTL_ADD_linux 1
+#define EPOLL_CTL_DEL_linux 2
+#define EPOLL_CTL_MOD_linux 3
+#define EPOLL_CLOEXEC_linux O_CLOEXEC_linux
+
+#define EPOLLIN_linux       0x00000001
+#define EPOLLPRI_linux      0x00000002
+#define EPOLLOUT_linux      0x00000004
+#define EPOLLERR_linux      0x00000008
+#define EPOLLHUP_linux      0x00000010
+#define EPOLLNVAL_linux     0x00000020
+#define EPOLLRDNORM_linux   0x00000040
+#define EPOLLRDBAND_linux   0x00000080
+#define EPOLLWRNORM_linux   0x00000100
+#define EPOLLWRBAND_linux   0x00000200
+#define EPOLLMSG_linux      0x00000400
+#define EPOLLRDHUP_linux    0x00002000
+#define EPOLLEXCLUSIVE_linux (1U << 28)
+#define EPOLLWAKEUP_linux    (1U << 29)
+#define EPOLLONESHOT_linux   (1U << 30)
+#define EPOLLET_linux        (1U << 31)
+
+#define FICLONE_linux           _IOW_linux(0x94, 9, sizeof(int))
+#define FICLONERANGE_linux      _IOW_linux(0x94, 13, sizeof(struct file_clone_range_linux))
+#define FIDEDUPERANGE_linux     _IOWR_linux(0x94, 54, sizeof(struct file_dedupe_range_linux))
+
+#define NS_GET_USERNS_linux           _IO_linux(0xb7, 0x1)
+#define NS_GET_PARENT_linux           _IO_linux(0xb7, 0x2)
+#define NS_GET_NSTYPE_linux           _IO_linux(0xb7, 0x3)
+#define NS_GET_OWNER_UID_linux        _IO_linux(0xb7, 0x4)
+#define NS_GET_PID_FROM_PIDNS_linux   _IOR_linux(0xb7, 0x6, sizeof(int))
+#define NS_GET_TGID_FROM_PIDNS_linux  _IOR_linux(0xb7, 0x7, sizeof(int))
+#define NS_GET_PID_IN_PIDNS_linux     _IOR_linux(0xb7, 0x8, sizeof(int))
+#define NS_GET_TGID_IN_PIDNS_linux    _IOR_linux(0xb7, 0x9, sizeof(int))
+#define NS_GET_MNTNS_ID_linux         _IOR_linux(0xb7, 5, sizeof(unsigned long long))
+#define NS_GET_ID_linux               _IOR_linux(0xb7, 13, sizeof(unsigned long long))
+
+#define UFFDIO_linux            0xAA
+#define UFFDIO_API_linux        _IOWR_linux(UFFDIO_linux, 0x3F, sizeof(struct uffdio_api_linux))
+#define UFFDIO_REGISTER_linux    _IOWR_linux(UFFDIO_linux, 0x00, sizeof(struct uffdio_register_linux))
+#define UFFDIO_UNREGISTER_linux  _IOR_linux(UFFDIO_linux, 0x01, sizeof(struct uffdio_range_linux))
+#define UFFDIO_WAKE_linux        _IOR_linux(UFFDIO_linux, 0x02, sizeof(struct uffdio_range_linux))
+#define UFFDIO_COPY_linux        _IOWR_linux(UFFDIO_linux, 0x03, sizeof(struct uffdio_copy_linux))
+#define UFFDIO_ZEROPAGE_linux    _IOWR_linux(UFFDIO_linux, 0x04, sizeof(struct uffdio_zeropage_linux))
+#define UFFDIO_MOVE_linux        _IOWR_linux(UFFDIO_linux, 0x05, sizeof(struct uffdio_move_linux))
+#define UFFDIO_WRITEPROTECT_linux _IOWR_linux(UFFDIO_linux, 0x06, sizeof(struct uffdio_writeprotect_linux))
+#define UFFDIO_CONTINUE_linux    _IOWR_linux(UFFDIO_linux, 0x07, sizeof(struct uffdio_continue_linux))
+#define UFFDIO_POISON_linux      _IOWR_linux(UFFDIO_linux, 0x08, sizeof(struct uffdio_poison_linux))
+
+#define RNDGETENTCNT_linux      _IOR_linux('R', 0x00, sizeof(int))
+#define RNDADDTOENTCNT_linux    _IOW_linux('R', 0x01, sizeof(int))
+#define RNDGETPOOL_linux        _IOR_linux('R', 0x02, sizeof(int[2]))
+#define RNDADDENTROPY_linux     _IOW_linux('R', 0x03, sizeof(int[2]))
+#define RNDZAPENTCNT_linux      _IO_linux('R', 0x04)
+#define RNDCLEARPOOL_linux      _IO_linux('R', 0x06)
+#define RNDRESEEDCRNG_linux     _IO_linux('R', 0x07)
+
+#define PIDFS_IOCTL_MAGIC_linux 0xFF
+#define PIDFD_GET_CGROUP_NAMESPACE_linux            _IO_linux(PIDFS_IOCTL_MAGIC_linux, 1)
+#define PIDFD_GET_IPC_NAMESPACE_linux               _IO_linux(PIDFS_IOCTL_MAGIC_linux, 2)
+#define PIDFD_GET_MNT_NAMESPACE_linux               _IO_linux(PIDFS_IOCTL_MAGIC_linux, 3)
+#define PIDFD_GET_NET_NAMESPACE_linux               _IO_linux(PIDFS_IOCTL_MAGIC_linux, 4)
+#define PIDFD_GET_PID_NAMESPACE_linux               _IO_linux(PIDFS_IOCTL_MAGIC_linux, 5)
+#define PIDFD_GET_PID_FOR_CHILDREN_NAMESPACE_linux  _IO_linux(PIDFS_IOCTL_MAGIC_linux, 6)
+#define PIDFD_GET_TIME_NAMESPACE_linux              _IO_linux(PIDFS_IOCTL_MAGIC_linux, 7)
+#define PIDFD_GET_TIME_FOR_CHILDREN_NAMESPACE_linux _IO_linux(PIDFS_IOCTL_MAGIC_linux, 8)
+#define PIDFD_GET_USER_NAMESPACE_linux              _IO_linux(PIDFS_IOCTL_MAGIC_linux, 9)
+#define PIDFD_GET_UTS_NAMESPACE_linux               _IO_linux(PIDFS_IOCTL_MAGIC_linux, 10)
+#define PIDFD_GET_INFO_linux                        _IOWR_linux(PIDFS_IOCTL_MAGIC_linux, 11, sizeof(struct pidfd_info_linux))
+
+#define SIOCADDRT_linux       0x890B
+#define SIOCDELRT_linux       0x890C
+#define SIOCGIFNAME_linux     0x8910
+#define SIOCSIFLINK_linux     0x8911
+#define SIOCGIFCONF_linux     0x8912
+#define SIOCGIFFLAGS_linux    0x8913
+#define SIOCSIFFLAGS_linux    0x8914
+#define SIOCGIFADDR_linux     0x8915
+#define SIOCSIFADDR_linux     0x8916
+#define SIOCGIFDSTADDR_linux  0x8917
+#define SIOCSIFDSTADDR_linux  0x8918
+#define SIOCGIFBRDADDR_linux  0x8919
+#define SIOCSIFBRDADDR_linux  0x891a
+#define SIOCGIFNETMASK_linux  0x891b
+#define SIOCSIFNETMASK_linux  0x891c
+#define SIOCGIFMETRIC_linux   0x891d
+#define SIOCSIFMETRIC_linux   0x891e
+#define SIOCGIFMTU_linux      0x8921
+#define SIOCSIFMTU_linux      0x8922
+#define SIOCSIFNAME_linux     0x8923
+#define SIOCSIFHWADDR_linux   0x8924
+#define SIOCGIFHWADDR_linux   0x8927
+
+#define LOOP_SET_FD_linux       0x4C00
+#define LOOP_CLR_FD_linux       0x4C01
+#define LOOP_SET_STATUS_linux    0x4C02
+#define LOOP_GET_STATUS_linux    0x4C03
+#define LOOP_SET_STATUS64_linux  0x4C04
+#define LOOP_GET_STATUS64_linux  0x4C05
+#define LOOP_CHANGE_FD_linux     0x4C06
+#define LOOP_SET_CAPACITY_linux  0x4C07
+#define LOOP_SET_DIRECT_IO_linux 0x4C08
+#define LOOP_SET_BLOCK_SIZE_linux 0x4C09
+#define LOOP_CONFIGURE_linux     0x4C0A
+#define LOOP_CTL_ADD_linux       0x4C80
+#define LOOP_CTL_REMOVE_linux    0x4C81
+#define LOOP_CTL_GET_FREE_linux  0x4C82
+
+#define TUNSETNOCSUM_linux  _IOW_linux('T', 200, sizeof(int))
+#define TUNSETDEBUG_linux   _IOW_linux('T', 201, sizeof(int))
+#define TUNSETIFF_linux     _IOW_linux('T', 202, sizeof(int))
+#define TUNSETPERSIST_linux _IOW_linux('T', 203, sizeof(int))
+#define TUNSETOWNER_linux   _IOW_linux('T', 204, sizeof(int))
+#define TUNSETLINK_linux    _IOW_linux('T', 205, sizeof(int))
+#define TUNSETGROUP_linux   _IOW_linux('T', 206, sizeof(int))
+#define TUNGETFEATURES_linux _IOR_linux('T', 207, sizeof(unsigned int))
+#define TUNGETIFF_linux      _IOR_linux('T', 210, sizeof(unsigned int))
+#define TUNGETSNDBUF_linux   _IOR_linux('T', 211, sizeof(int))
+#define TUNSETSNDBUF_linux   _IOW_linux('T', 212, sizeof(int))
+#define TUNGETVNETHDRSZ_linux _IOR_linux('T', 215, sizeof(int))
+#define TUNSETVNETHDRSZ_linux _IOW_linux('T', 216, sizeof(int))
+#define TUNSETQUEUE_linux    _IOW_linux('T', 217, sizeof(int))
+#define TUNSETIFINDEX_linux  _IOW_linux('T', 218, sizeof(unsigned int))
+#define TUNSETCARRIER_linux  _IOW_linux('T', 226, sizeof(int))
+
+#define EPOLL_IOC_TYPE_linux 0x8A
+#define EPIOCSPARAMS_linux   _IOW_linux(EPOLL_IOC_TYPE_linux, 0x01, sizeof(struct epoll_params_linux))
+#define EPIOCGPARAMS_linux   _IOR_linux(EPOLL_IOC_TYPE_linux, 0x02, sizeof(struct epoll_params_linux))
+
+#define IFF_TUN_linux           0x0001
+#define IFF_TAP_linux           0x0002
+#define IFF_NAPI_linux          0x0010
+#define IFF_NO_PI_linux         0x1000
+#define IFF_ONE_QUEUE_linux     0x2000
+#define IFF_VNET_HDR_linux      0x4000
+#define IFF_TUN_EXCL_linux      0x8000
+#define IFF_MULTI_QUEUE_linux   0x0100
 
 typedef struct {
   unsigned long long flags;
@@ -2120,6 +2593,316 @@ typedef struct {
   unsigned char f_handle[];
 } file_handle_linux;
 
+typedef struct {
+  short l_type;
+  short l_whence;
+  long l_start;
+  long l_len;
+  int l_pid;
+} flock_linux;
+
+typedef struct {
+  short l_type;
+  short l_whence;
+  long long l_start;
+  long long l_len;
+  int l_pid;
+} flock64_linux;
+
+typedef struct {
+  int type;
+  int pid;
+} f_owner_ex_linux;
+
+typedef struct {
+  unsigned int d_flags;
+  unsigned short d_type;
+  unsigned short __pad;
+} delegation_linux;
+
+typedef struct {
+  unsigned short ws_row;
+  unsigned short ws_col;
+  unsigned short ws_xpixel;
+  unsigned short ws_ypixel;
+} winsize_linux;
+
+#define NCCS_linux 19
+typedef struct {
+  tcflag_t_linux c_iflag;
+  tcflag_t_linux c_oflag;
+  tcflag_t_linux c_cflag;
+  tcflag_t_linux c_lflag;
+  cc_t_linux     c_line;
+  cc_t_linux     c_cc[NCCS_linux];
+} termios_linux;
+
+typedef struct {
+  tcflag_t_linux c_iflag;
+  tcflag_t_linux c_oflag;
+  tcflag_t_linux c_cflag;
+  tcflag_t_linux c_lflag;
+  cc_t_linux     c_line;
+  cc_t_linux     c_cc[NCCS_linux];
+  speed_t_linux  c_ispeed;
+  speed_t_linux  c_ospeed;
+} termios2_linux;
+
+typedef struct {
+  unsigned int   fsx_xflags;
+  unsigned int   fsx_extsize;
+  unsigned int   fsx_nextents;
+  unsigned int   fsx_projid;
+  unsigned int   fsx_cowextsize;
+  unsigned char  fsx_pad[8];
+} fsxattr_linux;
+
+typedef struct {
+  unsigned long fds_bits[1024 / (8 * sizeof(long))];
+} fd_set_linux;
+
+typedef struct {
+  unsigned long  n;
+  fd_set_linux   *inp;
+  fd_set_linux   *outp;
+  fd_set_linux   *exp;
+  __kernel_old_timeval_linux *tvp;
+} sel_arg_struct_linux;
+
+typedef struct {
+  int   fd;
+  short events;
+  short revents;
+} pollfd_linux;
+
+typedef struct {
+  sigset_t_linux *p;
+  unsigned long  size;
+} sigset_argpack_linux;
+
+typedef struct {
+  unsigned int   busy_poll_usecs;
+  unsigned short busy_poll_budget;
+  unsigned char  prefer_busy_poll;
+  unsigned char  __pad;
+} epoll_params_linux;
+
+#ifdef __x86_64__
+#define EPOLL_PACKED_linux __attribute__((packed))
+#else
+#define EPOLL_PACKED_linux
+#endif
+
+typedef struct {
+  unsigned int       events;
+  unsigned long long data;
+} EPOLL_PACKED_linux epoll_event_linux;
+
+typedef struct {
+  unsigned long long src_offset;
+  unsigned long long src_length;
+  unsigned short dest_count;
+  unsigned short reserved1;
+  unsigned int reserved2;
+  struct {
+    int dest_fd;
+    unsigned long long dest_offset;
+    unsigned long long bytes_deduped;
+    int status;
+    unsigned int reserved;
+  } info[];
+} file_dedupe_range_linux;
+
+typedef struct {
+  unsigned long long src_offset;
+  unsigned long long src_length;
+  unsigned int dest_fd;
+  unsigned int reserved;
+  unsigned long long dest_offset;
+} file_clone_range_linux;
+
+typedef struct {
+  unsigned long long fe_logical;
+  unsigned long long fe_physical;
+  unsigned long long fe_length;
+  unsigned long long fe_reserved64[2];
+  unsigned int fe_flags;
+  unsigned int fe_reserved[3];
+} fiemap_extent_linux;
+
+typedef struct {
+  unsigned long long fm_start;
+  unsigned long long fm_length;
+  unsigned int fm_flags;
+  unsigned int fm_mapped_extents;
+  unsigned int fm_extent_count;
+  unsigned int fm_reserved;
+  fiemap_extent_linux fm_extents[];
+} fiemap_linux;
+
+typedef struct {
+  unsigned long long start;
+  unsigned long long len;
+} uffdio_range_linux;
+
+typedef struct {
+  unsigned long long api;
+  unsigned long long features;
+  unsigned long long ioctls;
+} uffdio_api_linux;
+
+typedef struct {
+  uffdio_range_linux range;
+  unsigned long long mode;
+  unsigned long long ioctls;
+} uffdio_register_linux;
+
+typedef struct {
+  unsigned long long dst;
+  unsigned long long src;
+  unsigned long long len;
+  unsigned long long mode;
+  long long copy;
+} uffdio_copy_linux;
+
+typedef struct {
+  uffdio_range_linux range;
+  unsigned long long mode;
+  long long zeropage;
+} uffdio_zeropage_linux;
+
+typedef struct {
+  uffdio_range_linux range;
+  unsigned long long mode;
+} uffdio_writeprotect_linux;
+
+typedef struct {
+  uffdio_range_linux range;
+  unsigned long long mode;
+  long long mapped;
+} uffdio_continue_linux;
+
+typedef struct {
+  uffdio_range_linux range;
+  unsigned long long mode;
+  long long updated;
+} uffdio_poison_linux;
+
+typedef struct {
+  unsigned long long dst;
+  unsigned long long src;
+  unsigned long long len;
+  unsigned long long mode;
+  long long move;
+} uffdio_move_linux;
+
+typedef struct {
+  unsigned long long mask;
+  unsigned long long cgroupid;
+  unsigned int pid;
+  unsigned int tgid;
+  unsigned int ppid;
+  unsigned int ruid;
+  unsigned int rgid;
+  unsigned int euid;
+  unsigned int egid;
+  unsigned int suid;
+  unsigned int sgid;
+  unsigned int fsuid;
+  unsigned int fsgid;
+  int exit_code;
+  struct {
+    unsigned int coredump_mask;
+    unsigned int coredump_signal;
+  };
+  unsigned long long supported_mask;
+} pidfd_info_linux;
+
+typedef struct {
+  unsigned short sa_family;
+  char sa_data[14];
+} sockaddr_linux;
+
+typedef struct {
+  unsigned short ss_family;
+  char __ss_padding[128 - sizeof(unsigned short) - sizeof(unsigned long)];
+  unsigned long __ss_align;
+} sockaddr_storage_linux;
+
+typedef struct {
+  unsigned long mem_start;
+  unsigned long mem_end;
+  unsigned short base_addr;
+  unsigned char irq;
+  unsigned char dma;
+  unsigned char port;
+} ifmap_linux;
+
+typedef struct {
+  unsigned int type;
+  unsigned int size;
+  union {
+    void *ifs_ifsu;
+  };
+} if_settings_linux;
+
+typedef struct {
+  union {
+    char ifrn_name[16];
+  } ifr_ifrn;
+  union {
+    sockaddr_linux ifru_addr;
+    sockaddr_linux ifru_dstaddr;
+    sockaddr_linux ifru_broadaddr;
+    sockaddr_linux ifru_netmask;
+    sockaddr_linux ifru_hwaddr;
+    short ifru_flags;
+    int ifru_ivalue;
+    int ifru_mtu;
+    ifmap_linux ifru_map;
+    char ifru_slave[16];
+    char ifru_newname[16];
+    void *ifru_data;
+    if_settings_linux ifru_settings;
+  } ifr_ifru;
+} ifreq_linux;
+
+typedef struct {
+  int ifc_len;
+  union {
+    char *ifcu_buf;
+    ifreq_linux *ifcu_req;
+  } ifc_ifcu;
+} ifconf_linux;
+
+typedef struct {
+  unsigned long long lo_device;
+  unsigned long long lo_inode;
+  unsigned long long lo_rdevice;
+  unsigned long long lo_offset;
+  unsigned long long lo_sizelimit;
+  unsigned int lo_number;
+  unsigned int lo_encrypt_type;
+  unsigned int lo_encrypt_key_size;
+  unsigned int lo_flags;
+  unsigned char lo_file_name[64];
+  unsigned char lo_crypt_name[64];
+  unsigned char lo_encrypt_key[32];
+  unsigned long long lo_init[2];
+} loop_info64_linux;
+
+typedef struct {
+  unsigned int fd;
+  unsigned int block_size;
+  loop_info64_linux info;
+  unsigned long long __reserved[8];
+} loop_config_linux;
+
+typedef struct {
+  unsigned short flags;
+  unsigned short proto;
+} tun_pi_linux;
+
 #define Syscall0_linux(number, ret2)                   _Syscall0_linux(number, (long*)(ret2))
 #define Syscall1_linux(number, a, ret2)                _Syscall1_linux(number, (long)(a), (long*)(ret2))
 #define Syscall2_linux(number, a, b, ret2)             _Syscall2_linux(number, (long)(a), (long)(b), (long*)(ret2))
@@ -2280,8 +3063,6 @@ long fsync_linux(unsigned int fd);
 long fdatasync_linux(unsigned int fd);
 long sync_file_range_linux(int fd, long long offset, long long nbytes, unsigned int flags);
 // Disabled wrapper: long arm_sync_file_range_linux(int fd, long long offset, long long nbytes, unsigned int flags);
-#if 0 // WIP
-//
 // 6. FILE DESCRIPTOR MANAGEMENT
 //
 // 6a. Duplicating and controlling file descriptors
@@ -2290,8 +3071,11 @@ long dup2_linux(unsigned int oldfd, unsigned int newfd);
 long dup3_linux(unsigned int oldfd, unsigned int newfd, int flags);
 long fcntl_linux(unsigned int fd, unsigned int cmd, unsigned long arg);
 long fcntl64_linux(unsigned int fd, unsigned int cmd, unsigned long arg);
+
 // 6b. Device-specific control operations
 long ioctl_linux(unsigned int fd, unsigned int cmd, unsigned long arg);
+
+#if 0 // WIP
 // 6c. I/O Multiplexing
 long select_linux(int n, fd_set *inp, fd_set *outp, fd_set *exp, __kernel_old_timeval *tvp);
 long _newselect_linux(int n, fd_set *inp, fd_set *outp, fd_set *exp, __kernel_old_timeval *tvp);
@@ -3901,26 +4685,29 @@ long sync_file_range_linux(int fd, long long offset, long long nbytes, unsigned 
 #endif
 }
 // Disabled wrapper: long arm_sync_file_range_linux(int fd, long long offset, long long nbytes, unsigned int flags);
-#if 0 // WIP
-//
 // 6. FILE DESCRIPTOR MANAGEMENT
 //
 // 6a. Duplicating and controlling file descriptors
 long dup_linux(unsigned int fildes) {
   return Syscall1_linux(NR_dup_linux, fildes, 0);
 }
-long dup2_linux(unsigned int oldfd, unsigned int newfd) {
-  return Syscall2_linux(NR_dup2_linux, oldfd, newfd, 0);
-}
+// long dup2_linux(unsigned int oldfd, unsigned int newfd) {
+//   return Syscall3_linux(NR_dup2_linux, oldfd, newfd, 0, 0);
+// }
 long dup3_linux(unsigned int oldfd, unsigned int newfd, int flags) {
   return Syscall3_linux(NR_dup3_linux, oldfd, newfd, flags, 0);
 }
-long fcntl_linux(unsigned int fd, unsigned int cmd, unsigned long arg) {
-  return Syscall3_linux(NR_fcntl_linux, fd, cmd, arg, 0);
-}
+// long fcntl_linux(unsigned int fd, unsigned int cmd, unsigned long arg) {
+//   return Syscall3_linux(NR_fcntl_linux, fd, cmd, arg, 0);
+// }
 long fcntl64_linux(unsigned int fd, unsigned int cmd, unsigned long arg) {
+#if defined(__x86_64__) || defined(__aarch64__) || (defined(__riscv) && (__riscv_xlen == 64))
+  return Syscall3_linux(NR_fcntl_linux, fd, cmd, arg, 0);
+#else
   return Syscall3_linux(NR_fcntl64_linux, fd, cmd, arg, 0);
+#endif
 }
+#if 0 // WIP
 // 6b. Device-specific control operations
 long ioctl_linux(unsigned int fd, unsigned int cmd, unsigned long arg) {
   return Syscall3_linux(NR_ioctl_linux, fd, cmd, arg, 0);
@@ -3934,19 +4721,34 @@ long _newselect_linux(int n, fd_set *inp, fd_set *outp, fd_set *exp, __kernel_ol
 }
 // Disabled wrapper: pselect6_linux(int n, fd_set *inp, fd_set *outp, fd_set *exp, __kernel_old_timespec_linux *tsp, void *sig);
 long pselect6_time64_linux(int n, fd_set *inp, fd_set *outp, fd_set *exp, __kernel_timespec_linux *tsp, void *sig) {
+#if defined(__x86_64__) || defined(__aarch64__) || (defined(__riscv) && (__riscv_xlen == 64))
+  return Syscall6_linux(NR_pselect6_linux, n, inp, outp, exp, tsp, sig, 0);
+#else
   return Syscall6_linux(NR_pselect6_time64_linux, n, inp, outp, exp, tsp, sig, 0);
+#endif
 }
 long poll_linux(pollfd *ufds, unsigned int nfds, int timeout) {
-  return Syscall3_linux(NR_poll_linux, ufds, nfds, timeout, 0);
+  __kernel_timespec_linux ts;
+  __kernel_timespec_linux *tsp = 0;
+  if (timeout >= 0) {
+    ts.tv_sec = timeout / 1000;
+    ts.tv_nsec = (timeout % 1000) * 1000000;
+    tsp = &ts;
+  }
+  return ppoll_time64_linux(ufds, nfds, tsp, 0, _NSIG_WORDS_linux * sizeof(unsigned long));
 }
 // Disabled wrapper: long ppoll_linux(pollfd *, unsigned int, __kernel_old_timespec_linux *, const sigset_t *, unsigned long);
 long ppoll_time64_linux(pollfd *ufds, unsigned int nfds, __kernel_timespec_linux *tsp, const sigset_t *sigmask, unsigned long sigsetsize) {
+#if defined(__x86_64__) || defined(__aarch64__) || (defined(__riscv) && (__riscv_xlen == 64))
+  return Syscall5_linux(NR_ppoll_linux, ufds, nfds, tsp, sigmask, sigsetsize, 0);
+#else
   return Syscall5_linux(NR_ppoll_time64_linux, ufds, nfds, tsp, sigmask, sigsetsize, 0);
+#endif
 }
 // 6d. Scalable I/O event notification
-long epoll_create_linux(int size) {
-  return Syscall1_linux(NR_epoll_create_linux, size, 0);
-}
+// long epoll_create_linux(int size) {
+//   return Syscall1_linux(NR_epoll_create_linux, size, 0);
+// }
 long epoll_create1_linux(int flags) {
   return Syscall1_linux(NR_epoll_create1_linux, flags, 0);
 }
@@ -3954,7 +4756,7 @@ long epoll_ctl_linux(int epfd, int op, int fd, epoll_event *event) {
   return Syscall4_linux(NR_epoll_ctl_linux, epfd, op, fd, event, 0);
 }
 long epoll_wait_linux(int epfd, epoll_event *events, int maxevents, int timeout) {
-  return Syscall4_linux(NR_epoll_wait_linux, epfd, events, maxevents, timeout, 0);
+  return Syscall6_linux(NR_epoll_pwait_linux, epfd, events, maxevents, timeout, 0, 0, 0);
 }
 long epoll_pwait_linux(int epfd, epoll_event *events, int maxevents, int timeout, const sigset_t *sigmask, unsigned long sigsetsize) {
   return Syscall6_linux(NR_epoll_pwait_linux, epfd, events, maxevents, timeout, sigmask, sigsetsize, 0);
@@ -3962,12 +4764,12 @@ long epoll_pwait_linux(int epfd, epoll_event *events, int maxevents, int timeout
 long epoll_pwait2_linux(int epfd, epoll_event *events, int maxevents, const __kernel_timespec_linux *timeout, const sigset_t *sigmask, unsigned long sigsetsize) {
   return Syscall6_linux(NR_epoll_pwait2_linux, epfd, events, maxevents, timeout, sigmask, sigsetsize, 0);
 }
-long epoll_ctl_old_linux(int epfd, int op, int fd, epoll_event *event) {
-  return Syscall4_linux(NR_epoll_ctl_old_linux, epfd, op, fd, event, 0);
-}
-long epoll_wait_old_linux(int epfd, epoll_event *events, int maxevents, int timeout) {
-  return Syscall4_linux(NR_epoll_wait_old_linux, epfd, events, maxevents, timeout, 0);
-}
+// long epoll_ctl_old_linux(int epfd, int op, int fd, epoll_event *event) {
+//   return Syscall4_linux(NR_epoll_ctl_old_linux, epfd, op, fd, event, 0);
+// }
+// long epoll_wait_old_linux(int epfd, epoll_event *events, int maxevents, int timeout) {
+//   return Syscall4_linux(NR_epoll_wait_old_linux, epfd, events, maxevents, timeout, 0);
+// }
 //
 // 7. FILE METADATA
 //
