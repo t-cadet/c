@@ -2416,6 +2416,352 @@
 #define LOCK_NB_linux   4
 #define LOCK_UN_linux   8
 
+#define DT_UNKNOWN_linux    0
+#define DT_FIFO_linux       1
+#define DT_CHR_linux        2
+#define DT_DIR_linux        4
+#define DT_BLK_linux        6
+#define DT_REG_linux        8
+#define DT_LNK_linux        10
+#define DT_SOCK_linux       12
+#define DT_WHT_linux        14
+
+#define RENAME_NOREPLACE_linux  (1 << 0)
+#define RENAME_EXCHANGE_linux   (1 << 1)
+#define RENAME_WHITEOUT_linux   (1 << 2)
+
+#define MAJOR_linux(dev)    ((unsigned int)(((dev) >> 8) & 0xfff) | ((unsigned int)((dev) >> 32) & ~0xfff))
+#define MINOR_linux(dev)    ((unsigned int)((dev) & 0xff) | ((unsigned int)((dev) >> 12) & ~0xff))
+#define MKDEV_linux(ma, mi) ((((unsigned int)(ma) & 0xfff) << 8) | (((unsigned int)(mi) & 0xff) | (((unsigned int)(mi) & ~0xff) << 12)))
+
+#define MS_RDONLY_linux             1
+#define MS_NOSUID_linux             2
+#define MS_NODEV_linux              4
+#define MS_NOEXEC_linux             8
+#define MS_SYNCHRONOUS_linux        16
+#define MS_REMOUNT_linux            32
+#define MS_MANDLOCK_linux           64
+#define MS_DIRSYNC_linux            128
+#define MS_NOSYMFOLLOW_linux        256
+#define MS_NOATIME_linux            1024
+#define MS_NODIRATIME_linux         2048
+#define MS_BIND_linux               4096
+#define MS_MOVE_linux               8192
+#define MS_REC_linux                16384
+#define MS_VERBOSE_linux            32768
+#define MS_SILENT_linux             32768
+#define MS_POSIXACL_linux           (1 << 16)
+#define MS_UNBINDABLE_linux         (1 << 17)
+#define MS_PRIVATE_linux            (1 << 18)
+#define MS_SLAVE_linux              (1 << 19)
+#define MS_SHARED_linux             (1 << 20)
+#define MS_RELATIME_linux           (1 << 21)
+#define MS_KERNMOUNT_linux          (1 << 22)
+#define MS_I_VERSION_linux          (1 << 23)
+#define MS_STRICTATIME_linux        (1 << 24)
+#define MS_LAZYTIME_linux           (1 << 25)
+#define MS_SUBMOUNT_linux           (1 << 26)
+#define MS_NOREMOTELOCK_linux       (1 << 27)
+#define MS_NOSEC_linux              (1 << 28)
+#define MS_BORN_linux               (1 << 29)
+#define MS_ACTIVE_linux             (1 << 30)
+#define MS_NOUSER_linux             (1U << 31)
+
+#define MS_RMT_MASK_linux           (MS_RDONLY_linux | MS_SYNCHRONOUS_linux | MS_MANDLOCK_linux | MS_I_VERSION_linux | MS_LAZYTIME_linux)
+#define MS_MGC_VAL_linux            0xc0ed0000
+#define MS_MGC_MSK_linux            0xffff0000
+
+#define MNT_FORCE_linux             1
+#define MNT_DETACH_linux            2
+#define MNT_EXPIRE_linux            4
+#define UMOUNT_NOFOLLOW_linux       8
+
+#define OPEN_TREE_CLONE_linux       1
+#define OPEN_TREE_CLOEXEC_linux     O_CLOEXEC_linux
+
+#define MOVE_MOUNT_F_SYMLINKS_linux     0x00000001
+#define MOVE_MOUNT_F_AUTOMOUNTS_linux   0x00000002
+#define MOVE_MOUNT_F_EMPTY_PATH_linux   0x00000004
+#define MOVE_MOUNT_T_SYMLINKS_linux     0x00000010
+#define MOVE_MOUNT_T_AUTOMOUNTS_linux   0x00000020
+#define MOVE_MOUNT_T_EMPTY_PATH_linux   0x00000040
+#define MOVE_MOUNT_SET_GROUP_linux      0x00000100
+#define MOVE_MOUNT_BENEATH_linux        0x00000200
+
+#define FSOPEN_CLOEXEC_linux            0x00000001
+
+#define FSPICK_CLOEXEC_linux            0x00000001
+#define FSPICK_SYMLINK_NOFOLLOW_linux   0x00000002
+#define FSPICK_NO_AUTOMOUNT_linux       0x00000004
+#define FSPICK_EMPTY_PATH_linux         0x00000008
+
+#define FSMOUNT_CLOEXEC_linux           0x00000001
+
+#define MOUNT_ATTR_RDONLY_linux         0x00000001
+#define MOUNT_ATTR_NOSUID_linux         0x00000002
+#define MOUNT_ATTR_NODEV_linux          0x00000004
+#define MOUNT_ATTR_NOEXEC_linux         0x00000008
+#define MOUNT_ATTR__ATIME_linux         0x00000070
+#define MOUNT_ATTR_RELATIME_linux       0x00000000
+#define MOUNT_ATTR_NOATIME_linux        0x00000010
+#define MOUNT_ATTR_STRICTATIME_linux    0x00000020
+#define MOUNT_ATTR_NODIRATIME_linux     0x00000080
+#define MOUNT_ATTR_IDMAP_linux          0x00100000
+#define MOUNT_ATTR_NOSYMFOLLOW_linux    0x00200000
+
+#define MOUNT_ATTR_SIZE_VER0_linux      32
+
+#define STATMOUNT_SB_BASIC_linux        0x00000001U
+#define STATMOUNT_MNT_BASIC_linux       0x00000002U
+#define STATMOUNT_PROPAGATE_FROM_linux  0x00000004U
+#define STATMOUNT_MNT_ROOT_linux        0x00000008U
+#define STATMOUNT_MNT_POINT_linux       0x00000010U
+#define STATMOUNT_FS_TYPE_linux         0x00000020U
+#define STATMOUNT_MNT_NS_ID_linux       0x00000040U
+#define STATMOUNT_MNT_OPTS_linux        0x00000080U
+#define STATMOUNT_FS_SUBTYPE_linux      0x00000100U
+#define STATMOUNT_SB_SOURCE_linux       0x00000200U
+#define STATMOUNT_OPT_ARRAY_linux       0x00000400U
+#define STATMOUNT_OPT_SEC_ARRAY_linux   0x00000800U
+#define STATMOUNT_SUPPORTED_MASK_linux  0x00001000U
+#define STATMOUNT_MNT_UIDMAP_linux      0x00002000U
+#define STATMOUNT_MNT_GIDMAP_linux      0x00004000U
+
+#define MNT_ID_REQ_SIZE_VER0_linux      24
+#define MNT_ID_REQ_SIZE_VER1_linux      32
+
+#define LSMT_ROOT_linux                 0xffffffffffffffffULL
+#define LISTMOUNT_REVERSE_linux         (1 << 0)
+
+#define ST_RDONLY_linux                 1
+#define ST_NOSUID_linux                 2
+#define ST_NODEV_linux                  4
+#define ST_NOEXEC_linux                 8
+#define ST_SYNCHRONOUS_linux            16
+#define ST_MANDLOCK_linux               64
+#define ST_WRITE_linux                  128
+#define ST_APPEND_linux                 256
+#define ST_IMMUTABLE_linux              512
+#define ST_NOATIME_linux                1024
+#define ST_NODIRATIME_linux             2048
+#define ST_RELATIME_linux               4096
+
+enum {
+  FSCONFIG_SET_FLAG_linux         = 0,
+  FSCONFIG_SET_STRING_linux       = 1,
+  FSCONFIG_SET_BINARY_linux       = 2,
+  FSCONFIG_SET_PATH_linux         = 3,
+  FSCONFIG_SET_PATH_EMPTY_linux   = 4,
+  FSCONFIG_SET_FD_linux           = 5,
+  FSCONFIG_CMD_CREATE_linux       = 6,
+  FSCONFIG_CMD_RECONFIGURE_linux  = 7,
+  FSCONFIG_CMD_CREATE_EXCL_linux  = 8
+};
+
+#define USRQUOTA_linux             0
+#define GRPQUOTA_linux             1
+#define PRJQUOTA_linux             2
+
+#define SUBCMDMASK_linux           0x00ff
+#define SUBCMDSHIFT_linux          8
+#define QCMD_linux(cmd, type)      (((cmd) << SUBCMDSHIFT_linux) | ((type) & SUBCMDMASK_linux))
+
+#define Q_SYNC_linux               0x800001
+#define Q_QUOTAON_linux            0x800002
+#define Q_QUOTAOFF_linux           0x800003
+#define Q_GETFMT_linux             0x800004
+#define Q_GETINFO_linux            0x800005
+#define Q_SETINFO_linux            0x800006
+#define Q_GETQUOTA_linux           0x800007
+#define Q_SETQUOTA_linux           0x800008
+#define Q_GETNEXTQUOTA_linux       0x800009
+
+#define QFMT_VFS_OLD_linux         1
+#define QFMT_VFS_V0_linux          2
+#define QFMT_OCFS2_linux           3
+#define QFMT_VFS_V1_linux          4
+#define QFMT_SHMEM_linux           5
+
+#define QIF_BLIMITS_linux          (1 << 0)
+#define QIF_SPACE_linux            (1 << 1)
+#define QIF_ILIMITS_linux          (1 << 2)
+#define QIF_INODES_linux           (1 << 3)
+#define QIF_BTIME_linux            (1 << 4)
+#define QIF_ITIME_linux            (1 << 5)
+#define QIF_LIMITS_linux           (QIF_BLIMITS_linux | QIF_ILIMITS_linux)
+#define QIF_USAGE_linux            (QIF_SPACE_linux | QIF_INODES_linux)
+#define QIF_TIMES_linux            (QIF_BTIME_linux | QIF_ITIME_linux)
+#define QIF_ALL_linux              (QIF_LIMITS_linux | QIF_USAGE_linux | QIF_TIMES_linux)
+
+#define IIF_BGRACE_linux           1
+#define IIF_IGRACE_linux           2
+#define IIF_FLAGS_linux            4
+#define IIF_ALL_linux              (IIF_BGRACE_linux | IIF_IGRACE_linux | IIF_FLAGS_linux)
+
+#define XQM_CMD_linux(x)           (('X' << 8) + (x))
+#define Q_XQUOTAON_linux           XQM_CMD_linux(1)
+#define Q_XQUOTAOFF_linux          XQM_CMD_linux(2)
+#define Q_XGETQUOTA_linux          XQM_CMD_linux(3)
+#define Q_XSETQLIM_linux           XQM_CMD_linux(4)
+#define Q_XGETQSTAT_linux          XQM_CMD_linux(5)
+#define Q_XQUOTARM_linux           XQM_CMD_linux(6)
+#define Q_XQUOTASYNC_linux         XQM_CMD_linux(7)
+#define Q_XGETQSTATV_linux         XQM_CMD_linux(8)
+#define Q_XGETNEXTQUOTA_linux      XQM_CMD_linux(9)
+
+#define FS_DQ_ISOFT_linux          (1 << 0)
+#define FS_DQ_IHARD_linux          (1 << 1)
+#define FS_DQ_BSOFT_linux          (1 << 2)
+#define FS_DQ_BHARD_linux          (1 << 3)
+#define FS_DQ_RTBSOFT_linux        (1 << 4)
+#define FS_DQ_RTBHARD_linux        (1 << 5)
+#define FS_DQ_LIMIT_MASK_linux     (FS_DQ_ISOFT_linux | FS_DQ_IHARD_linux | FS_DQ_BSOFT_linux | FS_DQ_BHARD_linux | FS_DQ_RTBSOFT_linux | FS_DQ_RTBHARD_linux)
+#define FS_DQ_BTIMER_linux         (1 << 6)
+#define FS_DQ_ITIMER_linux         (1 << 7)
+#define FS_DQ_RTBTIMER_linux       (1 << 8)
+#define FS_DQ_TIMER_MASK_linux     (FS_DQ_BTIMER_linux | FS_DQ_ITIMER_linux | FS_DQ_RTBTIMER_linux)
+#define FS_DQ_BWARNS_linux         (1 << 9)
+#define FS_DQ_IWARNS_linux         (1 << 10)
+#define FS_DQ_RTBWARNS_linux       (1 << 11)
+#define FS_DQ_WARNS_MASK_linux     (FS_DQ_BWARNS_linux | FS_DQ_IWARNS_linux | FS_DQ_RTBWARNS_linux)
+#define FS_DQ_BCOUNT_linux         (1 << 12)
+#define FS_DQ_ICOUNT_linux         (1 << 13)
+#define FS_DQ_RTBCOUNT_linux       (1 << 14)
+#define FS_DQ_ACCT_MASK_linux      (FS_DQ_BCOUNT_linux | FS_DQ_ICOUNT_linux | FS_DQ_RTBCOUNT_linux)
+#define FS_DQ_BIGTIME_linux        (1 << 15)
+
+#define FS_QUOTA_UDQ_ACCT_linux    (1 << 0)
+#define FS_QUOTA_UDQ_ENFD_linux    (1 << 1)
+#define FS_QUOTA_GDQ_ACCT_linux    (1 << 2)
+#define FS_QUOTA_GDQ_ENFD_linux    (1 << 3)
+#define FS_QUOTA_PDQ_ACCT_linux    (1 << 4)
+#define FS_QUOTA_PDQ_ENFD_linux    (1 << 5)
+
+#define FS_USER_QUOTA_linux        (1 << 0)
+#define FS_PROJ_QUOTA_linux        (1 << 1)
+#define FS_GROUP_QUOTA_linux       (1 << 2)
+
+#define IN_ACCESS_linux            0x00000001
+#define IN_MODIFY_linux            0x00000002
+#define IN_ATTRIB_linux            0x00000004
+#define IN_CLOSE_WRITE_linux       0x00000008
+#define IN_CLOSE_NOWRITE_linux     0x00000010
+#define IN_OPEN_linux              0x00000020
+#define IN_MOVED_FROM_linux        0x00000040
+#define IN_MOVED_TO_linux          0x00000080
+#define IN_CREATE_linux            0x00000100
+#define IN_DELETE_linux            0x00000200
+#define IN_DELETE_SELF_linux       0x00000400
+#define IN_MOVE_SELF_linux         0x00000800
+
+#define IN_UNMOUNT_linux           0x00002000
+#define IN_Q_OVERFLOW_linux        0x00004000
+#define IN_IGNORED_linux           0x00008000
+
+#define IN_CLOSE_linux             (IN_CLOSE_WRITE_linux | IN_CLOSE_NOWRITE_linux)
+#define IN_MOVE_linux              (IN_MOVED_FROM_linux | IN_MOVED_TO_linux)
+
+#define IN_ONLYDIR_linux           0x01000000
+#define IN_DONT_FOLLOW_linux       0x02000000
+#define IN_EXCL_UNLINK_linux       0x04000000
+#define IN_MASK_CREATE_linux       0x10000000
+#define IN_MASK_ADD_linux          0x20000000
+#define IN_ISDIR_linux             0x40000000
+#define IN_ONESHOT_linux           0x80000000
+
+#define IN_ALL_EVENTS_linux        (IN_ACCESS_linux | IN_MODIFY_linux | IN_ATTRIB_linux | IN_CLOSE_WRITE_linux | \
+                                    IN_CLOSE_NOWRITE_linux | IN_OPEN_linux | IN_MOVED_FROM_linux | \
+                                    IN_MOVED_TO_linux | IN_DELETE_linux | IN_CREATE_linux | IN_DELETE_SELF_linux | \
+                                    IN_MOVE_SELF_linux)
+
+#define IN_CLOEXEC_linux           O_CLOEXEC_linux
+#define IN_NONBLOCK_linux          O_NONBLOCK_linux
+
+#define FAN_ACCESS_linux           0x00000001
+#define FAN_MODIFY_linux           0x00000002
+#define FAN_ATTRIB_linux           0x00000004
+#define FAN_CLOSE_WRITE_linux      0x00000008
+#define FAN_CLOSE_NOWRITE_linux    0x00000010
+#define FAN_OPEN_linux             0x00000020
+#define FAN_MOVED_FROM_linux       0x00000040
+#define FAN_MOVED_TO_linux         0x00000080
+#define FAN_CREATE_linux           0x00000100
+#define FAN_DELETE_linux           0x00000200
+#define FAN_DELETE_SELF_linux      0x00000400
+#define FAN_MOVE_SELF_linux        0x00000800
+#define FAN_OPEN_EXEC_linux        0x00001000
+
+#define FAN_Q_OVERFLOW_linux       0x00004000
+#define FAN_FS_ERROR_linux         0x00008000
+
+#define FAN_OPEN_PERM_linux        0x00010000
+#define FAN_ACCESS_PERM_linux      0x00020000
+#define FAN_OPEN_EXEC_PERM_linux   0x00040000
+
+#define FAN_PRE_ACCESS_linux       0x00100000
+#define FAN_MNT_ATTACH_linux       0x01000000
+#define FAN_MNT_DETACH_linux       0x02000000
+
+#define FAN_EVENT_ON_CHILD_linux   0x08000000
+
+#define FAN_RENAME_linux           0x10000000
+
+#define FAN_ONDIR_linux            0x40000000
+
+#define FAN_CLOSE_linux            (FAN_CLOSE_WRITE_linux | FAN_CLOSE_NOWRITE_linux)
+#define FAN_MOVE_linux             (FAN_MOVED_FROM_linux | FAN_MOVED_TO_linux)
+
+#define FAN_CLOEXEC_linux          0x00000001
+#define FAN_NONBLOCK_linux         0x00000002
+
+#define FAN_CLASS_NOTIF_linux      0x00000000
+#define FAN_CLASS_CONTENT_linux    0x00000004
+#define FAN_CLASS_PRE_CONTENT_linux 0x00000008
+
+#define FAN_UNLIMITED_QUEUE_linux  0x00000010
+#define FAN_UNLIMITED_MARKS_linux  0x00000020
+#define FAN_ENABLE_AUDIT_linux     0x00000040
+
+#define FAN_REPORT_PIDFD_linux     0x00000080
+#define FAN_REPORT_TID_linux       0x00000100
+#define FAN_REPORT_FID_linux       0x00000200
+#define FAN_REPORT_DIR_FID_linux   0x00000400
+#define FAN_REPORT_NAME_linux      0x00000800
+#define FAN_REPORT_TARGET_FID_linux 0x00001000
+#define FAN_REPORT_FD_ERROR_linux  0x00002000
+#define FAN_REPORT_MNT_linux       0x00004000
+
+#define FAN_REPORT_DFID_NAME_linux (FAN_REPORT_DIR_FID_linux | FAN_REPORT_NAME_linux)
+#define FAN_REPORT_DFID_NAME_TARGET_linux (FAN_REPORT_DFID_NAME_linux | FAN_REPORT_FID_linux | FAN_REPORT_TARGET_FID_linux)
+
+#define FAN_MARK_ADD_linux         0x00000001
+#define FAN_MARK_REMOVE_linux      0x00000002
+#define FAN_MARK_DONT_FOLLOW_linux 0x00000004
+#define FAN_MARK_ONLYDIR_linux     0x00000008
+#define FAN_MARK_IGNORED_MASK_linux 0x00000020
+#define FAN_MARK_IGNORED_SURV_MODIFY_linux 0x00000040
+#define FAN_MARK_FLUSH_linux       0x00000080
+#define FAN_MARK_EVICTABLE_linux   0x00000200
+#define FAN_MARK_IGNORE_linux      0x00000400
+
+#define FAN_MARK_INODE_linux       0x00000000
+#define FAN_MARK_MOUNT_linux       0x00000010
+#define FAN_MARK_FILESYSTEM_linux  0x00000100
+#define FAN_MARK_MNTNS_linux       0x00000110
+
+#define FAN_MARK_IGNORE_SURV_linux (FAN_MARK_IGNORE_linux | FAN_MARK_IGNORED_SURV_MODIFY_linux)
+
+#define FAN_ALLOW_linux            0x01
+#define FAN_DENY_linux             0x02
+#define FAN_AUDIT_linux            0x10
+#define FAN_INFO_linux             0x20
+
+#define FAN_NOFD_linux             -1
+#define FAN_NOPIDFD_linux          FAN_NOFD_linux
+#define FAN_EPIDFD_linux           -2
+
+#define FANOTIFY_METADATA_VERSION_linux 3
+
 typedef struct {
   unsigned long long flags;
   unsigned long long pidfd;
@@ -3297,6 +3643,291 @@ typedef struct {
   unsigned int  flags;
 } xattr_args_linux;
 
+typedef struct {
+  unsigned long  d_ino;
+  unsigned long  d_off;
+  unsigned short d_reclen;
+  char           d_name[];
+} linux_dirent_linux;
+
+typedef struct {
+  unsigned long long d_ino;
+  long long          d_off;
+  unsigned short     d_reclen;
+  unsigned char      d_type;
+  char               d_name[];
+} linux_dirent64_linux;
+
+typedef struct {
+  unsigned long  d_ino;
+  unsigned long  d_offset;
+  unsigned short d_namlen;
+  char           d_name[];
+} old_linux_dirent_linux;
+
+
+typedef struct {
+  unsigned long long attr_set;
+  unsigned long long attr_clr;
+  unsigned long long propagation;
+  unsigned long long userns_fd;
+} mount_attr_linux;
+
+typedef struct {
+  int val[2];
+} fsid_t_linux;
+
+typedef struct {
+  unsigned long f_type;
+  unsigned long f_bsize;
+  unsigned long f_blocks;
+  unsigned long f_bfree;
+  unsigned long f_bavail;
+  unsigned long f_files;
+  unsigned long f_ffree;
+  fsid_t_linux f_fsid;
+  unsigned long f_namelen;
+  unsigned long f_frsize;
+  unsigned long f_flags;
+  unsigned long f_spare[4];
+} statfs_t_linux;
+
+typedef struct {
+  unsigned long f_type;
+  unsigned long f_bsize;
+  unsigned long long f_blocks;
+  unsigned long long f_bfree;
+  unsigned long long f_bavail;
+  unsigned long long f_files;
+  unsigned long long f_ffree;
+  fsid_t_linux f_fsid;
+  unsigned long f_namelen;
+  unsigned long f_frsize;
+  unsigned long f_flags;
+  unsigned long f_spare[4];
+} statfs64_t_linux;
+
+typedef struct {
+  unsigned int size;
+  unsigned int mnt_opts;
+  unsigned long long mask;
+  unsigned int sb_dev_major;
+  unsigned int sb_dev_minor;
+  unsigned long long sb_magic;
+  unsigned int sb_flags;
+  unsigned int fs_type;
+  unsigned long long mnt_id;
+  unsigned long long mnt_parent_id;
+  unsigned int mnt_id_old;
+  unsigned int mnt_parent_id_old;
+  unsigned long long mnt_attr;
+  unsigned long long mnt_propagation;
+  unsigned long long mnt_peer_group;
+  unsigned long long mnt_master;
+  unsigned long long propagate_from;
+  unsigned int mnt_root;
+  unsigned int mnt_point;
+  unsigned long long mnt_ns_id;
+  unsigned int fs_subtype;
+  unsigned int sb_source;
+  unsigned int opt_num;
+  unsigned int opt_array;
+  unsigned int opt_sec_num;
+  unsigned int opt_sec_array;
+  unsigned long long supported_mask;
+  unsigned int mnt_uidmap_num;
+  unsigned int mnt_uidmap;
+  unsigned int mnt_gidmap_num;
+  unsigned int mnt_gidmap;
+  unsigned long long __spare2[43];
+  char str[];
+} statmount_t_linux;
+
+typedef struct {
+  unsigned int size;
+  unsigned int mnt_ns_fd;
+  unsigned long long mnt_id;
+  unsigned long long param;
+  unsigned long long mnt_ns_id;
+} mnt_id_req_linux;
+
+typedef struct {
+  unsigned long long dqb_bhardlimit;
+  unsigned long long dqb_bsoftlimit;
+  unsigned long long dqb_curspace;
+  unsigned long long dqb_ihardlimit;
+  unsigned long long dqb_isoftlimit;
+  unsigned long long dqb_curinodes;
+  unsigned long long dqb_btime;
+  unsigned long long dqb_itime;
+  unsigned int dqb_valid;
+} if_dqblk_linux;
+
+typedef struct {
+  unsigned long long dqb_bhardlimit;
+  unsigned long long dqb_bsoftlimit;
+  unsigned long long dqb_curspace;
+  unsigned long long dqb_ihardlimit;
+  unsigned long long dqb_isoftlimit;
+  unsigned long long dqb_curinodes;
+  unsigned long long dqb_btime;
+  unsigned long long dqb_itime;
+  unsigned int dqb_valid;
+  unsigned int dqb_id;
+} if_nextdqblk_linux;
+
+typedef struct {
+  unsigned long long dqi_bgrace;
+  unsigned long long dqi_igrace;
+  unsigned int dqi_flags;
+  unsigned int dqi_valid;
+} if_dqinfo_linux;
+
+typedef struct {
+  char d_version;
+  char d_flags;
+  unsigned short d_fieldmask;
+  unsigned int d_id;
+  unsigned long long d_blk_hardlimit;
+  unsigned long long d_blk_softlimit;
+  unsigned long long d_ino_hardlimit;
+  unsigned long long d_ino_softlimit;
+  unsigned long long d_bcount;
+  unsigned long long d_icount;
+  int d_itimer;
+  int d_btimer;
+  unsigned short d_iwarns;
+  unsigned short d_bwarns;
+  char d_itimer_hi;
+  char d_btimer_hi;
+  char d_rtbtimer_hi;
+  char d_padding2;
+  unsigned long long d_rtb_hardlimit;
+  unsigned long long d_rtb_softlimit;
+  unsigned long long d_rtbcount;
+  int d_rtbtimer;
+  unsigned short d_rtbwarns;
+  short d_padding3;
+  char d_padding4[8];
+} fs_disk_quota_linux;
+
+typedef struct {
+  unsigned long long qfs_ino;
+  unsigned long long qfs_nblks;
+  unsigned int qfs_nextents;
+} fs_qfilestat_linux;
+
+typedef struct {
+  char qs_version;
+  unsigned short qs_flags;
+  char qs_pad;
+  fs_qfilestat_linux qs_uquota;
+  fs_qfilestat_linux qs_gquota;
+  unsigned int qs_incoredqs;
+  int qs_btimelimit;
+  int qs_itimelimit;
+  int qs_rtbtimelimit;
+  unsigned short qs_bwarnlimit;
+  unsigned short qs_iwarnlimit;
+} fs_quota_stat_linux;
+
+typedef struct {
+  unsigned long long qfs_ino;
+  unsigned long long qfs_nblks;
+  unsigned int qfs_nextents;
+  unsigned int qfs_pad;
+} fs_qfilestatv_linux;
+
+typedef struct {
+  char qs_version;
+  unsigned char qs_pad1;
+  unsigned short qs_flags;
+  unsigned int qs_incoredqs;
+  fs_qfilestatv_linux qs_uquota;
+  fs_qfilestatv_linux qs_gquota;
+  fs_qfilestatv_linux qs_pquota;
+  int qs_btimelimit;
+  int qs_itimelimit;
+  int qs_rtbtimelimit;
+  unsigned short qs_bwarnlimit;
+  unsigned short qs_iwarnlimit;
+  unsigned short qs_rtbwarnlimit;
+  unsigned short qs_pad3;
+  unsigned int qs_pad4;
+  unsigned long long qs_pad2[7];
+} fs_quota_statv_linux;
+
+typedef struct {
+  int wd;
+  unsigned int mask;
+  unsigned int cookie;
+  unsigned int len;
+  char name[];
+} inotify_event_linux;
+
+typedef struct {
+  unsigned int event_len;
+  unsigned char vers;
+  unsigned char reserved;
+  unsigned short metadata_len;
+  unsigned long long mask;
+  int fd;
+  int pid;
+} fanotify_event_metadata_linux;
+
+typedef struct {
+  unsigned char info_type;
+  unsigned char pad;
+  unsigned short len;
+} fanotify_event_info_header_linux;
+
+typedef struct {
+  fanotify_event_info_header_linux hdr;
+  fsid_t_linux fsid;
+  unsigned char handle[];
+} fanotify_event_info_fid_linux;
+
+typedef struct {
+  fanotify_event_info_header_linux hdr;
+  int pidfd;
+} fanotify_event_info_pidfd_linux;
+
+typedef struct {
+  fanotify_event_info_header_linux hdr;
+  int error;
+  unsigned int error_count;
+} fanotify_event_info_error_linux;
+
+typedef struct {
+  fanotify_event_info_header_linux hdr;
+  unsigned int pad;
+  unsigned long long offset;
+  unsigned long long count;
+} fanotify_event_info_range_linux;
+
+typedef struct {
+  fanotify_event_info_header_linux hdr;
+  unsigned long long mnt_id;
+} fanotify_event_info_mnt_linux;
+
+typedef struct {
+  int fd;
+  unsigned int response;
+} fanotify_response_linux;
+
+typedef struct {
+  unsigned char type;
+  unsigned char pad;
+  unsigned short len;
+} fanotify_response_info_header_linux;
+
+typedef struct {
+  fanotify_response_info_header_linux hdr;
+  unsigned int rule_number;
+  unsigned int subj_trust;
+  unsigned int obj_trust;
+} fanotify_response_info_audit_rule_linux;
+
 #define Syscall0_linux(number, ret2)                   _Syscall0_linux(number, (long*)(ret2))
 #define Syscall1_linux(number, a, ret2)                _Syscall1_linux(number, (long)(a), (long*)(ret2))
 #define Syscall2_linux(number, a, b, ret2)             _Syscall2_linux(number, (long)(a), (long)(b), (long*)(ret2))
@@ -3545,7 +4176,6 @@ long fremovexattr_linux(int fd, const char *name);
 long removexattrat_linux(int dfd, const char *path, unsigned int at_flags, const char *name);
 // 7f. Advisory file locking
 long flock_linux(unsigned int fd, unsigned int cmd);
-#if 0 // WIP
 //
 // 8. DIRECTORY & NAMESPACE OPERATIONS
 //
@@ -3553,9 +4183,9 @@ long flock_linux(unsigned int fd, unsigned int cmd);
 long mkdir_linux(const char *pathname, unsigned int mode);
 long mkdirat_linux(int dfd, const char * pathname, unsigned int mode);
 long rmdir_linux(const char *pathname);
-long getdents_linux(unsigned int fd, linux_dirent *dirent, unsigned int count);
-long getdents64_linux(unsigned int fd, linux_dirent64 *dirent, unsigned int count);
-long readdir_linux(unsigned int fd, old_linux_dirent *dirent, unsigned int count);
+// Disabled wrapper: long getdents_linux(unsigned int fd, linux_dirent_linux *dirent, unsigned int count);
+long getdents64_linux(unsigned int fd, linux_dirent64_linux *dirent, unsigned int count);
+// Disabled wrapper: long readdir_linux(unsigned int fd, old_linux_dirent_linux *dirent, unsigned int count);
 // 8b. Getting and changing current directory
 long getcwd_linux(char *buf, unsigned long size);
 long chdir_linux(const char *filename);
@@ -3565,7 +4195,7 @@ long link_linux(const char *oldname, const char *newname);
 long linkat_linux(int olddfd, const char *oldname, int newdfd, const char *newname, int flags);
 long unlink_linux(const char *pathname);
 long unlinkat_linux(int dfd, const char * pathname, int flag);
-long symlink_linux(const char *old, const char *new);
+long symlink_linux(const char *old, const char *newname);
 long symlinkat_linux(const char * oldname, int newdfd, const char * newname);
 long readlink_linux(const char *path, char *buf, int bufsiz);
 long readlinkat_linux(int dfd, const char *path, char *buf, int bufsiz);
@@ -3584,36 +4214,37 @@ long umount_linux(char *name, int flags);
 long umount2_linux(char *name, int flags);
 long pivot_root_linux(const char *new_root, const char *put_old);
 long chroot_linux(const char *filename);
-long mount_setattr_linux(int dfd, const char *path, unsigned int flags, mount_attr *uattr, unsigned long usize);
+long mount_setattr_linux(int dfd, const char *path, unsigned int flags, mount_attr_linux *uattr, unsigned long usize);
 long move_mount_linux(int from_dfd, const char *from_path, int to_dfd, const char *to_path, unsigned int ms_flags);
 long open_tree_linux(int dfd, const char *path, unsigned flags);
-long open_tree_attr_linux(int dfd, const char *path, unsigned flags, mount_attr *uattr, unsigned long usize);
+long open_tree_attr_linux(int dfd, const char *path, unsigned flags, mount_attr_linux *uattr, unsigned long usize);
 long fsconfig_linux(int fs_fd, unsigned int cmd, const char *key, const void *value, int aux);
 long fsmount_linux(int fs_fd, unsigned int flags, unsigned int ms_flags);
 long fsopen_linux(const char *fs_name, unsigned int flags);
 long fspick_linux(int dfd, const char *path, unsigned int flags);
 // 9b. Getting filesystem statistics
-long statfs_linux(const char * path, statfs *buf);
-long fstatfs_linux(unsigned int fd, statfs *buf);
-long statfs64_linux(const char *path, unsigned long sz, statfs64 *buf);
-long fstatfs64_linux(unsigned int fd, unsigned long sz, statfs64 *buf);
-long ustat_linux(unsigned dev, ustat *ubuf);
-long statmount_linux(const mnt_id_req *req, statmount *buf, unsigned long bufsize, unsigned int flags);
-long listmount_linux(const mnt_id_req *req, u64 *mnt_ids, unsigned long nr_mnt_ids, unsigned int flags);
+// Disabled wrapper: long statfs_linux(const char * path, statfs_t_linux *buf);
+// Disabled wrapper: long fstatfs_linux(unsigned int fd, statfs_t_linux *buf);
+long statfs64_linux(const char *path, unsigned long sz, statfs64_t_linux *buf);
+long fstatfs64_linux(unsigned int fd, unsigned long sz, statfs64_t_linux *buf);
+// Disabled wrapper: long ustat_linux(unsigned dev, ustat *ubuf);
+long statmount_linux(const mnt_id_req_linux *req, statmount_t_linux *buf, unsigned long bufsize, unsigned int flags);
+long listmount_linux(const mnt_id_req_linux *req, unsigned long long *mnt_ids, unsigned long nr_mnt_ids, unsigned int flags);
 // 9c. Disk quota control
-long quotactl_linux(unsigned int cmd, const char *special, qid_t id, void *addr);
-long quotactl_fd_linux(unsigned int fd, unsigned int cmd, qid_t id, void *addr);
+long quotactl_linux(unsigned int cmd, const char *special, unsigned int id, void *addr);
+long quotactl_fd_linux(unsigned int fd, unsigned int cmd, unsigned int id, void *addr);
 //
 // 10. FILE SYSTEM MONITORING
 //
 // 10a. Monitoring filesystem events
 long inotify_init_linux(void);
 long inotify_init1_linux(int flags);
-long inotify_add_watch_linux(int fd, const char *path, u32 mask);
-long inotify_rm_watch_linux(int fd, __s32 wd);
+long inotify_add_watch_linux(int fd, const char *path, unsigned int mask);
+long inotify_rm_watch_linux(int fd, int wd);
 // 10b. Filesystem-wide event notification
 long fanotify_init_linux(unsigned int flags, unsigned int event_f_flags);
-long fanotify_mark_linux(int fanotify_fd, unsigned int flags, u64 mask, int fd, const char *pathname);
+long fanotify_mark_linux(int fanotify_fd, unsigned int flags, unsigned long long mask, int fd, const char *pathname);
+#if 0 // WIP
 //
 // 11. SIGNALS
 //
@@ -3681,8 +4312,8 @@ long mq_timedreceive_time64_linux(mqd_t mqdes, char *u_msg_ptr, unsigned long ms
 long mq_notify_linux(mqd_t mqdes, const sigevent *notification);
 long mq_getsetattr_linux(mqd_t mqdes, const mq_attr *mqstat, mq_attr *omqstat);
 // 13e. Synchronization Primitives - Futexes
-// Disabled wrapper: long futex_linux(u32 *uaddr, int op, u32 val, const __kernel_old_timespec_linux *utime, u32 *uaddr2, u32 val3);
-long futex_time64_linux(u32 *uaddr, int op, u32 val, const __kernel_timespec_linux *utime, u32 *uaddr2, u32 val3);
+// Disabled wrapper: long futex_linux(unsigned int *uaddr, int op, unsigned int val, const __kernel_old_timespec_linux *utime, unsigned int *uaddr2, unsigned int val3);
+long futex_time64_linux(unsigned int *uaddr, int op, unsigned int val, const __kernel_timespec_linux *utime, unsigned int *uaddr2, unsigned int val3);
 long futex_wait_linux(void *uaddr, unsigned long val, unsigned long mask, unsigned int flags, __kernel_timespec_linux *timespec, clockid_t clockid);
 long futex_wake_linux(void *uaddr, unsigned long mask, int nr, unsigned int flags);
 long futex_waitv_linux(futex_waitv *waiters, unsigned int nr_futexes, unsigned int flags, __kernel_timespec_linux *timeout, clockid_t clockid);
@@ -3732,8 +4363,8 @@ long io_getevents_linux(aio_context_t ctx_id, long min_nr, long nr, io_event *ev
 // Disabled wrapper: long io_pgetevents_linux(aio_context_t ctx_id, long min_nr, long nr, io_event *events, __kernel_old_timespec_linux *timeout, const __aio_sigset *sig);
 long io_pgetevents_time64_linux(aio_context_t ctx_id, long min_nr, long nr, io_event *events, __kernel_timespec_linux *timeout, const __aio_sigset *sig);
 // 15b. io_uring: high-performance asynchronous I/O
-long io_uring_setup_linux(u32 entries, io_uring_params *p);
-long io_uring_enter_linux(unsigned int fd, u32 to_submit, u32 min_complete, u32 flags, const void *argp, unsigned long argsz);
+long io_uring_setup_linux(unsigned int entries, io_uring_params *p);
+long io_uring_enter_linux(unsigned int fd, unsigned int to_submit, unsigned int min_complete, unsigned int flags, const void *argp, unsigned long argsz);
 long io_uring_register_linux(unsigned int fd, unsigned int op, void *arg, unsigned int nr_args);
 //
 // 16. TIME & CLOCKS
@@ -3827,9 +4458,9 @@ long capset_linux(cap_user_header_t header, const cap_user_data_t data);
 long seccomp_linux(unsigned int op, unsigned int flags, void *uargs);
 // 19c. Linux Security Module interfaces
 long security_linux(void);
-long lsm_get_self_attr_linux(unsigned int attr, lsm_ctx *ctx, u32 *size, u32 flags);
-long lsm_set_self_attr_linux(unsigned int attr, lsm_ctx *ctx, u32 size, u32 flags);
-long lsm_list_modules_linux(u64 *ids, u32 *size, u32 flags);
+long lsm_get_self_attr_linux(unsigned int attr, lsm_ctx *ctx, unsigned int *size, unsigned int flags);
+long lsm_set_self_attr_linux(unsigned int attr, lsm_ctx *ctx, unsigned int size, unsigned int flags);
+long lsm_list_modules_linux(unsigned long long *ids, unsigned int *size, unsigned int flags);
 // 19d. Unprivileged access control
 long landlock_create_ruleset_linux(const landlock_ruleset_attr *attr, unsigned long size, __u32 flags);
 long landlock_add_rule_linux(int ruleset_fd, enum landlock_rule_type rule_type, const void *rule_attr, __u32 flags);
@@ -3857,7 +4488,7 @@ long acct_linux(const char *name);
 //
 long unshare_linux(unsigned long unshare_flags);
 long setns_linux(int fd, int nstype);
-long listns_linux(const ns_id_req *req, u64 *ns_ids, unsigned long nr_ns_ids, unsigned int flags);
+long listns_linux(const ns_id_req *req, unsigned long long *ns_ids, unsigned long nr_ns_ids, unsigned int flags);
 //
 // 22. PROCESS INSPECTION & CONTROL
 //
@@ -3964,7 +4595,7 @@ long rseq_linux(rseq *rseq, uint32_t rseq_len, int flags, uint32_t sig);
 // 29b. Restart syscall
 long restart_syscall_linux(void);
 // 29c. Directory entry cache
-long lookup_dcookie_linux(u64 cookie64, char *buf, unsigned long len);
+long lookup_dcookie_linux(unsigned long long cookie64, char *buf, unsigned long len);
 //
 // 30. LEGACY, OBSOLETE & UNIMPLEMENTED
 //
@@ -5279,29 +5910,24 @@ long removexattrat_linux(int dfd, const char *path, unsigned int at_flags, const
 long flock_linux(unsigned int fd, unsigned int cmd) {
   return Syscall2_linux(NR_flock_linux, fd, cmd, 0);
 }
-#if 0 // WIP
 //
 // 8. DIRECTORY & NAMESPACE OPERATIONS
 //
 // 8a. Creating, removing, and reading directories
 long mkdir_linux(const char *pathname, unsigned int mode) {
-  return Syscall2_linux(NR_mkdir_linux, pathname, mode, 0);
+  return mkdirat_linux(AT_FDCWD_linux, pathname, mode);
 }
 long mkdirat_linux(int dfd, const char * pathname, unsigned int mode) {
   return Syscall3_linux(NR_mkdirat_linux, dfd, pathname, mode, 0);
 }
 long rmdir_linux(const char *pathname) {
-  return Syscall1_linux(NR_rmdir_linux, pathname, 0);
+  return unlinkat_linux(AT_FDCWD_linux, pathname, AT_REMOVEDIR_linux);
 }
-long getdents_linux(unsigned int fd, linux_dirent *dirent, unsigned int count) {
-  return Syscall3_linux(NR_getdents_linux, fd, dirent, count, 0);
-}
-long getdents64_linux(unsigned int fd, linux_dirent64 *dirent, unsigned int count) {
+// Disabled wrapper: long getdents_linux(unsigned int fd, linux_dirent_linux *dirent, unsigned int count);
+long getdents64_linux(unsigned int fd, linux_dirent64_linux *dirent, unsigned int count) {
   return Syscall3_linux(NR_getdents64_linux, fd, dirent, count, 0);
 }
-long readdir_linux(unsigned int fd, old_linux_dirent *dirent, unsigned int count) {
-  return Syscall3_linux(NR_readdir_linux, fd, dirent, count, 0);
-}
+// Disabled wrapper: long readdir_linux(unsigned int fd, old_linux_dirent_linux *dirent, unsigned int count);
 // 8b. Getting and changing current directory
 long getcwd_linux(char *buf, unsigned long size) {
   return Syscall2_linux(NR_getcwd_linux, buf, size, 0);
@@ -5314,41 +5940,41 @@ long fchdir_linux(unsigned int fd) {
 }
 // 8c. Creating and managing hard and symbolic links
 long link_linux(const char *oldname, const char *newname) {
-  return Syscall2_linux(NR_link_linux, oldname, newname, 0);
+  return linkat_linux(AT_FDCWD_linux, oldname, AT_FDCWD_linux, newname, 0);
 }
 long linkat_linux(int olddfd, const char *oldname, int newdfd, const char *newname, int flags) {
   return Syscall5_linux(NR_linkat_linux, olddfd, oldname, newdfd, newname, flags, 0);
 }
 long unlink_linux(const char *pathname) {
-  return Syscall1_linux(NR_unlink_linux, pathname, 0);
+  return unlinkat_linux(AT_FDCWD_linux, pathname, 0);
 }
 long unlinkat_linux(int dfd, const char * pathname, int flag) {
   return Syscall3_linux(NR_unlinkat_linux, dfd, pathname, flag, 0);
 }
-long symlink_linux(const char *old, const char *new) {
-  return Syscall2_linux(NR_symlink_linux, old, new, 0);
+long symlink_linux(const char *old, const char *newname) {
+  return symlinkat_linux(old, AT_FDCWD_linux, newname);
 }
 long symlinkat_linux(const char * oldname, int newdfd, const char * newname) {
   return Syscall3_linux(NR_symlinkat_linux, oldname, newdfd, newname, 0);
 }
 long readlink_linux(const char *path, char *buf, int bufsiz) {
-  return Syscall3_linux(NR_readlink_linux, path, buf, bufsiz, 0);
+  return readlinkat_linux(AT_FDCWD_linux, path, buf, bufsiz);
 }
 long readlinkat_linux(int dfd, const char *path, char *buf, int bufsiz) {
   return Syscall4_linux(NR_readlinkat_linux, dfd, path, buf, bufsiz, 0);
 }
 long rename_linux(const char *oldname, const char *newname) {
-  return Syscall2_linux(NR_rename_linux, oldname, newname, 0);
+  return renameat2_linux(AT_FDCWD_linux, oldname, AT_FDCWD_linux, newname, 0);
 }
 long renameat_linux(int olddfd, const char * oldname, int newdfd, const char * newname) {
-  return Syscall4_linux(NR_renameat_linux, olddfd, oldname, newdfd, newname, 0);
+  return renameat2_linux(olddfd, oldname, newdfd, newname, 0);
 }
 long renameat2_linux(int olddfd, const char *oldname, int newdfd, const char *newname, unsigned int flags) {
   return Syscall5_linux(NR_renameat2_linux, olddfd, oldname, newdfd, newname, flags, 0);
 }
 // 8d. Creating device and named pipe nodes
 long mknod_linux(const char *filename, unsigned int mode, unsigned dev) {
-  return Syscall3_linux(NR_mknod_linux, filename, mode, dev, 0);
+  return mknodat_linux(AT_FDCWD_linux, filename, mode, dev);
 }
 long mknodat_linux(int dfd, const char * filename, unsigned int mode, unsigned dev) {
   return Syscall4_linux(NR_mknodat_linux, dfd, filename, mode, dev, 0);
@@ -5361,7 +5987,7 @@ long mount_linux(char *dev_name, char *dir_name, char *type, unsigned long flags
   return Syscall5_linux(NR_mount_linux, dev_name, dir_name, type, flags, data, 0);
 }
 long umount_linux(char *name, int flags) {
-  return Syscall2_linux(NR_umount_linux, name, flags, 0);
+  return umount2_linux(name, 0);
 }
 long umount2_linux(char *name, int flags) {
   return Syscall2_linux(NR_umount2_linux, name, flags, 0);
@@ -5372,7 +5998,7 @@ long pivot_root_linux(const char *new_root, const char *put_old) {
 long chroot_linux(const char *filename) {
   return Syscall1_linux(NR_chroot_linux, filename, 0);
 }
-long mount_setattr_linux(int dfd, const char *path, unsigned int flags, mount_attr *uattr, unsigned long usize) {
+long mount_setattr_linux(int dfd, const char *path, unsigned int flags, mount_attr_linux *uattr, unsigned long usize) {
   return Syscall5_linux(NR_mount_setattr_linux, dfd, path, flags, uattr, usize, 0);
 }
 long move_mount_linux(int from_dfd, const char *from_path, int to_dfd, const char *to_path, unsigned int ms_flags) {
@@ -5381,7 +6007,7 @@ long move_mount_linux(int from_dfd, const char *from_path, int to_dfd, const cha
 long open_tree_linux(int dfd, const char *path, unsigned flags) {
   return Syscall3_linux(NR_open_tree_linux, dfd, path, flags, 0);
 }
-long open_tree_attr_linux(int dfd, const char *path, unsigned flags, mount_attr *uattr, unsigned long usize) {
+long open_tree_attr_linux(int dfd, const char *path, unsigned flags, mount_attr_linux *uattr, unsigned long usize) {
   return Syscall5_linux(NR_open_tree_attr_linux, dfd, path, flags, uattr, usize, 0);
 }
 long fsconfig_linux(int fs_fd, unsigned int cmd, const char *key, const void *value, int aux) {
@@ -5397,32 +6023,34 @@ long fspick_linux(int dfd, const char *path, unsigned int flags) {
   return Syscall3_linux(NR_fspick_linux, dfd, path, flags, 0);
 }
 // 9b. Getting filesystem statistics
-long statfs_linux(const char * path, statfs *buf) {
+// Disabled wrapper: long statfs_linux(const char * path, statfs_t_linux *buf);
+// Disabled wrapper: long fstatfs_linux(unsigned int fd, statfs_t_linux *buf);
+long statfs64_linux(const char *path, unsigned long sz, statfs64_t_linux *buf) {
+#if defined(__x86_64__) || defined(__aarch64__) || (defined(__riscv) && (__riscv_xlen == 64))
   return Syscall2_linux(NR_statfs_linux, path, buf, 0);
-}
-long fstatfs_linux(unsigned int fd, statfs *buf) {
-  return Syscall2_linux(NR_fstatfs_linux, fd, buf, 0);
-}
-long statfs64_linux(const char *path, unsigned long sz, statfs64 *buf) {
+#else
   return Syscall3_linux(NR_statfs64_linux, path, sz, buf, 0);
+#endif
 }
-long fstatfs64_linux(unsigned int fd, unsigned long sz, statfs64 *buf) {
+long fstatfs64_linux(unsigned int fd, unsigned long sz, statfs64_t_linux *buf) {
+#if defined(__x86_64__) || defined(__aarch64__) || (defined(__riscv) && (__riscv_xlen == 64))
+  return Syscall2_linux(NR_fstatfs_linux, fd, buf, 0);
+#else
   return Syscall3_linux(NR_fstatfs64_linux, fd, sz, buf, 0);
+#endif
 }
-long ustat_linux(unsigned dev, ustat *ubuf) {
-  return Syscall2_linux(NR_ustat_linux, dev, ubuf, 0);
-}
-long statmount_linux(const mnt_id_req *req, statmount *buf, unsigned long bufsize, unsigned int flags) {
+// Disabled wrapper: long ustat_linux(unsigned dev, ustat *ubuf);
+long statmount_linux(const mnt_id_req_linux *req, statmount_t_linux *buf, unsigned long bufsize, unsigned int flags) {
   return Syscall4_linux(NR_statmount_linux, req, buf, bufsize, flags, 0);
 }
-long listmount_linux(const mnt_id_req *req, u64 *mnt_ids, unsigned long nr_mnt_ids, unsigned int flags) {
+long listmount_linux(const mnt_id_req_linux *req, unsigned long long *mnt_ids, unsigned long nr_mnt_ids, unsigned int flags) {
   return Syscall4_linux(NR_listmount_linux, req, mnt_ids, nr_mnt_ids, flags, 0);
 }
 // 9c. Disk quota control
-long quotactl_linux(unsigned int cmd, const char *special, qid_t id, void *addr) {
+long quotactl_linux(unsigned int cmd, const char *special, unsigned int id, void *addr) {
   return Syscall4_linux(NR_quotactl_linux, cmd, special, id, addr, 0);
 }
-long quotactl_fd_linux(unsigned int fd, unsigned int cmd, qid_t id, void *addr) {
+long quotactl_fd_linux(unsigned int fd, unsigned int cmd, unsigned int id, void *addr) {
   return Syscall4_linux(NR_quotactl_fd_linux, fd, cmd, id, addr, 0);
 }
 //
@@ -5430,24 +6058,29 @@ long quotactl_fd_linux(unsigned int fd, unsigned int cmd, qid_t id, void *addr) 
 //
 // 10a. Monitoring filesystem events
 long inotify_init_linux(void) {
-  return Syscall0_linux(NR_inotify_init_linux, 0);
+  return inotify_init1_linux(0);
 }
 long inotify_init1_linux(int flags) {
   return Syscall1_linux(NR_inotify_init1_linux, flags, 0);
 }
-long inotify_add_watch_linux(int fd, const char *path, u32 mask) {
+long inotify_add_watch_linux(int fd, const char *path, unsigned int mask) {
   return Syscall3_linux(NR_inotify_add_watch_linux, fd, path, mask, 0);
 }
-long inotify_rm_watch_linux(int fd, __s32 wd) {
+long inotify_rm_watch_linux(int fd, int wd) {
   return Syscall2_linux(NR_inotify_rm_watch_linux, fd, wd, 0);
 }
 // 10b. Filesystem-wide event notification
 long fanotify_init_linux(unsigned int flags, unsigned int event_f_flags) {
   return Syscall2_linux(NR_fanotify_init_linux, flags, event_f_flags, 0);
 }
-long fanotify_mark_linux(int fanotify_fd, unsigned int flags, u64 mask, int fd, const char *pathname) {
+long fanotify_mark_linux(int fanotify_fd, unsigned int flags, unsigned long long mask, int fd, const char *pathname) {
+#if defined(__x86_64__) || defined(__aarch64__) || (defined(__riscv) && (__riscv_xlen == 64))
   return Syscall5_linux(NR_fanotify_mark_linux, fanotify_fd, flags, mask, fd, pathname, 0);
+#else
+  return Syscall6_linux(NR_fanotify_mark_linux, fanotify_fd, flags, LO32_bits(mask), HI32_bits(mask), fd, pathname, 0);
+#endif
 }
+#if 0 // WIP
 //
 // 11. SIGNALS
 //
@@ -5601,8 +6234,8 @@ long mq_getsetattr_linux(mqd_t mqdes, const mq_attr *mqstat, mq_attr *omqstat) {
   return Syscall3_linux(NR_mq_getsetattr_linux, mqdes, mqstat, omqstat, 0);
 }
 // 13e. Synchronization Primitives - Futexes
-// Disabled wrapper: long futex_linux(u32 *uaddr, int op, u32 val, const __kernel_old_timespec_linux *utime, u32 *uaddr2, u32 val3);
-long futex_time64_linux(u32 *uaddr, int op, u32 val, const __kernel_timespec_linux *utime, u32 *uaddr2, u32 val3) {
+// Disabled wrapper: long futex_linux(unsigned int *uaddr, int op, unsigned int val, const __kernel_old_timespec_linux *utime, unsigned int *uaddr2, unsigned int val3);
+long futex_time64_linux(unsigned int *uaddr, int op, unsigned int val, const __kernel_timespec_linux *utime, unsigned int *uaddr2, unsigned int val3) {
   return Syscall6_linux(NR_futex_time64_linux, uaddr, op, val, utime, uaddr2, val3, 0);
 }
 long futex_wait_linux(void *uaddr, unsigned long val, unsigned long mask, unsigned int flags, __kernel_timespec_linux *timespec, clockid_t clockid) {
@@ -5724,10 +6357,10 @@ long io_pgetevents_time64_linux(aio_context_t ctx_id, long min_nr, long nr, io_e
   return Syscall6_linux(NR_io_pgetevents_time64_linux, ctx_id, min_nr, nr, events, timeout, sig, 0);
 }
 // 15b. io_uring: high-performance asynchronous I/O
-long io_uring_setup_linux(u32 entries, io_uring_params *p) {
+long io_uring_setup_linux(unsigned int entries, io_uring_params *p) {
   return Syscall2_linux(NR_io_uring_setup_linux, entries, p, 0);
 }
-long io_uring_enter_linux(unsigned int fd, u32 to_submit, u32 min_complete, u32 flags, const void *argp, unsigned long argsz) {
+long io_uring_enter_linux(unsigned int fd, unsigned int to_submit, unsigned int min_complete, unsigned int flags, const void *argp, unsigned long argsz) {
   return Syscall6_linux(NR_io_uring_enter_linux, fd, to_submit, min_complete, flags, argp, argsz, 0);
 }
 long io_uring_register_linux(unsigned int fd, unsigned int op, void *arg, unsigned int nr_args) {
@@ -5945,13 +6578,13 @@ long seccomp_linux(unsigned int op, unsigned int flags, void *uargs) {
 long security_linux(void) {
   return Syscall0_linux(NR_security_linux, 0);
 }
-long lsm_get_self_attr_linux(unsigned int attr, lsm_ctx *ctx, u32 *size, u32 flags) {
+long lsm_get_self_attr_linux(unsigned int attr, lsm_ctx *ctx, unsigned int *size, unsigned int flags) {
   return Syscall4_linux(NR_lsm_get_self_attr_linux, attr, ctx, size, flags, 0);
 }
-long lsm_set_self_attr_linux(unsigned int attr, lsm_ctx *ctx, u32 size, u32 flags) {
+long lsm_set_self_attr_linux(unsigned int attr, lsm_ctx *ctx, unsigned int size, unsigned int flags) {
   return Syscall4_linux(NR_lsm_set_self_attr_linux, attr, ctx, size, flags, 0);
 }
-long lsm_list_modules_linux(u64 *ids, u32 *size, u32 flags) {
+long lsm_list_modules_linux(unsigned long long *ids, unsigned int *size, unsigned int flags) {
   return Syscall3_linux(NR_lsm_list_modules_linux, ids, size, flags, 0);
 }
 // 19d. Unprivileged access control
@@ -6013,7 +6646,7 @@ long unshare_linux(unsigned long unshare_flags) {
 long setns_linux(int fd, int nstype) {
   return Syscall2_linux(NR_setns_linux, fd, nstype, 0);
 }
-long listns_linux(const ns_id_req *req, u64 *ns_ids, unsigned long nr_ns_ids, unsigned int flags) {
+long listns_linux(const ns_id_req *req, unsigned long long *ns_ids, unsigned long nr_ns_ids, unsigned int flags) {
   return Syscall4_linux(NR_listns_linux, req, ns_ids, nr_ns_ids, flags, 0);
 }
 //
@@ -6232,7 +6865,7 @@ long restart_syscall_linux(void) {
   return Syscall0_linux(NR_restart_syscall_linux, 0);
 }
 // 29c. Directory entry cache
-long lookup_dcookie_linux(u64 cookie64, char *buf, unsigned long len) {
+long lookup_dcookie_linux(unsigned long long cookie64, char *buf, unsigned long len) {
   return Syscall3_linux(NR_lookup_dcookie_linux, cookie64, buf, len, 0);
 }
 //
