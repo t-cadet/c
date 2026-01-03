@@ -1,4 +1,4 @@
-// clang -nostdlib -static -fuse-ld=lld -ffreestanding -o linux_demo linux_demo.c -e main && ./linux_demo
+// clang -O0 -nostdlib -static -fuse-ld=lld -ffreestanding -o linux_demo linux_demo.c -e main && ./linux_demo
 // 
 // Cross-compilation:
 // 
