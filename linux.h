@@ -2771,6 +2771,130 @@ enum {
 
 #define FANOTIFY_METADATA_VERSION_linux 3
 
+#define PIPE_BUF_linux              4096
+#define O_NOTIFICATION_PIPE_linux   O_EXCL_linux
+
+#define IPC_PRIVATE_linux          ((int) 0)
+
+#define IPC_CREAT_linux            00001000
+#define IPC_EXCL_linux             00002000
+#define IPC_NOWAIT_linux           00004000
+
+#define IPC_RMID_linux             0
+#define IPC_SET_linux              1
+#define IPC_STAT_linux             2
+#define IPC_INFO_linux             3
+
+#define IPC_64_linux               0x0100
+
+#define SHM_R_linux                0400
+#define SHM_W_linux                0200
+#define SHM_HUGETLB_linux          04000
+#define SHM_NORESERVE_linux        010000
+
+#define SHM_RDONLY_linux           010000
+#define SHM_RND_linux              020000
+#define SHM_REMAP_linux            040000
+#define SHM_EXEC_linux             0100000
+
+#define SHM_LOCK_linux             11
+#define SHM_UNLOCK_linux           12
+
+#define SHM_STAT_linux             13
+#define SHM_INFO_linux             14
+#define SHM_STAT_ANY_linux         15
+
+#define MSG_STAT_linux             11
+#define MSG_INFO_linux             12
+#define MSG_STAT_ANY_linux         13
+
+#define MSG_NOERROR_linux     010000
+#define MSG_EXCEPT_linux      020000
+#define MSG_COPY_linux        040000
+
+#define MSGMNI_linux 32000
+#define MSGMAX_linux 8192
+#define MSGMNB_linux 16384
+
+#define SEM_UNDO_linux        0x1000
+
+#define GETPID_linux  11
+#define GETVAL_linux  12
+#define GETALL_linux  13
+#define GETNCNT_linux 14
+#define GETZCNT_linux 15
+#define SETVAL_linux  16
+#define SETALL_linux  17
+
+#define SEM_STAT_linux 18
+#define SEM_INFO_linux 19
+#define SEM_STAT_ANY_linux 20
+
+#define SEMMNI_linux  32000
+#define SEMMSL_linux  32000
+#define SEMMNS_linux  (SEMMNI_linux*SEMMSL_linux)
+#define SEMOPM_linux  500
+#define SEMVMX_linux  32767
+#define SEMAEM_linux  SEMVMX_linux
+
+#define MQ_PRIO_MAX_linux  32768
+#define MQ_BYTES_MAX_linux 819200
+
+#define NOTIFY_NONE_linux    0
+#define NOTIFY_WOKENUP_linux 1
+#define NOTIFY_REMOVED_linux 2
+
+#define FUTEX_WAIT            0
+#define FUTEX_WAKE            1
+#define FUTEX_FD              2
+#define FUTEX_REQUEUE         3
+#define FUTEX_CMP_REQUEUE     4
+#define FUTEX_WAKE_OP         5
+#define FUTEX_LOCK_PI         6
+#define FUTEX_UNLOCK_PI       7
+#define FUTEX_TRYLOCK_PI      8
+#define FUTEX_WAIT_BITSET     9
+#define FUTEX_WAKE_BITSET     10
+#define FUTEX_WAIT_REQUEUE_PI 11
+#define FUTEX_CMP_REQUEUE_PI  12
+#define FUTEX_LOCK_PI2        13
+
+#define FUTEX_PRIVATE_FLAG   128
+#define FUTEX_CLOCK_REALTIME 256
+#define FUTEX_CMD_MASK       ~(FUTEX_PRIVATE_FLAG | FUTEX_CLOCK_REALTIME)
+
+#define FUTEX_WAIT_PRIVATE            (FUTEX_WAIT            | FUTEX_PRIVATE_FLAG)
+#define FUTEX_WAKE_PRIVATE            (FUTEX_WAKE            | FUTEX_PRIVATE_FLAG)
+#define FUTEX_REQUEUE_PRIVATE         (FUTEX_REQUEUE         | FUTEX_PRIVATE_FLAG)
+#define FUTEX_CMP_REQUEUE_PRIVATE     (FUTEX_CMP_REQUEUE     | FUTEX_PRIVATE_FLAG)
+#define FUTEX_WAKE_OP_PRIVATE         (FUTEX_WAKE_OP         | FUTEX_PRIVATE_FLAG)
+#define FUTEX_LOCK_PI_PRIVATE         (FUTEX_LOCK_PI         | FUTEX_PRIVATE_FLAG)
+#define FUTEX_LOCK_PI2_PRIVATE        (FUTEX_LOCK_PI2        | FUTEX_PRIVATE_FLAG)
+#define FUTEX_UNLOCK_PI_PRIVATE       (FUTEX_UNLOCK_PI       | FUTEX_PRIVATE_FLAG)
+#define FUTEX_TRYLOCK_PI_PRIVATE      (FUTEX_TRYLOCK_PI      | FUTEX_PRIVATE_FLAG)
+#define FUTEX_WAIT_BITSET_PRIVATE     (FUTEX_WAIT_BITSET     | FUTEX_PRIVATE_FLAG)
+#define FUTEX_WAKE_BITSET_PRIVATE     (FUTEX_WAKE_BITSET     | FUTEX_PRIVATE_FLAG)
+#define FUTEX_WAIT_REQUEUE_PI_PRIVATE (FUTEX_WAIT_REQUEUE_PI | FUTEX_PRIVATE_FLAG)
+#define FUTEX_CMP_REQUEUE_PI_PRIVATE  (FUTEX_CMP_REQUEUE_PI  | FUTEX_PRIVATE_FLAG)
+
+#define FUTEX2_SIZE_U8  0x00
+#define FUTEX2_SIZE_U16 0x01
+#define FUTEX2_SIZE_U32 0x02
+#define FUTEX2_SIZE_U64 0x03
+#define FUTEX2_NUMA     0x04
+#define FUTEX2_MPOL     0x08
+#define FUTEX2_PRIVATE  FUTEX_PRIVATE_FLAG
+
+#define FUTEX_WAITERS          0x80000000
+#define FUTEX_OWNER_DIED       0x40000000
+#define FUTEX_TID_MASK         0x3fffffff
+#define ROBUST_LIST_LIMIT      2048
+#define FUTEX_BITSET_MATCH_ANY 0xffffffff
+
+#define EFD_SEMAPHORE_linux         (1 << 0)
+#define EFD_CLOEXEC_linux           O_CLOEXEC_linux
+#define EFD_NONBLOCK_linux          O_NONBLOCK_linux
+
 typedef struct {
   unsigned long long flags;
   unsigned long long pidfd;
@@ -2812,7 +2936,7 @@ typedef struct {
 typedef union {
   int sival_int;
   void *sival_ptr;
-} sigval_t_linux;
+} sigval_linux;
 
 #define ADDR_BND_PKEY_PAD_linux  (__alignof__(void *) < sizeof(short) ?  sizeof(short) : __alignof__(void *))
 #if defined(__x86_64__) || defined(__aarch64__) || (defined(__riscv) && (__riscv_xlen == 64))
@@ -2830,14 +2954,14 @@ typedef union {
   struct {
     int _tid;
     int _overrun;
-    sigval_t_linux _sigval;
+    sigval_linux _sigval;
     int _sys_private;
   } _timer;
 
   struct {
     int _pid;
     unsigned int _uid;
-    sigval_t_linux _sigval;
+    sigval_linux _sigval;
   } _rt;
 
   struct {
@@ -2927,21 +3051,21 @@ _Static_assert(sizeof(siginfo_t_linux) == 128, "");
 #define si_arch_linux        _sifields._sigsys._arch
 
 typedef struct {
-  sigval_t_linux sigev_value;
+  sigval_linux sigev_value;
   int sigev_signo;
   int sigev_notify;
   union {
-    int _pad[((64 - (sizeof(int) * 2 + sizeof(sigval_t_linux))) / sizeof(int))];
+    int _pad[((64 - (sizeof(int) * 2 + sizeof(sigval_linux))) / sizeof(int))];
      int _tid;
 
     struct {
-     void (*_function)(sigval_t_linux);
+     void (*_function)(sigval_linux);
      void *_attribute;
     } _sigev_thread;
   } _sigev_un;
-} sigevent_t_linux;
+} sigevent_linux;
 
-_Static_assert(sizeof(sigevent_t_linux) == 64, "");
+_Static_assert(sizeof(sigevent_linux) == 64, "");
 
 #define sigev_notify_function_linux   _sigev_un._sigev_thread._function
 #define sigev_notify_attributes_linux _sigev_un._sigev_thread._attribute
@@ -4003,6 +4127,157 @@ typedef struct {
 
 _Static_assert(sizeof(signalfd_siginfo_linux) == 128, "");
 
+typedef struct {
+  int key;
+  unsigned int uid;
+  unsigned int gid;
+  unsigned int cuid;
+  unsigned int cgid;
+  unsigned short mode;
+  unsigned char __pad1[2];
+  unsigned short seq;
+  unsigned short __pad2;
+  unsigned long __unused1;
+  unsigned long __unused2;
+} ipc_perm_linux;
+
+typedef struct {
+  ipc_perm_linux shm_perm;
+  unsigned long shm_segsz;
+#if defined(__x86_64__) || defined(__aarch64__) || (defined(__riscv) && (__riscv_xlen == 64))
+  long shm_atime;
+  long shm_dtime;
+  long shm_ctime;
+#else
+  unsigned long shm_atime;
+  unsigned long shm_atime_high;
+  unsigned long shm_dtime;
+  unsigned long shm_dtime_high;
+  unsigned long shm_ctime;
+  unsigned long shm_ctime_high;
+#endif
+  int shm_cpid;
+  int shm_lpid;
+  unsigned long shm_nattch;
+  unsigned long __unused4;
+  unsigned long __unused5;
+} shmid_ds_linux;
+
+typedef struct {
+  unsigned long shmmax;
+  unsigned long shmmin;
+  unsigned long shmmni;
+  unsigned long shmseg;
+  unsigned long shmall;
+  unsigned long __unused1;
+  unsigned long __unused2;
+  unsigned long __unused3;
+  unsigned long __unused4;
+} shminfo_linux;
+
+typedef struct {
+  int used_ids;
+  unsigned long shm_tot;
+  unsigned long shm_rss;
+  unsigned long shm_swp;
+  unsigned long swap_attempts;
+  unsigned long swap_successes;
+} shm_info_linux;
+
+typedef struct {
+  ipc_perm_linux msg_perm;
+#if defined(__x86_64__) || defined(__aarch64__) || (defined(__riscv) && (__riscv_xlen == 64))
+  long msg_stime;
+  long msg_rtime;
+  long msg_ctime;
+#else
+  unsigned long msg_stime;
+  unsigned long msg_stime_high;
+  unsigned long msg_rtime;
+  unsigned long msg_rtime_high;
+  unsigned long msg_ctime;
+  unsigned long msg_ctime_high;
+#endif
+  unsigned long msg_cbytes;
+  unsigned long msg_qnum;
+  unsigned long msg_qbytes;
+  int msg_lspid;
+  int msg_lrpid;
+  unsigned long __unused4;
+  unsigned long __unused5;
+} msqid_ds_linux;
+
+typedef struct {
+  int msgpool;
+  int msgmap;
+  int msgmax;
+  int msgmnb;
+  int msgmni;
+  int msgssz;
+  int msgtql;
+  unsigned short msgseg;
+} msginfo_linux;
+
+typedef struct {
+  unsigned short sem_num;
+  short sem_op;
+  short sem_flg;
+} sembuf_linux;
+
+typedef struct {
+  ipc_perm_linux sem_perm;
+#if defined(__x86_64__) || defined(__aarch64__) || (defined(__riscv) && (__riscv_xlen == 64))
+  long sem_otime;
+  long sem_ctime;
+#else
+  unsigned long sem_otime;
+  unsigned long sem_otime_high;
+  unsigned long sem_ctime;
+  unsigned long sem_ctime_high;
+#endif
+  unsigned long sem_nsems;
+  unsigned long __unused3;
+  unsigned long __unused4;
+} semid_ds_linux;
+
+typedef struct {
+  int semmap;
+  int semmni;
+  int semmns;
+  int semmnu;
+  int semmsl;
+  int semopm;
+  int semume;
+  int semusz;
+  int semvmx;
+  int semaem;
+} seminfo_linux;
+
+typedef struct {
+  long mq_flags;
+  long mq_maxmsg;
+  long mq_msgsize;
+  long mq_curmsgs;
+  long __reserved[4];
+} mq_attr_linux;
+
+typedef struct {
+  unsigned long long val;
+  unsigned long long uaddr;
+  unsigned int flags;
+  unsigned int __reserved;
+} futex_waitv_linux;
+
+typedef struct robust_list_linux {
+  struct robust_list_linux *next;
+} robust_list_linux;
+
+typedef struct {
+  struct robust_list_linux list;
+  long futex_offset;
+  struct robust_list_linux *list_op_pending;
+} robust_list_head_linux;
+
 #define Syscall0_linux(number, ret2)                   _Syscall0_linux(number, (long*)(ret2))
 #define Syscall1_linux(number, a, ret2)                _Syscall1_linux(number, (long)(a), (long*)(ret2))
 #define Syscall2_linux(number, a, b, ret2)             _Syscall2_linux(number, (long)(a), (long)(b), (long*)(ret2))
@@ -4362,39 +4637,39 @@ long pipe2_linux(int *fildes, int flags);
 // 13. INTER-PROCESS COMMUNICATION
 //
 // 13a. System V IPC - Shared Memory
-long shmget_linux(key_t key, unsigned long size, int flag);
-long shmat_linux(int shmid, char *shmaddr, int shmflg);
-long shmdt_linux(char *shmaddr);
-long shmctl_linux(int shmid, int cmd, shmid_ds *buf);
+long shmget_linux(int key, unsigned long size, int flag);
+long shmat_linux(int shmid, const void *shmaddr, int shmflg);
+long shmdt_linux(const void *shmaddr);
+long shmctl_linux(int shmid, int cmd, shmid_ds_linux *buf);
 // 13b. System V IPC - Message Queues
-long msgget_linux(key_t key, int msgflg);
-long msgsnd_linux(int msqid, msgbuf *msgp, unsigned long msgsz, int msgflg);
-long msgrcv_linux(int msqid, msgbuf *msgp, unsigned long msgsz, long msgtyp, int msgflg);
-long msgctl_linux(int msqid, int cmd, msqid_ds *buf);
+long msgget_linux(int key, int msgflg);
+long msgsnd_linux(int msqid, const void *msgp, unsigned long msgsz, int msgflg);
+long msgrcv_linux(int msqid, void *msgp, unsigned long msgsz, long msgtyp, int msgflg);
+long msgctl_linux(int msqid, int cmd, msqid_ds_linux *buf);
 // 13c. System V IPC - Semaphores
-long semget_linux(key_t key, int nsems, int semflg);
-long semop_linux(int semid, sembuf *sops, unsigned nsops);
+long semget_linux(int key, int nsems, int semflg);
+long semop_linux(int semid, sembuf_linux *sops, unsigned nsops);
 long semctl_linux(int semid, int semnum, int cmd, unsigned long arg);
-// Disabled wrapper: long semtimedop_linux(int semid, sembuf *sops, unsigned nsops, const __kernel_old_timespec_linux *timeout);
-long semtimedop_time64_linux(int semid, sembuf *tsops, unsigned int nsops, const __kernel_timespec_linux *timeout);
+// Disabled wrapper: long semtimedop_linux(int semid, sembuf_linux *sops, unsigned nsops, const __kernel_old_timespec_linux *timeout);
+long semtimedop_time64_linux(int semid, sembuf_linux *tsops, unsigned int nsops, const __kernel_timespec_linux *timeout);
 // 13d. POSIX Message Queues
-long mq_open_linux(const char *name, int oflag, unsigned int mode, mq_attr *attr);
+long mq_open_linux(const char *name, int oflag, unsigned int mode, mq_attr_linux *attr);
 long mq_unlink_linux(const char *name);
 // Disabled wrapper: long mq_timedsend_linux(mqd_t mqdes, const char *msg_ptr, unsigned long msg_len, unsigned int msg_prio, const __kernel_old_timespec_linux *abs_timeout);
-long mq_timedsend_time64_linux(mqd_t mqdes, const char *u_msg_ptr, unsigned long msg_len, unsigned int msg_prio, const __kernel_timespec_linux *u_abs_timeout);
+long mq_timedsend_time64_linux(mqd_t mqdes, const void *msg_ptr, unsigned long msg_len, unsigned int msg_prio, const __kernel_timespec_linux *u_abs_timeout);
 // Disabled wrapper: long mq_timedreceive_linux(mqd_t mqdes, char *msg_ptr, unsigned long msg_len, unsigned int *msg_prio, const __kernel_old_timespec_linux *abs_timeout);
-long mq_timedreceive_time64_linux(mqd_t mqdes, char *u_msg_ptr, unsigned long msg_len, unsigned int *u_msg_prio, const __kernel_timespec_linux *u_abs_timeout);
+long mq_timedreceive_time64_linux(mqd_t mqdes, void *msg_ptr, unsigned long msg_len, unsigned int *u_msg_prio, const __kernel_timespec_linux *u_abs_timeout);
 long mq_notify_linux(mqd_t mqdes, const sigevent *notification);
-long mq_getsetattr_linux(mqd_t mqdes, const mq_attr *mqstat, mq_attr *omqstat);
+long mq_getsetattr_linux(mqd_t mqdes, const mq_attr_linux *mqstat, mq_attr_linux *omqstat);
 // 13e. Synchronization Primitives - Futexes
 // Disabled wrapper: long futex_linux(unsigned int *uaddr, int op, unsigned int val, const __kernel_old_timespec_linux *utime, unsigned int *uaddr2, unsigned int val3);
 long futex_time64_linux(unsigned int *uaddr, int op, unsigned int val, const __kernel_timespec_linux *utime, unsigned int *uaddr2, unsigned int val3);
-long futex_wait_linux(void *uaddr, unsigned long val, unsigned long mask, unsigned int flags, __kernel_timespec_linux *timespec, clockid_t clockid);
+long futex_wait_linux(void *uaddr, unsigned long val, unsigned long mask, unsigned int flags, const __kernel_timespec_linux *timespec, int clockid);
 long futex_wake_linux(void *uaddr, unsigned long mask, int nr, unsigned int flags);
-long futex_waitv_linux(futex_waitv *waiters, unsigned int nr_futexes, unsigned int flags, __kernel_timespec_linux *timeout, clockid_t clockid);
-long futex_requeue_linux(futex_waitv *waiters, unsigned int flags, int nr_wake, int nr_requeue);
-long set_robust_list_linux(robust_list_head *head, unsigned long len);
-long get_robust_list_linux(int pid, robust_list_head * *head_ptr, unsigned long *len_ptr);
+long futex_waitv_linux(const futex_waitv_linux *waiters, unsigned int nr_futexes, unsigned int flags, const __kernel_timespec_linux *timeout, int clockid);
+long futex_requeue_linux(const futex_waitv_linux *waiters, unsigned int flags, int nr_wake, int nr_requeue);
+long set_robust_list_linux(robust_list_head_linux *head);
+long get_robust_list_linux(int pid, robust_list_head_linux * *head_ptr, unsigned long *len_ptr);
 // 13f. Synchronization Primitives - Event Notification
 long eventfd_linux(unsigned int count);
 long eventfd2_linux(unsigned int count, int flags);
@@ -4447,28 +4722,28 @@ long io_uring_register_linux(unsigned int fd, unsigned int op, void *arg, unsign
 // 16a. Reading current time from various clocks
 long time_linux(__kernel_old_time_t *tloc);
 long gettimeofday_linux(__kernel_old_timeval *tv, timezone *tz);
-// Disabled wrapper: long clock_gettime_linux(clockid_t which_clock, __kernel_old_timespec_linux *tp);
-long clock_gettime64_linux(clockid_t which_clock, __kernel_timespec_linux *tp);
-// Disabled wrapper: long clock_getres_linux(clockid_t which_clock, __kernel_old_timespec_linux *tp);
-long clock_getres_time64_linux(clockid_t which_clock, __kernel_timespec_linux *tp);
+// Disabled wrapper: long clock_gettime_linux(int which_clock, __kernel_old_timespec_linux *tp);
+long clock_gettime64_linux(int which_clock, __kernel_timespec_linux *tp);
+// Disabled wrapper: long clock_getres_linux(int which_clock, __kernel_old_timespec_linux *tp);
+long clock_getres_time64_linux(int which_clock, __kernel_timespec_linux *tp);
 // 16b. Setting system time and adjusting clocks
 long settimeofday_linux(__kernel_old_timeval *tv, timezone *tz);
-// Disabled wrapper: long clock_settime_linux(clockid_t which_clock, const __kernel_old_timespec_linux *tp);
-long clock_settime64_linux(clockid_t which_clock, const __kernel_timespec_linux *tp);
+// Disabled wrapper: long clock_settime_linux(int which_clock, const __kernel_old_timespec_linux *tp);
+long clock_settime64_linux(int which_clock, const __kernel_timespec_linux *tp);
 long stime_linux(__kernel_old_time_t *tptr);
 long adjtimex_linux(__kernel_timex *txc_p);
-long clock_adjtime_linux(clockid_t which_clock, __kernel_timex *tx);
-long clock_adjtime64_linux(clockid_t which_clock, __kernel_timex *tx);
+long clock_adjtime_linux(int which_clock, __kernel_timex *tx);
+long clock_adjtime64_linux(int which_clock, __kernel_timex *tx);
 // 16c. Suspending execution for a period of time
 long nanosleep_linux(__kernel_timespec_linux *rqtp, __kernel_timespec_linux *rmtp);
-// Disabled wrapper: long clock_nanosleep_linux(clockid_t which_clock, int flags, const __kernel_old_timespec_linux *rqtp, __kernel_old_timespec_linux *rmtp);
-long clock_nanosleep_time64_linux(clockid_t which_clock, int flags, const __kernel_timespec_linux *rqtp, __kernel_timespec_linux *rmtp);
+// Disabled wrapper: long clock_nanosleep_linux(int which_clock, int flags, const __kernel_old_timespec_linux *rqtp, __kernel_old_timespec_linux *rmtp);
+long clock_nanosleep_time64_linux(int which_clock, int flags, const __kernel_timespec_linux *rqtp, __kernel_timespec_linux *rmtp);
 // 16d. Setting periodic or one-shot timers
 long alarm_linux(unsigned int seconds);
 long setitimer_linux(int which, __kernel_old_itimerval *value, __kernel_old_itimerval *ovalue);
 long getitimer_linux(int which, __kernel_old_itimerval *value);
 // 16e. Per-process timers with precise control
-long timer_create_linux(clockid_t which_clock, sigevent *timer_event_spec, timer_t * created_timer_id);
+long timer_create_linux(int which_clock, sigevent *timer_event_spec, timer_t * created_timer_id);
 // Disabled wrapper: long timer_settime_linux(timer_t timer_id, int flags, const __kernel_itimerspec *new_setting, __kernel_itimerspec *old_setting);
 long timer_settime64_linux(timer_t timerid, int flags, const __kernel_timespec_linux *new_setting, __kernel_timespec_linux *old_setting);
 // Disabled wrapper: long timer_gettime_linux(timer_t timer_id, __kernel_itimerspec *setting);
@@ -6236,7 +6511,7 @@ long signalfd4_linux(int ufd, unsigned long long *user_mask, int flags) {
 // 12. PIPES & FIFOs
 //
 long pipe_linux(int *fildes) {
-  return Syscall1_linux(NR_pipe_linux, fildes, 0);
+  return pipe2_linux(fildes, 0);
 }
 long pipe2_linux(int *fildes, int flags) {
   return Syscall2_linux(NR_pipe2_linux, fildes, flags, 0);
@@ -6245,92 +6520,108 @@ long pipe2_linux(int *fildes, int flags) {
 // 13. INTER-PROCESS COMMUNICATION
 //
 // 13a. System V IPC - Shared Memory
-long shmget_linux(key_t key, unsigned long size, int flag) {
+long shmget_linux(int key, unsigned long size, int flag) {
   return Syscall3_linux(NR_shmget_linux, key, size, flag, 0);
 }
-long shmat_linux(int shmid, char *shmaddr, int shmflg) {
+long shmat_linux(int shmid, const void *shmaddr, int shmflg) {
   return Syscall3_linux(NR_shmat_linux, shmid, shmaddr, shmflg, 0);
 }
-long shmdt_linux(char *shmaddr) {
+long shmdt_linux(const void *shmaddr) {
   return Syscall1_linux(NR_shmdt_linux, shmaddr, 0);
 }
-long shmctl_linux(int shmid, int cmd, shmid_ds *buf) {
-  return Syscall3_linux(NR_shmctl_linux, shmid, cmd, buf, 0);
+long shmctl_linux(int shmid, int cmd, shmid_ds_linux *buf) {
+  return Syscall3_linux(NR_shmctl_linux, shmid, cmd | IPC_64_linux, buf, 0);
 }
 // 13b. System V IPC - Message Queues
-long msgget_linux(key_t key, int msgflg) {
+long msgget_linux(int key, int msgflg) {
   return Syscall2_linux(NR_msgget_linux, key, msgflg, 0);
 }
-long msgsnd_linux(int msqid, msgbuf *msgp, unsigned long msgsz, int msgflg) {
+long msgsnd_linux(int msqid, const void *msgp, unsigned long msgsz, int msgflg) {
   return Syscall4_linux(NR_msgsnd_linux, msqid, msgp, msgsz, msgflg, 0);
 }
-long msgrcv_linux(int msqid, msgbuf *msgp, unsigned long msgsz, long msgtyp, int msgflg) {
+long msgrcv_linux(int msqid, void *msgp, unsigned long msgsz, long msgtyp, int msgflg) {
   return Syscall5_linux(NR_msgrcv_linux, msqid, msgp, msgsz, msgtyp, msgflg, 0);
 }
-long msgctl_linux(int msqid, int cmd, msqid_ds *buf) {
-  return Syscall3_linux(NR_msgctl_linux, msqid, cmd, buf, 0);
+long msgctl_linux(int msqid, int cmd, msqid_ds_linux *buf) {
+  return Syscall3_linux(NR_msgctl_linux, msqid, cmd | IPC_64_linux, buf, 0);
 }
 // 13c. System V IPC - Semaphores
-long semget_linux(key_t key, int nsems, int semflg) {
+long semget_linux(int key, int nsems, int semflg) {
   return Syscall3_linux(NR_semget_linux, key, nsems, semflg, 0);
 }
-long semop_linux(int semid, sembuf *sops, unsigned nsops) {
-  return Syscall3_linux(NR_semop_linux, semid, sops, nsops, 0);
+long semop_linux(int semid, sembuf_linux *sops, unsigned nsops) {
+  return semtimedop_time64_linux(semid, sops, nsops, 0);
 }
 long semctl_linux(int semid, int semnum, int cmd, unsigned long arg) {
-  return Syscall4_linux(NR_semctl_linux, semid, semnum, cmd, arg, 0);
+  return Syscall4_linux(NR_semctl_linux, semid, semnum, cmd | IPC_64_linux, arg, 0);
 }
-// Disabled wrapper: long semtimedop_linux(int semid, sembuf *sops, unsigned nsops, const __kernel_old_timespec_linux *timeout);
-long semtimedop_time64_linux(int semid, sembuf *tsops, unsigned int nsops, const __kernel_timespec_linux *timeout) {
+// Disabled wrapper: long semtimedop_linux(int semid, sembuf_linux *sops, unsigned nsops, const __kernel_old_timespec_linux *timeout);
+long semtimedop_time64_linux(int semid, sembuf_linux *tsops, unsigned int nsops, const __kernel_timespec_linux *timeout) {
+#if defined(__x86_64__) || defined(__aarch64__) || (defined(__riscv) && (__riscv_xlen == 64))
+  return Syscall4_linux(NR_semtimedop_linux, semid, tsops, nsops, timeout, 0);
+#else
   return Syscall4_linux(NR_semtimedop_time64_linux, semid, tsops, nsops, timeout, 0);
+#endif
 }
 // 13d. POSIX Message Queues
-long mq_open_linux(const char *name, int oflag, unsigned int mode, mq_attr *attr) {
+long mq_open_linux(const char *name, int oflag, unsigned int mode, mq_attr_linux *attr) {
   return Syscall4_linux(NR_mq_open_linux, name, oflag, mode, attr, 0);
 }
 long mq_unlink_linux(const char *name) {
   return Syscall1_linux(NR_mq_unlink_linux, name, 0);
 }
 // Disabled wrapper: long mq_timedsend_linux(mqd_t mqdes, const char *msg_ptr, unsigned long msg_len, unsigned int msg_prio, const __kernel_old_timespec_linux *abs_timeout);
-long mq_timedsend_time64_linux(mqd_t mqdes, const char *u_msg_ptr, unsigned long msg_len, unsigned int msg_prio, const __kernel_timespec_linux *u_abs_timeout) {
+long mq_timedsend_time64_linux(mqd_t mqdes, const void *msg_ptr, unsigned long msg_len, unsigned int msg_prio, const __kernel_timespec_linux *u_abs_timeout) {
+#if defined(__x86_64__) || defined(__aarch64__) || (defined(__riscv) && (__riscv_xlen == 64))
+  return Syscall5_linux(NR_mq_timedsend_linux, mqdes, u_msg_ptr, msg_len, msg_prio, u_abs_timeout, 0);
+#else
   return Syscall5_linux(NR_mq_timedsend_time64_linux, mqdes, u_msg_ptr, msg_len, msg_prio, u_abs_timeout, 0);
+#endif
 }
 // Disabled wrapper: long mq_timedreceive_linux(mqd_t mqdes, char *msg_ptr, unsigned long msg_len, unsigned int *msg_prio, const __kernel_old_timespec_linux *abs_timeout);
-long mq_timedreceive_time64_linux(mqd_t mqdes, char *u_msg_ptr, unsigned long msg_len, unsigned int *u_msg_prio, const __kernel_timespec_linux *u_abs_timeout) {
+long mq_timedreceive_time64_linux(mqd_t mqdes, void *msg_ptr, unsigned long msg_len, unsigned int *u_msg_prio, const __kernel_timespec_linux *u_abs_timeout) {
+#if defined(__x86_64__) || defined(__aarch64__) || (defined(__riscv) && (__riscv_xlen == 64))
+  return Syscall5_linux(NR_mq_timedreceive_linux, mqdes, u_msg_ptr, msg_len, u_msg_prio, u_abs_timeout, 0);
+#else
   return Syscall5_linux(NR_mq_timedreceive_time64_linux, mqdes, u_msg_ptr, msg_len, u_msg_prio, u_abs_timeout, 0);
+#endif
 }
 long mq_notify_linux(mqd_t mqdes, const sigevent *notification) {
   return Syscall2_linux(NR_mq_notify_linux, mqdes, notification, 0);
 }
-long mq_getsetattr_linux(mqd_t mqdes, const mq_attr *mqstat, mq_attr *omqstat) {
+long mq_getsetattr_linux(mqd_t mqdes, const mq_attr_linux *mqstat, mq_attr_linux *omqstat) {
   return Syscall3_linux(NR_mq_getsetattr_linux, mqdes, mqstat, omqstat, 0);
 }
 // 13e. Synchronization Primitives - Futexes
 // Disabled wrapper: long futex_linux(unsigned int *uaddr, int op, unsigned int val, const __kernel_old_timespec_linux *utime, unsigned int *uaddr2, unsigned int val3);
 long futex_time64_linux(unsigned int *uaddr, int op, unsigned int val, const __kernel_timespec_linux *utime, unsigned int *uaddr2, unsigned int val3) {
+#if defined(__x86_64__) || defined(__aarch64__) || (defined(__riscv) && (__riscv_xlen == 64))
+  return Syscall6_linux(NR_futex_linux, uaddr, op, val, utime, uaddr2, val3, 0);
+#endif
   return Syscall6_linux(NR_futex_time64_linux, uaddr, op, val, utime, uaddr2, val3, 0);
+#end
 }
-long futex_wait_linux(void *uaddr, unsigned long val, unsigned long mask, unsigned int flags, __kernel_timespec_linux *timespec, clockid_t clockid) {
+long futex_wait_linux(void *uaddr, unsigned long val, unsigned long mask, unsigned int flags, const __kernel_timespec_linux *timespec, int clockid) {
   return Syscall6_linux(NR_futex_wait_linux, uaddr, val, mask, flags, timespec, clockid, 0);
 }
 long futex_wake_linux(void *uaddr, unsigned long mask, int nr, unsigned int flags) {
   return Syscall4_linux(NR_futex_wake_linux, uaddr, mask, nr, flags, 0);
 }
-long futex_waitv_linux(futex_waitv *waiters, unsigned int nr_futexes, unsigned int flags, __kernel_timespec_linux *timeout, clockid_t clockid) {
+long futex_waitv_linux(const futex_waitv_linux *waiters, unsigned int nr_futexes, unsigned int flags, const __kernel_timespec_linux *timeout, int clockid) {
   return Syscall5_linux(NR_futex_waitv_linux, waiters, nr_futexes, flags, timeout, clockid, 0);
 }
-long futex_requeue_linux(futex_waitv *waiters, unsigned int flags, int nr_wake, int nr_requeue) {
+long futex_requeue_linux(const futex_waitv_linux *waiters, unsigned int flags, int nr_wake, int nr_requeue) {
   return Syscall4_linux(NR_futex_requeue_linux, waiters, flags, nr_wake, nr_requeue, 0);
 }
-long set_robust_list_linux(robust_list_head *head, unsigned long len) {
-  return Syscall2_linux(NR_set_robust_list_linux, head, len, 0);
+long set_robust_list_linux(robust_list_head_linux *head) {
+  return Syscall2_linux(NR_set_robust_list_linux, head, sizeof(*head), 0);
 }
-long get_robust_list_linux(int pid, robust_list_head * *head_ptr, unsigned long *len_ptr) {
+long get_robust_list_linux(int pid, robust_list_head_linux * *head_ptr, unsigned long *len_ptr) {
   return Syscall3_linux(NR_get_robust_list_linux, pid, head_ptr, len_ptr, 0);
 }
 // 13f. Synchronization Primitives - Event Notification
 long eventfd_linux(unsigned int count) {
-  return Syscall1_linux(NR_eventfd_linux, count, 0);
+  return eventfd2_linux(count, 0);
 }
 long eventfd2_linux(unsigned int count, int flags) {
   return Syscall2_linux(NR_eventfd2_linux, count, flags, 0);
@@ -6448,20 +6739,20 @@ long time_linux(__kernel_old_time_t *tloc) {
 long gettimeofday_linux(__kernel_old_timeval *tv, timezone *tz) {
   return Syscall2_linux(NR_gettimeofday_linux, tv, tz, 0);
 }
-// Disabled wrapper: long clock_gettime_linux(clockid_t which_clock, __kernel_old_timespec_linux *tp);
-long clock_gettime64_linux(clockid_t which_clock, __kernel_timespec_linux *tp) {
+// Disabled wrapper: long clock_gettime_linux(int which_clock, __kernel_old_timespec_linux *tp);
+long clock_gettime64_linux(int which_clock, __kernel_timespec_linux *tp) {
   return Syscall2_linux(NR_clock_gettime64_linux, which_clock, tp, 0);
 }
-// Disabled wrapper: long clock_getres_linux(clockid_t which_clock, __kernel_old_timespec_linux *tp);
-long clock_getres_time64_linux(clockid_t which_clock, __kernel_timespec_linux *tp) {
+// Disabled wrapper: long clock_getres_linux(int which_clock, __kernel_old_timespec_linux *tp);
+long clock_getres_time64_linux(int which_clock, __kernel_timespec_linux *tp) {
   return Syscall2_linux(NR_clock_getres_time64_linux, which_clock, tp, 0);
 }
 // 16b. Setting system time and adjusting clocks
 long settimeofday_linux(__kernel_old_timeval *tv, timezone *tz) {
   return Syscall2_linux(NR_settimeofday_linux, tv, tz, 0);
 }
-// Disabled wrapper: long clock_settime_linux(clockid_t which_clock, const __kernel_old_timespec_linux *tp);
-long clock_settime64_linux(clockid_t which_clock, const __kernel_timespec_linux *tp) {
+// Disabled wrapper: long clock_settime_linux(int which_clock, const __kernel_old_timespec_linux *tp);
+long clock_settime64_linux(int which_clock, const __kernel_timespec_linux *tp) {
   return Syscall2_linux(NR_clock_settime64_linux, which_clock, tp, 0);
 }
 long stime_linux(__kernel_old_time_t *tptr) {
@@ -6470,18 +6761,18 @@ long stime_linux(__kernel_old_time_t *tptr) {
 long adjtimex_linux(__kernel_timex *txc_p) {
   return Syscall1_linux(NR_adjtimex_linux, txc_p, 0);
 }
-long clock_adjtime_linux(clockid_t which_clock, __kernel_timex *tx) {
+long clock_adjtime_linux(int which_clock, __kernel_timex *tx) {
   return Syscall2_linux(NR_clock_adjtime_linux, which_clock, tx, 0);
 }
-long clock_adjtime64_linux(clockid_t which_clock, __kernel_timex *tx) {
+long clock_adjtime64_linux(int which_clock, __kernel_timex *tx) {
   return Syscall2_linux(NR_clock_adjtime64_linux, which_clock, tx, 0);
 }
 // 16c. Suspending execution for a period of time
 long nanosleep_linux(__kernel_timespec_linux *rqtp, __kernel_timespec_linux *rmtp) {
   return Syscall2_linux(NR_nanosleep_linux, rqtp, rmtp, 0);
 }
-// Disabled wrapper: long clock_nanosleep_linux(clockid_t which_clock, int flags, const __kernel_old_timespec_linux *rqtp, __kernel_old_timespec_linux *rmtp);
-long clock_nanosleep_time64_linux(clockid_t which_clock, int flags, const __kernel_timespec_linux *rqtp, __kernel_timespec_linux *rmtp) {
+// Disabled wrapper: long clock_nanosleep_linux(int which_clock, int flags, const __kernel_old_timespec_linux *rqtp, __kernel_old_timespec_linux *rmtp);
+long clock_nanosleep_time64_linux(int which_clock, int flags, const __kernel_timespec_linux *rqtp, __kernel_timespec_linux *rmtp) {
   return Syscall4_linux(NR_clock_nanosleep_time64_linux, which_clock, flags, rqtp, rmtp, 0);
 }
 // 16d. Setting periodic or one-shot timers
@@ -6495,7 +6786,7 @@ long getitimer_linux(int which, __kernel_old_itimerval *value) {
   return Syscall2_linux(NR_getitimer_linux, which, value, 0);
 }
 // 16e. Per-process timers with precise control
-long timer_create_linux(clockid_t which_clock, sigevent *timer_event_spec, timer_t * created_timer_id) {
+long timer_create_linux(int which_clock, sigevent *timer_event_spec, timer_t * created_timer_id) {
   return Syscall3_linux(NR_timer_create_linux, which_clock, timer_event_spec, created_timer_id, 0);
 }
 // Disabled wrapper: long timer_settime_linux(timer_t timer_id, int flags, const __kernel_itimerspec *new_setting, __kernel_itimerspec *old_setting);
