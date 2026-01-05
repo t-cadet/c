@@ -2895,6 +2895,231 @@ enum {
 #define EFD_CLOEXEC_linux           O_CLOEXEC_linux
 #define EFD_NONBLOCK_linux          O_NONBLOCK_linux
 
+#define SOCK_STREAM_linux             1
+#define SOCK_DGRAM_linux              2
+#define SOCK_RAW_linux                3
+#define SOCK_RDM_linux                4
+#define SOCK_SEQPACKET_linux          5
+#define SOCK_DCCP_linux               6
+#define SOCK_PACKET_linux             10
+
+#define SOCK_CLOEXEC_linux            O_CLOEXEC_linux
+#define SOCK_NONBLOCK_linux           O_NONBLOCK_linux
+
+#define AF_UNSPEC_linux               0
+#define AF_UNIX_linux                 1
+#define AF_LOCAL_linux                1
+#define AF_INET_linux                 2
+#define AF_AX25_linux                 3
+#define AF_IPX_linux                  4
+#define AF_APPLETALK_linux            5
+#define AF_NETROM_linux               6
+#define AF_BRIDGE_linux               7
+#define AF_ATMPVC_linux               8
+#define AF_X25_linux                  9
+#define AF_INET6_linux                10
+#define AF_ROSE_linux                 11
+#define AF_DECnet_linux               12
+#define AF_NETBEUI_linux              13
+#define AF_SECURITY_linux             14
+#define AF_KEY_linux                  15
+#define AF_NETLINK_linux              16
+#define AF_ROUTE_linux                AF_NETLINK_linux
+#define AF_PACKET_linux               17
+#define AF_ASH_linux                  18
+#define AF_ECONET_linux               19
+#define AF_ATMSVC_linux               20
+#define AF_RDS_linux                  21
+#define AF_SNA_linux                  22
+#define AF_IRDA_linux                 23
+#define AF_PPPOX_linux                24
+#define AF_WANPIPE_linux              25
+#define AF_LLC_linux                  26
+#define AF_IB_linux                   27
+#define AF_MPLS_linux                 28
+#define AF_CAN_linux                  29
+#define AF_TIPC_linux                 30
+#define AF_BLUETOOTH_linux            31
+#define AF_IUCV_linux                 32
+#define AF_RXRPC_linux                33
+#define AF_ISDN_linux                 34
+#define AF_PHONET_linux               35
+#define AF_IEEE802154_linux           36
+#define AF_CAIF_linux                 37
+#define AF_MAX_linux                  46
+
+#define PF_UNSPEC_linux               AF_UNSPEC_linux
+#define PF_UNIX_linux                 AF_UNIX_linux
+#define PF_LOCAL_linux                AF_LOCAL_linux
+#define PF_INET_linux                 AF_INET_linux
+#define PF_AX25_linux                 AF_AX25_linux
+#define PF_IPX_linux                  AF_IPX_linux
+#define PF_APPLETALK_linux            AF_APPLETALK_linux
+#define PF_NETROM_linux               AF_NETROM_linux
+#define PF_BRIDGE_linux               AF_BRIDGE_linux
+#define PF_ATMPVC_linux               AF_ATMPVC_linux
+#define PF_X25_linux                  PF_X25_linux
+#define PF_INET6_linux                AF_INET6_linux
+#define PF_ROSE_linux                 AF_ROSE_linux
+#define PF_DECnet_linux               AF_DECnet_linux
+#define PF_NETBEUI_linux              AF_NETBEUI_linux
+#define PF_SECURITY_linux             AF_SECURITY_linux
+#define PF_KEY_linux                  AF_KEY_linux
+#define PF_NETLINK_linux              AF_NETLINK_linux
+#define PF_ROUTE_linux                AF_ROUTE_linux
+#define PF_PACKET_linux               AF_PACKET_linux
+#define PF_ASH_linux                  AF_ASH_linux
+#define PF_ECONET_linux               AF_ECONET_linux
+#define PF_ATMSVC_linux               AF_ATMSVC_linux
+#define PF_RDS_linux                  AF_RDS_linux
+#define PF_SNA_linux                  AF_SNA_linux
+#define PF_IRDA_linux                 AF_IRDA_linux
+#define PF_PPPOX_linux                AF_PPPOX_linux
+#define PF_WANPIPE_linux              AF_WANPIPE_linux
+#define PF_LLC_linux                  AF_LLC_linux
+#define PF_IB_linux                   AF_IB_linux
+#define PF_MPLS_linux                 AF_MPLS_linux
+#define PF_CAN_linux                  AF_CAN_linux
+#define PF_TIPC_linux                 AF_TIPC_linux
+#define PF_BLUETOOTH_linux            AF_BLUETOOTH_linux
+#define PF_IUCV_linux                 AF_IUCV_linux
+#define PF_RXRPC_linux                AF_RXRPC_linux
+#define PF_ISDN_linux                 AF_ISDN_linux
+#define PF_PHONET_linux               AF_PHONET_linux
+#define PF_IEEE802154_linux           AF_IEEE802154_linux
+#define PF_CAIF_linux                 AF_CAIF_linux
+#define PF_MAX_linux                  AF_MAX_linux
+
+#define SOL_SOCKET_linux              1
+#define SHUT_RD_linux                 0
+#define SHUT_WR_linux                 1
+#define SHUT_RDWR_linux               2
+#define SYS_SOCKET_linux              1
+#define SYS_BIND_linux                2
+#define SYS_CONNECT_linux             3
+#define SYS_LISTEN_linux              4
+#define SYS_ACCEPT_linux              5
+#define SYS_GETSOCKNAME_linux         6
+#define SYS_GETPEERNAME_linux         7
+#define SYS_SOCKETPAIR_linux          8
+#define SYS_SEND_linux                9
+#define SYS_RECV_linux                10
+#define SYS_SENDTO_linux              11
+#define SYS_RECVFROM_linux            12
+#define SYS_SHUTDOWN_linux            13
+#define SYS_SETSOCKOPT_linux          14
+#define SYS_GETSOCKOPT_linux          15
+#define SYS_SENDMSG_linux             16
+#define SYS_RECVMSG_linux             17
+#define SYS_ACCEPT4_linux             18
+#define SYS_RECVMMSG_linux            19
+#define SYS_SENDMMSG_linux            20
+
+#define MSG_OOB_linux                 0x01
+#define MSG_PEEK_linux                0x02
+#define MSG_DONTROUTE_linux           0x04
+#define MSG_CTRUNC_linux              0x08
+#define MSG_PROXY_linux               0x10
+#define MSG_TRUNC_linux               0x20
+#define MSG_DONTWAIT_linux            0x40
+#define MSG_EOR_linux                 0x80
+#define MSG_WAITALL_linux             0x100
+#define MSG_FIN_linux                 0x200
+#define MSG_SYN_linux                 0x400
+#define MSG_CONFIRM_linux             0x800
+#define MSG_RST_linux                 0x1000
+#define MSG_ERRQUEUE_linux            0x2000
+#define MSG_NOSIGNAL_linux            0x4000
+#define MSG_MORE_linux                0x8000
+#define MSG_WAITFORONE_linux          0x10000
+#define MSG_BATCH_linux               0x40000
+#define MSG_ZEROCOPY_linux            0x4000000
+#define MSG_FASTOPEN_linux            0x20000000
+#define MSG_CMSG_CLOEXEC_linux        0x40000000
+
+#define IPPROTO_IP_linux              0
+#define IPPROTO_ICMP_linux            1
+#define IPPROTO_IGMP_linux            2
+#define IPPROTO_IPIP_linux            4
+#define IPPROTO_TCP_linux             6
+#define IPPROTO_UDP_linux             17
+#define IPPROTO_IPV6_linux            41
+#define IPPROTO_RAW_linux             255
+
+#define TCP_NODELAY_linux             1
+#define TCP_MAXSEG_linux              2
+#define TCP_CORK_linux                3
+#define TCP_KEEPIDLE_linux            4
+#define TCP_KEEPINTVL_linux           5
+#define TCP_KEEPCNT_linux             6
+#define TCP_SYNCNT_linux              7
+#define TCP_LINGER2_linux             8
+#define TCP_DEFER_ACCEPT_linux        9
+#define TCP_WINDOW_CLAMP_linux        10
+#define TCP_INFO_linux                11
+#define TCP_QUICKACK_linux            12
+#define TCP_CONGESTION_linux          13
+#define TCP_MD5SIG_linux              14
+#define TCP_USER_TIMEOUT_linux        18
+#define TCP_REPAIR_linux              19
+
+#define SCM_RIGHTS_linux              0x01
+#define SCM_CREDENTIALS_linux         0x02
+
+#define CMSG_ALIGN_linux(len)         (((len) + sizeof(long) - 1) & ~(sizeof(long) - 1))
+#define CMSG_FIRSTHDR_linux(mhdr) \
+  ((mhdr)->msg_controllen >= sizeof(cmsghdr_linux) ? \
+   (cmsghdr_linux *)(mhdr)->msg_control : (cmsghdr_linux *)0)
+#define CMSG_DATA_linux(cmsg)         ((unsigned char *)(cmsg) + CMSG_ALIGN_linux(sizeof(cmsghdr_linux)))
+#define CMSG_SPACE_linux(len)         (CMSG_ALIGN_linux(sizeof(cmsghdr_linux)) + CMSG_ALIGN_linux(len))
+#define CMSG_LEN_linux(len)           (CMSG_ALIGN_linux(sizeof(cmsghdr_linux)) + (len))
+
+#define SOL_IP_linux                  IPPROTO_IP_linux
+#define SOL_TCP_linux                 IPPROTO_TCP_linux
+#define SOL_UDP_linux                 IPPROTO_UDP_linux
+#define SOL_IPV6_linux                IPPROTO_IPV6_linux
+#define SOL_ICMPV6_linux              58
+
+#define SO_DEBUG_linux                1
+#define SO_REUSEADDR_linux            2
+#define SO_TYPE_linux                 3
+#define SO_ERROR_linux                4
+#define SO_DONTROUTE_linux            5
+#define SO_BROADCAST_linux            6
+#define SO_SNDBUF_linux               7
+#define SO_RCVBUF_linux               8
+#define SO_SNDBUFFORCE_linux          32
+#define SO_RCVBUFFORCE_linux          33
+#define SO_KEEPALIVE_linux            9
+#define SO_OOBINLINE_linux            10
+#define SO_NO_CHECK_linux             11
+#define SO_PRIORITY_linux             12
+#define SO_LINGER_linux               13
+#define SO_BSDCOMPAT_linux            14
+#define SO_REUSEPORT_linux            15
+#define SO_PASSCRED_linux             16
+#define SO_PEERCRED_linux             17
+#define SO_RCVLOWAT_linux             18
+#define SO_SNDLOWAT_linux             19
+#define SO_RCVTIMEO_linux             SO_RCVTIMEO_OLD_linux
+#define SO_SNDTIMEO_linux             SO_SNDTIMEO_OLD_linux
+#define SO_RCVTIMEO_OLD_linux         20
+#define SO_SNDTIMEO_OLD_linux         21
+
+#define SOMAXCONN_linux               4096
+
+#define IOCB_CMD_PREAD_linux          0
+#define IOCB_CMD_PWRITE_linux         1
+#define IOCB_CMD_FSYNC_linux          2
+#define IOCB_CMD_FDSYNC_linux         3
+#define IOCB_CMD_POLL_linux           5
+#define IOCB_CMD_NOOP_linux           6
+#define IOCB_CMD_PREADV_linux         7
+#define IOCB_CMD_PWRITEV_linux        8
+
+#define IOCB_FLAG_RESFD_linux         (1 << 0)
+#define IOCB_FLAG_IOPRIO_linux        (1 << 1)
+
 typedef struct {
   unsigned long long flags;
   unsigned long long pidfd;
@@ -4278,6 +4503,75 @@ typedef struct {
   struct robust_list_linux *list_op_pending;
 } robust_list_head_linux;
 
+typedef struct {
+  void *msg_name;
+  int msg_namelen;
+  struct iovec_linux *msg_iov;
+  unsigned long msg_iovlen;
+  void *msg_control;
+  unsigned long msg_controllen;
+  unsigned int msg_flags;
+} user_msghdr_linux;
+
+typedef struct {
+  user_msghdr_linux msg_hdr;
+  unsigned int msg_len;
+} mmsghdr_linux;
+
+typedef struct {
+  unsigned long cmsg_len;
+  int cmsg_level;
+  int cmsg_type;
+} cmsghdr_linux;
+
+typedef struct {
+  int l_onoff;
+  int l_linger;
+} linger_linux;
+
+typedef struct {
+  unsigned int pid;
+  unsigned int uid;
+  unsigned int gid;
+} ucred_linux;
+
+typedef struct {
+  unsigned long long data;
+  unsigned long long obj;
+  long long res;
+  long long res2;
+} io_event_linux;
+
+_Static_assert(sizeof(io_event_linux) == 32, "");
+
+typedef struct {
+  unsigned long long aio_data;
+#if defined(__x86_64__) || defined(__aarch64__) || defined(__arm__) || defined(__i386__) || defined(__riscv)
+  unsigned int aio_key;
+  int aio_rw_flags;
+#else
+  int aio_rw_flags;
+  unsigned int aio_key;
+#endif
+  unsigned short aio_lio_opcode;
+  short aio_reqprio;
+  unsigned int aio_fildes;
+  unsigned long long aio_buf;
+  unsigned long long aio_nbytes;
+  long long aio_offset;
+  unsigned long long aio_reserved2;
+  unsigned int aio_flags;
+  unsigned int aio_resfd;
+} iocb_linux;
+
+_Static_assert(sizeof(iocb_linux) == 64, "");
+
+typedef struct {
+  const unsigned long long *sigmask;
+  unsigned long sigsetsize;
+} aio_sigset_linux;
+
+
 #define Syscall0_linux(number, ret2)                   _Syscall0_linux(number, (long*)(ret2))
 #define Syscall1_linux(number, a, ret2)                _Syscall1_linux(number, (long)(a), (long*)(ret2))
 #define Syscall2_linux(number, a, b, ret2)             _Syscall2_linux(number, (long)(a), (long)(b), (long*)(ret2))
@@ -4672,46 +4966,46 @@ long get_robust_list_linux(int pid, robust_list_head_linux * *head_ptr, unsigned
 // 13f. Synchronization Primitives - Event Notification
 long eventfd_linux(unsigned int count);
 long eventfd2_linux(unsigned int count, int flags);
-#if 0 // WIP
 //
 // 14. SOCKETS & NETWORKING
 //
 // 14a. Creating and configuring sockets
 long socket_linux(int family, int type, int protocol);
 long socketpair_linux(int family, int type, int protocol, int *usockvec);
-long bind_linux(int fd, sockaddr_linux *umyaddr, int addrlen);
+long bind_linux(int fd, const sockaddr_linux *umyaddr, int addrlen);
 long listen_linux(int fd, int backlog);
 long accept_linux(int fd, sockaddr_linux *upeer_sockaddr, int *upeer_addrlen);
 long accept4_linux(int fd, sockaddr_linux *upeer_sockaddr, int *upeer_addrlen, int flags);
-long connect_linux(int fd, sockaddr_linux *uservaddr, int addrlen);
+long connect_linux(int fd, const sockaddr_linux *uservaddr, int addrlen);
 long shutdown_linux(int fd, int how);
-long socketcall_linux(int call, unsigned long *args);
+// Disabled wrapper: long socketcall_linux(int call, unsigned long *args);
 // 14b. Sending and receiving data on sockets
-long send_linux(int fd, void *buff, unsigned long len, unsigned int flags);
-long sendto_linux(int fd, void *buff, unsigned long len, unsigned int flags, sockaddr_linux *addr, int addr_len);
-long sendmsg_linux(int fd, user_msghdr *msg, unsigned flags);
-long sendmmsg_linux(int fd, mmsghdr *msg, unsigned int vlen, unsigned flags);
-long recv_linux(int fd, void *ubuf, unsigned long size, unsigned int flags);
+long send_linux(int fd, const void *buf, unsigned long len, unsigned int flags);
+long sendto_linux(int fd, const void *buf, unsigned long len, unsigned int flags, const sockaddr_linux *addr, int addr_len);
+long sendmsg_linux(int fd, const user_msghdr_linux *msg, unsigned flags);
+long sendmmsg_linux(int fd, const mmsghdr_linux *msg, unsigned int vlen, unsigned flags);
+long recv_linux(int fd, void *buf, unsigned long size, unsigned int flags);
 long recvfrom_linux(int fd, void *ubuf, unsigned long size, unsigned int flags, sockaddr_linux *addr, int *addr_len);
-long recvmsg_linux(int fd, user_msghdr *msg, unsigned flags);
-// Disabled wrapper: long recvmmsg_linux(int fd, mmsghdr *msg, unsigned int vlen, unsigned flags, __kernel_old_timespec_linux *timeout);
-long recvmmsg_time64_linux(int fd, mmsghdr *mmsg, unsigned int vlen, unsigned int flags, __kernel_timespec_linux *timeout);
+long recvmsg_linux(int fd, user_msghdr_linux *msg, unsigned flags);
+// Disabled wrapper: long recvmmsg_linux(int fd, mmsghdr_linux *msg, unsigned int vlen, unsigned flags, __kernel_old_timespec_linux *timeout);
+long recvmmsg_time64_linux(int fd, mmsghdr_linux *mmsg, unsigned int vlen, unsigned int flags, __kernel_timespec_linux *timeout);
 // 14c. Getting and setting socket options
-long getsockopt_linux(int fd, int level, int optname, char *optval, int *optlen);
-long setsockopt_linux(int fd, int level, int optname, char *optval, int optlen);
+long getsockopt_linux(int fd, int level, int optname, void *optval, int *optlen);
+long setsockopt_linux(int fd, int level, int optname, const void *optval, int optlen);
 long getsockname_linux(int fd, sockaddr_linux *usockaddr, int *usockaddr_len);
 long getpeername_linux(int fd, sockaddr_linux *usockaddr, int *usockaddr_len);
 //
 // 15. ASYNCHRONOUS I/O
 //
 // 15a. AIO: asynchronous I/O interface
-long io_setup_linux(unsigned nr_reqs, aio_context_t *ctx);
-long io_destroy_linux(aio_context_t ctx);
-long io_submit_linux(aio_context_t ctx_id, long nr, iocb * *iocbpp);
-long io_cancel_linux(aio_context_t ctx_id, iocb *iocb, io_event *result);
-long io_getevents_linux(aio_context_t ctx_id, long min_nr, long nr, io_event *events, __kernel_timespec_linux *timeout);
-// Disabled wrapper: long io_pgetevents_linux(aio_context_t ctx_id, long min_nr, long nr, io_event *events, __kernel_old_timespec_linux *timeout, const __aio_sigset *sig);
-long io_pgetevents_time64_linux(aio_context_t ctx_id, long min_nr, long nr, io_event *events, __kernel_timespec_linux *timeout, const __aio_sigset *sig);
+long io_setup_linux(unsigned nr_reqs, unsigned long *ctx);
+long io_destroy_linux(unsigned long ctx);
+long io_submit_linux(unsigned long ctx_id, long nr, iocb_linux *const *iocbpp);
+long io_cancel_linux(unsigned long ctx_id, const iocb_linux *iocb, io_event_linux *result);
+long io_getevents_linux(unsigned long ctx_id, long min_nr, long nr, io_event_linux *events, __kernel_timespec_linux *timeout);
+// Disabled wrapper: long io_pgetevents_linux(unsigned long ctx_id, long min_nr, long nr, io_event_linux *events, const __kernel_old_timespec_linux *timeout, const __aio_sigset *sig);
+long io_pgetevents_time64_linux(unsigned long ctx_id, long min_nr, long nr, io_event_linux *events, const __kernel_timespec_linux *timeout, unsigned long long sigmask);
+#if 0 // WIP
 // 15b. io_uring: high-performance asynchronous I/O
 long io_uring_setup_linux(unsigned int entries, io_uring_params *p);
 long io_uring_enter_linux(unsigned int fd, unsigned int to_submit, unsigned int min_complete, unsigned int flags, const void *argp, unsigned long argsz);
@@ -6625,7 +6919,6 @@ long eventfd_linux(unsigned int count) {
 long eventfd2_linux(unsigned int count, int flags) {
   return Syscall2_linux(NR_eventfd2_linux, count, flags, 0);
 }
-#if 0 // WIP
 //
 // 14. SOCKETS & NETWORKING
 //
@@ -6636,58 +6929,60 @@ long socket_linux(int family, int type, int protocol) {
 long socketpair_linux(int family, int type, int protocol, int *usockvec) {
   return Syscall4_linux(NR_socketpair_linux, family, type, protocol, usockvec, 0);
 }
-long bind_linux(int fd, sockaddr_linux *umyaddr, int addrlen) {
+long bind_linux(int fd, const sockaddr_linux *umyaddr, int addrlen) {
   return Syscall3_linux(NR_bind_linux, fd, umyaddr, addrlen, 0);
 }
 long listen_linux(int fd, int backlog) {
   return Syscall2_linux(NR_listen_linux, fd, backlog, 0);
 }
 long accept_linux(int fd, sockaddr_linux *upeer_sockaddr, int *upeer_addrlen) {
-  return Syscall3_linux(NR_accept_linux, fd, upeer_sockaddr, upeer_addrlen, 0);
+  return accept4_linux(fd, upeer_sockaddr, upeer_addrlen, 0);
 }
 long accept4_linux(int fd, sockaddr_linux *upeer_sockaddr, int *upeer_addrlen, int flags) {
   return Syscall4_linux(NR_accept4_linux, fd, upeer_sockaddr, upeer_addrlen, flags, 0);
 }
-long connect_linux(int fd, sockaddr_linux *uservaddr, int addrlen) {
+long connect_linux(int fd, const sockaddr_linux *uservaddr, int addrlen) {
   return Syscall3_linux(NR_connect_linux, fd, uservaddr, addrlen, 0);
 }
 long shutdown_linux(int fd, int how) {
   return Syscall2_linux(NR_shutdown_linux, fd, how, 0);
 }
-long socketcall_linux(int call, unsigned long *args) {
-  return Syscall2_linux(NR_socketcall_linux, call, args, 0);
-}
+// Disabled wrapper: long socketcall_linux(int call, unsigned long *args);
 // 14b. Sending and receiving data on sockets
-long send_linux(int fd, void *buff, unsigned long len, unsigned int flags) {
-  return Syscall4_linux(NR_send_linux, fd, buff, len, flags, 0);
+long send_linux(int fd, const void *buf, unsigned long len, unsigned int flags) {
+  return sendto_linux(fd, buf, len, flags, 0, 0);
 }
-long sendto_linux(int fd, void *buff, unsigned long len, unsigned int flags, sockaddr_linux *addr, int addr_len) {
-  return Syscall6_linux(NR_sendto_linux, fd, buff, len, flags, addr, addr_len, 0);
+long sendto_linux(int fd, const void *buf, unsigned long len, unsigned int flags, const sockaddr_linux *addr, int addr_len) {
+  return Syscall6_linux(NR_sendto_linux, fd, buf, len, flags, addr, addr_len, 0);
 }
-long sendmsg_linux(int fd, user_msghdr *msg, unsigned flags) {
+long sendmsg_linux(int fd, const user_msghdr_linux *msg, unsigned flags) {
   return Syscall3_linux(NR_sendmsg_linux, fd, msg, flags, 0);
 }
-long sendmmsg_linux(int fd, mmsghdr *msg, unsigned int vlen, unsigned flags) {
+long sendmmsg_linux(int fd, const mmsghdr_linux *msg, unsigned int vlen, unsigned flags) {
   return Syscall4_linux(NR_sendmmsg_linux, fd, msg, vlen, flags, 0);
 }
-long recv_linux(int fd, void *ubuf, unsigned long size, unsigned int flags) {
-  return Syscall4_linux(NR_recv_linux, fd, ubuf, size, flags, 0);
+long recv_linux(int fd, void *buf, unsigned long size, unsigned int flags) {
+  return recvfrom_linux(fd, buf, size, flags, 0, 0);
 }
 long recvfrom_linux(int fd, void *ubuf, unsigned long size, unsigned int flags, sockaddr_linux *addr, int *addr_len) {
   return Syscall6_linux(NR_recvfrom_linux, fd, ubuf, size, flags, addr, addr_len, 0);
 }
-long recvmsg_linux(int fd, user_msghdr *msg, unsigned flags) {
+long recvmsg_linux(int fd, user_msghdr_linux *msg, unsigned flags) {
   return Syscall3_linux(NR_recvmsg_linux, fd, msg, flags, 0);
 }
-// Disabled wrapper: long recvmmsg_linux(int fd, mmsghdr *msg, unsigned int vlen, unsigned flags, __kernel_old_timespec_linux *timeout);
-long recvmmsg_time64_linux(int fd, mmsghdr *mmsg, unsigned int vlen, unsigned int flags, __kernel_timespec_linux *timeout) {
+// Disabled wrapper: long recvmmsg_linux(int fd, mmsghdr_linux *msg, unsigned int vlen, unsigned flags, __kernel_old_timespec_linux *timeout);
+long recvmmsg_time64_linux(int fd, mmsghdr_linux *mmsg, unsigned int vlen, unsigned int flags, __kernel_timespec_linux *timeout) {
+#if defined(__x86_64__) || defined(__aarch64__) || (defined(__riscv) && (__riscv_xlen == 64))
+  return Syscall5_linux(NR_recvmmsg_linux, fd, mmsg, vlen, flags, timeout, 0);
+#else
   return Syscall5_linux(NR_recvmmsg_time64_linux, fd, mmsg, vlen, flags, timeout, 0);
+#endif
 }
 // 14c. Getting and setting socket options
-long getsockopt_linux(int fd, int level, int optname, char *optval, int *optlen) {
+long getsockopt_linux(int fd, int level, int optname, void *optval, int *optlen) {
   return Syscall5_linux(NR_getsockopt_linux, fd, level, optname, optval, optlen, 0);
 }
-long setsockopt_linux(int fd, int level, int optname, char *optval, int optlen) {
+long setsockopt_linux(int fd, int level, int optname, const void *optval, int optlen) {
   return Syscall5_linux(NR_setsockopt_linux, fd, level, optname, optval, optlen, 0);
 }
 long getsockname_linux(int fd, sockaddr_linux *usockaddr, int *usockaddr_len) {
@@ -6700,25 +6995,33 @@ long getpeername_linux(int fd, sockaddr_linux *usockaddr, int *usockaddr_len) {
 // 15. ASYNCHRONOUS I/O
 //
 // 15a. AIO: asynchronous I/O interface
-long io_setup_linux(unsigned nr_reqs, aio_context_t *ctx) {
+long io_setup_linux(unsigned nr_reqs, unsigned long *ctx) {
   return Syscall2_linux(NR_io_setup_linux, nr_reqs, ctx, 0);
 }
-long io_destroy_linux(aio_context_t ctx) {
+long io_destroy_linux(unsigned long ctx) {
   return Syscall1_linux(NR_io_destroy_linux, ctx, 0);
 }
-long io_submit_linux(aio_context_t ctx_id, long nr, iocb * *iocbpp) {
+long io_submit_linux(unsigned long ctx_id, long nr, iocb_linux *const *iocbpp) {
   return Syscall3_linux(NR_io_submit_linux, ctx_id, nr, iocbpp, 0);
 }
-long io_cancel_linux(aio_context_t ctx_id, iocb *iocb, io_event *result) {
+long io_cancel_linux(unsigned long ctx_id, const iocb_linux *iocb, io_event_linux *result) {
   return Syscall3_linux(NR_io_cancel_linux, ctx_id, iocb, result, 0);
 }
-long io_getevents_linux(aio_context_t ctx_id, long min_nr, long nr, io_event *events, __kernel_timespec_linux *timeout) {
+long io_getevents_linux(unsigned long ctx_id, long min_nr, long nr, io_event_linux *events, __kernel_timespec_linux *timeout) {
   return Syscall5_linux(NR_io_getevents_linux, ctx_id, min_nr, nr, events, timeout, 0);
 }
-// Disabled wrapper: long io_pgetevents_linux(aio_context_t ctx_id, long min_nr, long nr, io_event *events, __kernel_old_timespec_linux *timeout, const __aio_sigset *sig);
-long io_pgetevents_time64_linux(aio_context_t ctx_id, long min_nr, long nr, io_event *events, __kernel_timespec_linux *timeout, const __aio_sigset *sig) {
-  return Syscall6_linux(NR_io_pgetevents_time64_linux, ctx_id, min_nr, nr, events, timeout, sig, 0);
+// Disabled wrapper: long io_pgetevents_linux(unsigned long ctx_id, long min_nr, long nr, io_event_linux *events, const __kernel_old_timespec_linux *timeout, const __aio_sigset *sig);
+long io_pgetevents_time64_linux(unsigned long ctx_id, long min_nr, long nr, io_event_linux *events, const __kernel_timespec_linux *timeout, unsigned long long sigmask) {
+  aio_sigset_linux sig;
+  sig.sigmask = &sigmask;
+  sig.sigsetsize = sizeof(sigmask);
+#if defined(__x86_64__) || defined(__aarch64__) || (defined(__riscv) && (__riscv_xlen == 64))
+  return Syscall6_linux(NR_io_pgetevents_linux, ctx_id, min_nr, nr, events, timeout, &sig, 0);
+#else
+  return Syscall6_linux(NR_io_pgetevents_time64_linux, ctx_id, min_nr, nr, events, timeout, &sig, 0);
+#endif
 }
+#if 0 // WIP
 // 15b. io_uring: high-performance asynchronous I/O
 long io_uring_setup_linux(unsigned int entries, io_uring_params *p) {
   return Syscall2_linux(NR_io_uring_setup_linux, entries, p, 0);
