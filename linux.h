@@ -3120,6 +3120,178 @@ enum {
 #define IOCB_FLAG_RESFD_linux         (1 << 0)
 #define IOCB_FLAG_IOPRIO_linux        (1 << 1)
 
+#define IORING_SETUP_IOPOLL_linux             (1U << 0)
+#define IORING_SETUP_SQPOLL_linux             (1U << 1)
+#define IORING_SETUP_SQ_AFF_linux             (1U << 2)
+#define IORING_SETUP_CQSIZE_linux             (1U << 3)
+#define IORING_SETUP_CLAMP_linux              (1U << 4)
+#define IORING_SETUP_ATTACH_WQ_linux          (1U << 5)
+#define IORING_SETUP_R_DISABLED_linux         (1U << 6)
+#define IORING_SETUP_SUBMIT_ALL_linux         (1U << 7)
+#define IORING_SETUP_COOP_TASKRUN_linux       (1U << 8)
+#define IORING_SETUP_TASKRUN_FLAG_linux       (1U << 9)
+#define IORING_SETUP_SQE128_linux             (1U << 10)
+#define IORING_SETUP_CQE32_linux              (1U << 11)
+#define IORING_SETUP_SINGLE_ISSUER_linux      (1U << 12)
+#define IORING_SETUP_DEFER_TASKRUN_linux      (1U << 13)
+#define IORING_SETUP_NO_MMAP_linux            (1U << 14)
+#define IORING_SETUP_REGISTERED_FD_ONLY_linux (1U << 15)
+#define IORING_SETUP_NO_SQARRAY_linux         (1U << 16)
+
+#define IOSQE_FIXED_FILE_linux         (1U << 0)
+#define IOSQE_IO_DRAIN_linux           (1U << 1)
+#define IOSQE_IO_LINK_linux            (1U << 2)
+#define IOSQE_IO_HARDLINK_linux        (1U << 3)
+#define IOSQE_ASYNC_linux              (1U << 4)
+#define IOSQE_BUFFER_SELECT_linux      (1U << 5)
+#define IOSQE_CQE_SKIP_SUCCESS_linux   (1U << 6)
+
+#define IORING_OP_NOP_linux              0
+#define IORING_OP_READV_linux            1
+#define IORING_OP_WRITEV_linux           2
+#define IORING_OP_FSYNC_linux            3
+#define IORING_OP_READ_FIXED_linux       4
+#define IORING_OP_WRITE_FIXED_linux      5
+#define IORING_OP_POLL_ADD_linux         6
+#define IORING_OP_POLL_REMOVE_linux      7
+#define IORING_OP_SYNC_FILE_RANGE_linux  8
+#define IORING_OP_SENDMSG_linux          9
+#define IORING_OP_RECVMSG_linux          10
+#define IORING_OP_TIMEOUT_linux          11
+#define IORING_OP_TIMEOUT_REMOVE_linux   12
+#define IORING_OP_ACCEPT_linux           13
+#define IORING_OP_ASYNC_CANCEL_linux     14
+#define IORING_OP_LINK_TIMEOUT_linux     15
+#define IORING_OP_CONNECT_linux          16
+#define IORING_OP_FALLOCATE_linux        17
+#define IORING_OP_OPENAT_linux           18
+#define IORING_OP_CLOSE_linux            19
+#define IORING_OP_FILES_UPDATE_linux     20
+#define IORING_OP_STATX_linux            21
+#define IORING_OP_READ_linux             22
+#define IORING_OP_WRITE_linux            23
+#define IORING_OP_FADVISE_linux          24
+#define IORING_OP_MADVISE_linux          25
+#define IORING_OP_SEND_linux             26
+#define IORING_OP_RECV_linux             27
+#define IORING_OP_OPENAT2_linux          28
+#define IORING_OP_EPOLL_CTL_linux        29
+#define IORING_OP_SPLICE_linux           30
+#define IORING_OP_PROVIDE_BUFFERS_linux  31
+#define IORING_OP_REMOVE_BUFFERS_linux   32
+#define IORING_OP_TEE_linux              33
+#define IORING_OP_SHUTDOWN_linux         34
+#define IORING_OP_RENAMEAT_linux         35
+#define IORING_OP_UNLINKAT_linux         36
+#define IORING_OP_MKDIRAT_linux          37
+#define IORING_OP_SYMLINKAT_linux        38
+#define IORING_OP_LINKAT_linux           39
+#define IORING_OP_MSG_RING_linux         40
+#define IORING_OP_FSETXATTR_linux        41
+#define IORING_OP_SETXATTR_linux         42
+#define IORING_OP_FGETXATTR_linux        43
+#define IORING_OP_GETXATTR_linux         44
+#define IORING_OP_SOCKET_linux           45
+#define IORING_OP_URING_CMD_linux        46
+#define IORING_OP_SEND_ZC_linux          47
+#define IORING_OP_SENDMSG_ZC_linux       48
+#define IORING_OP_READ_MULTISHOT_linux   49
+#define IORING_OP_WAITID_linux           50
+#define IORING_OP_FUTEX_WAIT_linux       51
+#define IORING_OP_FUTEX_WAKE_linux       52
+#define IORING_OP_FUTEX_WAITV_linux      53
+#define IORING_OP_FIXED_FD_INSTALL_linux 54
+#define IORING_OP_FTRUNCATE_linux        55
+
+#define IORING_ENTER_GETEVENTS_linux   (1U << 0)
+#define IORING_ENTER_SQ_WAKEUP_linux   (1U << 1)
+#define IORING_ENTER_SQ_WAIT_linux     (1U << 2)
+#define IORING_ENTER_EXT_ARG_linux     (1U << 3)
+#define IORING_ENTER_REGISTERED_RING_linux (1U << 4)
+
+#define IORING_REGISTER_BUFFERS_linux         0
+#define IORING_UNREGISTER_BUFFERS_linux       1
+#define IORING_REGISTER_FILES_linux           2
+#define IORING_UNREGISTER_FILES_linux         3
+#define IORING_REGISTER_EVENTFD_linux         4
+#define IORING_UNREGISTER_EVENTFD_linux       5
+#define IORING_REGISTER_FILES_UPDATE_linux    6
+#define IORING_REGISTER_EVENTFD_ASYNC_linux   7
+#define IORING_REGISTER_PROBE_linux           8
+#define IORING_REGISTER_PERSONALITY_linux     9
+#define IORING_UNREGISTER_PERSONALITY_linux   10
+#define IORING_REGISTER_RESTRICTIONS_linux    11
+#define IORING_REGISTER_ENABLE_RINGS_linux    12
+
+#define IORING_OFF_SQ_RING_linux       0ULL
+#define IORING_OFF_CQ_RING_linux       0x8000000ULL
+#define IORING_OFF_SQES_linux          0x10000000ULL
+#define IORING_OFF_PBUF_RING_linux     0x80000000ULL
+
+#define IORING_CQE_F_BUFFER_linux        (1U << 0)
+#define IORING_CQE_F_MORE_linux          (1U << 1)
+#define IORING_CQE_F_SOCK_NONEMPTY_linux (1U << 2)
+#define IORING_CQE_F_NOTIF_linux         (1U << 3)
+
+#define CLOCK_REALTIME_linux                  0
+#define CLOCK_MONOTONIC_linux                 1
+#define CLOCK_PROCESS_CPUTIME_ID_linux        2
+#define CLOCK_THREAD_CPUTIME_ID_linux         3
+#define CLOCK_MONOTONIC_RAW_linux             4
+#define CLOCK_REALTIME_COARSE_linux           5
+#define CLOCK_MONOTONIC_COARSE_linux          6
+#define CLOCK_BOOTTIME_linux                  7
+#define CLOCK_REALTIME_ALARM_linux            8
+#define CLOCK_BOOTTIME_ALARM_linux            9
+#define CLOCK_TAI_linux                       11
+
+#define ADJ_OFFSET_linux              0x0001
+#define ADJ_FREQUENCY_linux           0x0002
+#define ADJ_MAXERROR_linux            0x0004
+#define ADJ_ESTERROR_linux            0x0008
+#define ADJ_STATUS_linux              0x0010
+#define ADJ_TIMECONST_linux           0x0020
+#define ADJ_TAI_linux                 0x0080
+#define ADJ_SETOFFSET_linux           0x0100
+#define ADJ_MICRO_linux               0x1000
+#define ADJ_NANO_linux                0x2000
+#define ADJ_TICK_linux                0x4000
+#define ADJ_OFFSET_SINGLESHOT_linux   0x8001
+
+#define STA_PLL_linux                 0x0001
+#define STA_PPSFREQ_linux             0x0002
+#define STA_PPSTIME_linux             0x0004
+#define STA_FLL_linux                 0x0008
+#define STA_INS_linux                 0x0010
+#define STA_DEL_linux                 0x0020
+#define STA_UNSYNC_linux              0x0040
+#define STA_FREQHOLD_linux            0x0080
+#define STA_PPSSIGNAL_linux           0x0100
+#define STA_PPSJITTER_linux           0x0200
+#define STA_PPSWANDER_linux           0x0400
+#define STA_PPSERROR_linux            0x0800
+#define STA_CLOCKERR_linux            0x1000
+#define STA_NANO_linux                0x2000
+#define STA_MODE_linux                0x4000
+#define STA_CLK_linux                 0x8000
+
+#define TIMER_ABSTIME_linux           0x01
+
+#define ITIMER_REAL_linux             0
+#define ITIMER_VIRTUAL_linux          1
+#define ITIMER_PROF_linux             2
+
+#define TFD_TIMER_ABSTIME_linux       (1 << 0)
+#define TFD_TIMER_CANCEL_ON_SET_linux (1 << 1)
+#define TFD_CLOEXEC_linux             O_CLOEXEC_linux
+#define TFD_NONBLOCK_linux            O_NONBLOCK_linux
+
+#define TFD_IOC_SET_TICKS_linux       _IOW_linux('T', 0, unsigned long long)
+
+#define GRND_NONBLOCK_linux           0x0001
+#define GRND_RANDOM_linux             0x0002
+#define GRND_INSECURE_linux           0x0004
+
 typedef struct {
   unsigned long long flags;
   unsigned long long pidfd;
@@ -4572,6 +4744,176 @@ typedef struct {
 } aio_sigset_linux;
 
 
+typedef struct {
+  unsigned char opcode;
+  unsigned char flags;
+  unsigned short ioprio;
+  int fd;
+  union {
+    unsigned long long off;
+    unsigned long long addr2;
+    struct {
+      unsigned int cmd_op;
+      unsigned int __pad1;
+    };
+  };
+  union {
+    unsigned long long addr;
+    unsigned long long splice_off_in;
+    struct {
+      unsigned int level;
+      unsigned int optname;
+    };
+  };
+  unsigned int len;
+  union {
+    unsigned int rw_flags;
+    unsigned int fsync_flags;
+    unsigned short poll_events;
+    unsigned int poll32_events;
+    unsigned int sync_range_flags;
+    unsigned int msg_flags;
+    unsigned int timeout_flags;
+    unsigned int accept_flags;
+    unsigned int cancel_flags;
+    unsigned int open_flags;
+    unsigned int statx_flags;
+    unsigned int fadvise_advice;
+    unsigned int splice_flags;
+    unsigned int rename_flags;
+    unsigned int unlink_flags;
+    unsigned int hardlink_flags;
+    unsigned int xattr_flags;
+    unsigned int msg_ring_flags;
+    unsigned int uring_cmd_flags;
+    unsigned int waitid_flags;
+    unsigned int futex_flags;
+    unsigned int install_fd_flags;
+    unsigned int nop_flags;
+    unsigned int pipe_flags;
+  };
+  unsigned long long user_data;
+  union {
+    struct {
+      unsigned short buf_index;
+      unsigned short personality;
+    };
+    struct {
+      unsigned short buf_group;
+    } __attribute__((packed));
+  };
+  union {
+    int splice_fd_in;
+    unsigned int file_index;
+    unsigned int optlen;
+    struct {
+      unsigned short addr_len;
+      unsigned short __pad3[1];
+    };
+  };
+  union {
+    struct {
+      unsigned long long addr3;
+      unsigned long long __pad2[1];
+    };
+    unsigned char cmd[0];
+  };
+} io_uring_sqe_linux;
+
+typedef struct {
+  int tz_minuteswest;
+  int tz_dsttime;
+} timezone_linux;
+
+_Static_assert(sizeof(io_uring_sqe_linux) == 64, "");
+
+typedef struct {
+  unsigned long long user_data;
+  int res;
+  unsigned int flags;
+  unsigned long long big_cqe[];
+} io_uring_cqe_linux;
+
+_Static_assert(sizeof(io_uring_cqe_linux) == 16, "");
+
+typedef struct {
+  unsigned int head;
+  unsigned int tail;
+  unsigned int ring_mask;
+  unsigned int ring_entries;
+  unsigned int flags;
+  unsigned int dropped;
+  unsigned int array;
+  unsigned int resv1;
+  unsigned long long user_addr;
+} io_sqring_offsets_linux;
+
+typedef struct {
+  unsigned int head;
+  unsigned int tail;
+  unsigned int ring_mask;
+  unsigned int ring_entries;
+  unsigned int overflow;
+  unsigned int cqes;
+  unsigned int flags;
+  unsigned int resv1;
+  unsigned long long user_addr;
+} io_cqring_offsets_linux;
+
+typedef struct {
+  unsigned int sq_entries;
+  unsigned int cq_entries;
+  unsigned int flags;
+  unsigned int sq_thread_cpu;
+  unsigned int sq_thread_idle;
+  unsigned int features;
+  unsigned int wq_fd;
+  unsigned int resv[3];
+  io_sqring_offsets_linux sq_off;
+  io_cqring_offsets_linux cq_off;
+} io_uring_params_linux;
+
+typedef struct {
+  unsigned long long sigmask;
+  unsigned int sigmask_sz;
+  unsigned int min_wait_usec;
+  unsigned long long ts;
+} io_uring_getevents_arg_linux;
+
+typedef struct {
+  unsigned int modes;
+  long offset;
+  long freq;
+  long maxerror;
+  long esterror;
+  int status;
+  long constant;
+  long precision;
+  long tolerance;
+  __kernel_timespec_linux time;
+  long tick;
+  long ppsfreq;
+  long jitter;
+  int shift;
+  long stabil;
+  long jitcnt;
+  long calcnt;
+  long errcnt;
+  long stbcnt;
+  int tai;
+  int __padding[11];
+} __kernel_timex_linux;
+
+typedef struct {
+  __kernel_old_timeval_linux it_interval;
+  __kernel_old_timeval_linux it_value;
+} __kernel_old_itimerval_linux;
+
+typedef struct {
+  __kernel_timespec_linux it_interval;
+  __kernel_timespec_linux it_value;
+} __kernel_itimerspec_linux;
+
 #define Syscall0_linux(number, ret2)                   _Syscall0_linux(number, (long*)(ret2))
 #define Syscall1_linux(number, a, ret2)                _Syscall1_linux(number, (long)(a), (long*)(ret2))
 #define Syscall2_linux(number, a, b, ret2)             _Syscall2_linux(number, (long)(a), (long)(b), (long*)(ret2))
@@ -5005,55 +5347,55 @@ long io_cancel_linux(unsigned long ctx_id, const iocb_linux *iocb, io_event_linu
 long io_getevents_linux(unsigned long ctx_id, long min_nr, long nr, io_event_linux *events, __kernel_timespec_linux *timeout);
 // Disabled wrapper: long io_pgetevents_linux(unsigned long ctx_id, long min_nr, long nr, io_event_linux *events, const __kernel_old_timespec_linux *timeout, const __aio_sigset *sig);
 long io_pgetevents_time64_linux(unsigned long ctx_id, long min_nr, long nr, io_event_linux *events, const __kernel_timespec_linux *timeout, unsigned long long sigmask);
-#if 0 // WIP
 // 15b. io_uring: high-performance asynchronous I/O
-long io_uring_setup_linux(unsigned int entries, io_uring_params *p);
+long io_uring_setup_linux(unsigned int entries, io_uring_params_linux *p);
 long io_uring_enter_linux(unsigned int fd, unsigned int to_submit, unsigned int min_complete, unsigned int flags, const void *argp, unsigned long argsz);
 long io_uring_register_linux(unsigned int fd, unsigned int op, void *arg, unsigned int nr_args);
 //
 // 16. TIME & CLOCKS
 //
 // 16a. Reading current time from various clocks
-long time_linux(__kernel_old_time_t *tloc);
-long gettimeofday_linux(__kernel_old_timeval *tv, timezone *tz);
+// Disabled wrapper: long time_linux(long *tloc);
+// Disabled wrapper: long gettimeofday_linux(__kernel_old_timeval *tv, timezone_linux *tz);
 // Disabled wrapper: long clock_gettime_linux(int which_clock, __kernel_old_timespec_linux *tp);
 long clock_gettime64_linux(int which_clock, __kernel_timespec_linux *tp);
 // Disabled wrapper: long clock_getres_linux(int which_clock, __kernel_old_timespec_linux *tp);
 long clock_getres_time64_linux(int which_clock, __kernel_timespec_linux *tp);
 // 16b. Setting system time and adjusting clocks
-long settimeofday_linux(__kernel_old_timeval *tv, timezone *tz);
+// Disabled wrapper: long settimeofday_linux(__kernel_old_timeval *tv, timezone_linux *tz);
 // Disabled wrapper: long clock_settime_linux(int which_clock, const __kernel_old_timespec_linux *tp);
 long clock_settime64_linux(int which_clock, const __kernel_timespec_linux *tp);
-long stime_linux(__kernel_old_time_t *tptr);
-long adjtimex_linux(__kernel_timex *txc_p);
-long clock_adjtime_linux(int which_clock, __kernel_timex *tx);
-long clock_adjtime64_linux(int which_clock, __kernel_timex *tx);
+// Disabled wrapper: long stime_linux(long *tptr);
+long adjtimex_linux(__kernel_timex_linux *txc_p);
+// Disabled wrapper: long clock_adjtime_linux(int which_clock, __kernel_timex_linux *tx);
+long clock_adjtime64_linux(int which_clock, __kernel_timex_linux *tx);
 // 16c. Suspending execution for a period of time
 long nanosleep_linux(__kernel_timespec_linux *rqtp, __kernel_timespec_linux *rmtp);
 // Disabled wrapper: long clock_nanosleep_linux(int which_clock, int flags, const __kernel_old_timespec_linux *rqtp, __kernel_old_timespec_linux *rmtp);
 long clock_nanosleep_time64_linux(int which_clock, int flags, const __kernel_timespec_linux *rqtp, __kernel_timespec_linux *rmtp);
 // 16d. Setting periodic or one-shot timers
 long alarm_linux(unsigned int seconds);
-long setitimer_linux(int which, __kernel_old_itimerval *value, __kernel_old_itimerval *ovalue);
-long getitimer_linux(int which, __kernel_old_itimerval *value);
+long setitimer_linux(int which, __kernel_old_itimerval_linux *value, __kernel_old_itimerval_linux *ovalue);
+long getitimer_linux(int which, __kernel_old_itimerval_linux *value);
 // 16e. Per-process timers with precise control
-long timer_create_linux(int which_clock, sigevent_linux *timer_event_spec, timer_t * created_timer_id);
-// Disabled wrapper: long timer_settime_linux(timer_t timer_id, int flags, const __kernel_itimerspec *new_setting, __kernel_itimerspec *old_setting);
-long timer_settime64_linux(timer_t timerid, int flags, const __kernel_timespec_linux *new_setting, __kernel_timespec_linux *old_setting);
-// Disabled wrapper: long timer_gettime_linux(timer_t timer_id, __kernel_itimerspec *setting);
-long timer_gettime64_linux(timer_t timerid, __kernel_timespec_linux *setting);
-long timer_getoverrun_linux(timer_t timer_id);
-long timer_delete_linux(timer_t timer_id);
+long timer_create_linux(int which_clock, const sigevent_linux *timer_event_spec, int * created_timer_id);
+// Disabled wrapper: long timer_settime_linux(int timer_id, int flags, const __kernel_itimerspec_linux *new_setting, __kernel_itimerspec_linux *old_setting);
+long timer_settime64_linux(int timerid, int flags, const __kernel_timespec_linux *new_setting, __kernel_timespec_linux *old_setting);
+// Disabled wrapper: long timer_gettime_linux(int timer_id, __kernel_itimerspec_linux *setting);
+long timer_gettime64_linux(int timerid, __kernel_timespec_linux *setting);
+long timer_getoverrun_linux(int timer_id);
+long timer_delete_linux(int timer_id);
 // 16f. Timers accessible via file descriptors
 long timerfd_create_linux(int clockid, int flags);
-// Disabled wrapper: long timerfd_settime_linux(int ufd, int flags, const __kernel_itimerspec *utmr, __kernel_itimerspec *otmr);
+// Disabled wrapper: long timerfd_settime_linux(int ufd, int flags, const __kernel_itimerspec_linux *utmr, __kernel_itimerspec_linux *otmr);
 long timerfd_settime64_linux(int ufd, int flags, const __kernel_timespec_linux *utmr, __kernel_timespec_linux *otmr);
-// Disabled wrapper: long timerfd_gettime_linux(int ufd, __kernel_itimerspec *otmr);
+// Disabled wrapper: long timerfd_gettime_linux(int ufd, __kernel_itimerspec_linux *otmr);
 long timerfd_gettime64_linux(int ufd, __kernel_timespec_linux *otmr);
 //
 // 17. RANDOM NUMBERS
 //
 long getrandom_linux(char *buf, unsigned long count, unsigned int flags);
+#if 0 // WIP
 //
 // 18. USER & GROUP IDENTITY
 //
@@ -7021,9 +7363,8 @@ long io_pgetevents_time64_linux(unsigned long ctx_id, long min_nr, long nr, io_e
   return Syscall6_linux(NR_io_pgetevents_time64_linux, ctx_id, min_nr, nr, events, timeout, &sig, 0);
 #endif
 }
-#if 0 // WIP
 // 15b. io_uring: high-performance asynchronous I/O
-long io_uring_setup_linux(unsigned int entries, io_uring_params *p) {
+long io_uring_setup_linux(unsigned int entries, io_uring_params_linux *p) {
   return Syscall2_linux(NR_io_uring_setup_linux, entries, p, 0);
 }
 long io_uring_enter_linux(unsigned int fd, unsigned int to_submit, unsigned int min_complete, unsigned int flags, const void *argp, unsigned long argsz) {
@@ -7036,87 +7377,119 @@ long io_uring_register_linux(unsigned int fd, unsigned int op, void *arg, unsign
 // 16. TIME & CLOCKS
 //
 // 16a. Reading current time from various clocks
-long time_linux(__kernel_old_time_t *tloc) {
-  return Syscall1_linux(NR_time_linux, tloc, 0);
-}
-long gettimeofday_linux(__kernel_old_timeval *tv, timezone *tz) {
-  return Syscall2_linux(NR_gettimeofday_linux, tv, tz, 0);
-}
+// Disabled wrapper: long time_linux(long *tloc);
+// Disabled wrapper: long gettimeofday_linux(__kernel_old_timeval *tv, timezone_linux *tz);
 // Disabled wrapper: long clock_gettime_linux(int which_clock, __kernel_old_timespec_linux *tp);
 long clock_gettime64_linux(int which_clock, __kernel_timespec_linux *tp) {
+#if defined(__x86_64__) || defined(__aarch64__) || (defined(__riscv) && (__riscv_xlen == 64))
+  return Syscall2_linux(NR_clock_gettime_linux, which_clock, tp, 0);
+#else
   return Syscall2_linux(NR_clock_gettime64_linux, which_clock, tp, 0);
+#endif
 }
 // Disabled wrapper: long clock_getres_linux(int which_clock, __kernel_old_timespec_linux *tp);
 long clock_getres_time64_linux(int which_clock, __kernel_timespec_linux *tp) {
+#if defined(__x86_64__) || defined(__aarch64__) || (defined(__riscv) && (__riscv_xlen == 64))
+  return Syscall2_linux(NR_clock_getres_linux, which_clock, tp, 0);
+#else
   return Syscall2_linux(NR_clock_getres_time64_linux, which_clock, tp, 0);
+#endif
 }
 // 16b. Setting system time and adjusting clocks
-long settimeofday_linux(__kernel_old_timeval *tv, timezone *tz) {
-  return Syscall2_linux(NR_settimeofday_linux, tv, tz, 0);
-}
+// Disabled wrapper: long settimeofday_linux(__kernel_old_timeval *tv, timezone_linux *tz);
 // Disabled wrapper: long clock_settime_linux(int which_clock, const __kernel_old_timespec_linux *tp);
 long clock_settime64_linux(int which_clock, const __kernel_timespec_linux *tp) {
+#if defined(__x86_64__) || defined(__aarch64__) || (defined(__riscv) && (__riscv_xlen == 64))
+  return Syscall2_linux(NR_clock_settime_linux, which_clock, tp, 0);
+#else
   return Syscall2_linux(NR_clock_settime64_linux, which_clock, tp, 0);
+#endif
 }
-long stime_linux(__kernel_old_time_t *tptr) {
-  return Syscall1_linux(NR_stime_linux, tptr, 0);
+// Disabled wrapper: long stime_linux(long *tptr);
+long adjtimex_linux(__kernel_timex_linux *txc_p) {
+  return clock_adjtime64_linux(CLOCK_REALTIME_linux, txc_p);
 }
-long adjtimex_linux(__kernel_timex *txc_p) {
-  return Syscall1_linux(NR_adjtimex_linux, txc_p, 0);
-}
-long clock_adjtime_linux(int which_clock, __kernel_timex *tx) {
+// Disabled wrapper: long clock_adjtime_linux(int which_clock, __kernel_timex_linux *tx);
+long clock_adjtime64_linux(int which_clock, __kernel_timex_linux *tx) {
+#if defined(__x86_64__) || defined(__aarch64__) || (defined(__riscv) && (__riscv_xlen == 64))
   return Syscall2_linux(NR_clock_adjtime_linux, which_clock, tx, 0);
-}
-long clock_adjtime64_linux(int which_clock, __kernel_timex *tx) {
+#else
   return Syscall2_linux(NR_clock_adjtime64_linux, which_clock, tx, 0);
+#endif
 }
 // 16c. Suspending execution for a period of time
 long nanosleep_linux(__kernel_timespec_linux *rqtp, __kernel_timespec_linux *rmtp) {
-  return Syscall2_linux(NR_nanosleep_linux, rqtp, rmtp, 0);
+  return clock_nanosleep_time64_linux(CLOCK_REALTIME_linux, 0, rqtp, rmtp);
 }
 // Disabled wrapper: long clock_nanosleep_linux(int which_clock, int flags, const __kernel_old_timespec_linux *rqtp, __kernel_old_timespec_linux *rmtp);
 long clock_nanosleep_time64_linux(int which_clock, int flags, const __kernel_timespec_linux *rqtp, __kernel_timespec_linux *rmtp) {
+#if defined(__x86_64__) || defined(__aarch64__) || (defined(__riscv) && (__riscv_xlen == 64))
+  return Syscall4_linux(NR_clock_nanosleep_linux, which_clock, flags, rqtp, rmtp, 0);
+#else
   return Syscall4_linux(NR_clock_nanosleep_time64_linux, which_clock, flags, rqtp, rmtp, 0);
+#endif
 }
 // 16d. Setting periodic or one-shot timers
 long alarm_linux(unsigned int seconds) {
-  return Syscall1_linux(NR_alarm_linux, seconds, 0);
+  __kernel_old_itimerval_linux it, old_it;
+  it.it_interval.tv_sec = 0;
+  it.it_interval.tv_usec = 0;
+  it.it_value.tv_sec = seconds;
+  it.it_value.tv_usec = 0;
+  if (setitimer_linux(ITIMER_REAL_linux, &it, &old_it) < 0) return 0;
+  return old_it.it_value.tv_sec;
 }
-long setitimer_linux(int which, __kernel_old_itimerval *value, __kernel_old_itimerval *ovalue) {
+long setitimer_linux(int which, __kernel_old_itimerval_linux *value, __kernel_old_itimerval_linux *ovalue) {
   return Syscall3_linux(NR_setitimer_linux, which, value, ovalue, 0);
 }
-long getitimer_linux(int which, __kernel_old_itimerval *value) {
+long getitimer_linux(int which, __kernel_old_itimerval_linux *value) {
   return Syscall2_linux(NR_getitimer_linux, which, value, 0);
 }
 // 16e. Per-process timers with precise control
-long timer_create_linux(int which_clock, sigevent_linux *timer_event_spec, timer_t * created_timer_id) {
+long timer_create_linux(int which_clock, const sigevent_linux *timer_event_spec, int * created_timer_id) {
   return Syscall3_linux(NR_timer_create_linux, which_clock, timer_event_spec, created_timer_id, 0);
 }
-// Disabled wrapper: long timer_settime_linux(timer_t timer_id, int flags, const __kernel_itimerspec *new_setting, __kernel_itimerspec *old_setting);
-long timer_settime64_linux(timer_t timerid, int flags, const __kernel_timespec_linux *new_setting, __kernel_timespec_linux *old_setting) {
+// Disabled wrapper: long timer_settime_linux(int timer_id, int flags, const __kernel_itimerspec_linux *new_setting, __kernel_itimerspec_linux *old_setting);
+long timer_settime64_linux(int timerid, int flags, const __kernel_timespec_linux *new_setting, __kernel_timespec_linux *old_setting) {
+#if defined(__x86_64__) || defined(__aarch64__) || (defined(__riscv) && (__riscv_xlen == 64))
+  return Syscall4_linux(NR_timer_settime_linux, timerid, flags, new_setting, old_setting, 0);
+#else
   return Syscall4_linux(NR_timer_settime64_linux, timerid, flags, new_setting, old_setting, 0);
+#endif
 }
-// Disabled wrapper: long timer_gettime_linux(timer_t timer_id, __kernel_itimerspec *setting);
-long timer_gettime64_linux(timer_t timerid, __kernel_timespec_linux *setting) {
+// Disabled wrapper: long timer_gettime_linux(int timer_id, __kernel_itimerspec_linux *setting);
+long timer_gettime64_linux(int timerid, __kernel_timespec_linux *setting) {
+#if defined(__x86_64__) || defined(__aarch64__) || (defined(__riscv) && (__riscv_xlen == 64))
+  return Syscall2_linux(NR_timer_gettime_linux, timerid, setting, 0);
+#else
   return Syscall2_linux(NR_timer_gettime64_linux, timerid, setting, 0);
+#endif
 }
-long timer_getoverrun_linux(timer_t timer_id) {
+long timer_getoverrun_linux(int timer_id) {
   return Syscall1_linux(NR_timer_getoverrun_linux, timer_id, 0);
 }
-long timer_delete_linux(timer_t timer_id) {
+long timer_delete_linux(int timer_id) {
   return Syscall1_linux(NR_timer_delete_linux, timer_id, 0);
 }
 // 16f. Timers accessible via file descriptors
 long timerfd_create_linux(int clockid, int flags) {
   return Syscall2_linux(NR_timerfd_create_linux, clockid, flags, 0);
 }
-// Disabled wrapper: long timerfd_settime_linux(int ufd, int flags, const __kernel_itimerspec *utmr, __kernel_itimerspec *otmr);
+// Disabled wrapper: long timerfd_settime_linux(int ufd, int flags, const __kernel_itimerspec_linux *utmr, __kernel_itimerspec_linux *otmr);
 long timerfd_settime64_linux(int ufd, int flags, const __kernel_timespec_linux *utmr, __kernel_timespec_linux *otmr) {
+#if defined(__x86_64__) || defined(__aarch64__) || (defined(__riscv) && (__riscv_xlen == 64))
+  return Syscall4_linux(NR_timerfd_settime_linux, ufd, flags, utmr, otmr, 0);
+#else
   return Syscall4_linux(NR_timerfd_settime64_linux, ufd, flags, utmr, otmr, 0);
+#endif
 }
-// Disabled wrapper: long timerfd_gettime_linux(int ufd, __kernel_itimerspec *otmr);
+// Disabled wrapper: long timerfd_gettime_linux(int ufd, __kernel_itimerspec_linux *otmr);
 long timerfd_gettime64_linux(int ufd, __kernel_timespec_linux *otmr) {
+#if defined(__x86_64__) || defined(__aarch64__) || (defined(__riscv) && (__riscv_xlen == 64))
+  return Syscall2_linux(NR_timerfd_gettime_linux, ufd, otmr, 0);
+#else
   return Syscall2_linux(NR_timerfd_gettime64_linux, ufd, otmr, 0);
+#endif
 }
 //
 // 17. RANDOM NUMBERS
@@ -7124,6 +7497,7 @@ long timerfd_gettime64_linux(int ufd, __kernel_timespec_linux *otmr) {
 long getrandom_linux(char *buf, unsigned long count, unsigned int flags) {
   return Syscall3_linux(NR_getrandom_linux, buf, count, flags, 0);
 }
+#if 0 // WIP
 //
 // 18. USER & GROUP IDENTITY
 //
