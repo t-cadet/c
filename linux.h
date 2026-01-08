@@ -3423,6 +3423,81 @@ enum {
 #define KEYCTL_SET_TIMEOUT_linux            15
 #define KEYCTL_ASSUME_AUTHORITY_linux       16
 
+#define RLIMIT_CPU_linux              0
+#define RLIMIT_FSIZE_linux            1
+#define RLIMIT_DATA_linux             2
+#define RLIMIT_STACK_linux            3
+#define RLIMIT_CORE_linux             4
+#define RLIMIT_RSS_linux              5
+#define RLIMIT_NPROC_linux            6
+#define RLIMIT_NOFILE_linux           7
+#define RLIMIT_MEMLOCK_linux          8
+#define RLIMIT_AS_linux               9
+#define RLIMIT_LOCKS_linux            10
+#define RLIMIT_SIGPENDING_linux       11
+#define RLIMIT_MSGQUEUE_linux         12
+#define RLIMIT_NICE_linux             13
+#define RLIMIT_RTPRIO_linux           14
+#define RLIMIT_RTTIME_linux           15
+
+#define RLIM_INFINITY_linux           (~0UL)
+#define RLIM64_INFINITY_linux         (~0ULL)
+
+#define RUSAGE_SELF_linux             0
+#define RUSAGE_CHILDREN_linux         (-1)
+#define RUSAGE_BOTH_linux             (-2)
+#define RUSAGE_THREAD_linux           1
+
+#define UL_GETFSIZE_linux             1
+#define UL_SETFSIZE_linux             2
+
+#define LISTNS_CURRENT_USER_linux     0xffffffffffffffffULL
+#define NS_ID_REQ_SIZE_VER0_linux     32
+
+#define KCMP_FILE_linux               0
+#define KCMP_VM_linux                 1
+#define KCMP_FILES_linux              2
+#define KCMP_FS_linux                 3
+#define KCMP_SIGHAND_linux            4
+#define KCMP_IO_linux                 5
+#define KCMP_SYSVSEM_linux            6
+#define KCMP_EPOLL_TFD_linux          7
+
+#define PIDFD_NONBLOCK_linux             O_NONBLOCK_linux
+#define PIDFD_THREAD_linux               O_EXCL_linux
+#define PIDFD_SIGNAL_THREAD_linux        (1UL << 0)
+#define PIDFD_SIGNAL_THREAD_GROUP_linux  (1UL << 1)
+#define PIDFD_SIGNAL_PROCESS_GROUP_linux (1UL << 2)
+
+#define PTRACE_TRACEME_linux          0
+#define PTRACE_PEEKTEXT_linux         1
+#define PTRACE_PEEKDATA_linux         2
+#define PTRACE_PEEKUSR_linux          3
+#define PTRACE_POKETEXT_linux         4
+#define PTRACE_POKEDATA_linux         5
+#define PTRACE_POKEUSR_linux          6
+#define PTRACE_CONT_linux             7
+#define PTRACE_KILL_linux             8
+#define PTRACE_SINGLESTEP_linux       9
+#define PTRACE_ATTACH_linux           16
+#define PTRACE_DETACH_linux           17
+#define PTRACE_SYSCALL_linux          24
+#define PTRACE_SETOPTIONS_linux       0x4200
+#define PTRACE_GETEVENTMSG_linux      0x4201
+#define PTRACE_GETSIGINFO_linux       0x4202
+#define PTRACE_SETSIGINFO_linux       0x4203
+
+#define PTRACE_O_TRACESYSGOOD_linux    1
+#define PTRACE_O_TRACEFORK_linux       (1 << 1)
+#define PTRACE_O_TRACEVFORK_linux      (1 << 2)
+#define PTRACE_O_TRACECLONE_linux      (1 << 3)
+#define PTRACE_O_TRACEEXEC_linux       (1 << 4)
+#define PTRACE_O_TRACEVFORKDONE_linux  (1 << 5)
+#define PTRACE_O_TRACEEXIT_linux       (1 << 6)
+#define PTRACE_O_TRACESECCOMP_linux    (1 << 7)
+#define PTRACE_O_EXITKILL_linux        (1 << 20)
+#define PTRACE_O_SUSPEND_SECCOMP_linux (1 << 21)
+
 typedef struct {
   unsigned long long flags;
   unsigned long long pidfd;
@@ -5099,6 +5174,40 @@ typedef struct {
   int parent_fd;
 } landlock_path_beneath_attr_linux;
 
+typedef struct {
+  unsigned long rlim_cur;
+  unsigned long rlim_max;
+} rlimit_linux;
+
+typedef struct {
+  unsigned long long rlim_cur;
+  unsigned long long rlim_max;
+} rlimit64_linux;
+
+typedef struct {
+  long tms_utime;
+  long tms_stime;
+  long tms_cutime;
+  long tms_cstime;
+} tms_linux;
+
+typedef struct {
+  unsigned int size;
+  unsigned int spare;
+  unsigned long long ns_id;
+  struct {
+    unsigned int ns_type;
+    unsigned int spare2;
+    unsigned long long user_ns_id;
+  };
+} ns_id_req_linux;
+
+typedef struct {
+  unsigned int efd;
+  unsigned int tfd;
+  unsigned int toff;
+} kcmp_epoll_slot_linux;
+
 #define Syscall0_linux(number, ret2)                   _Syscall0_linux(number, (long*)(ret2))
 #define Syscall1_linux(number, a, ret2)                _Syscall1_linux(number, (long)(a), (long*)(ret2))
 #define Syscall2_linux(number, a, b, ret2)             _Syscall2_linux(number, (long)(a), (long)(b), (long*)(ret2))
@@ -5644,14 +5753,14 @@ long keyctl_linux(int cmd, unsigned long arg2, unsigned long arg3, unsigned long
 // 20. RESOURCE LIMITS & ACCOUNTING
 //
 // 20a. Getting and setting process resource limits
-long getrlimit_linux(unsigned int resource, rlimit *rlim);
-long setrlimit_linux(unsigned int resource, rlimit *rlim);
-long prlimit64_linux(int pid, unsigned int resource, const rlimit64 *new_rlim, rlimit64 *old_rlim);
-long ugetrlimit_linux(unsigned int resource, rlimit *rlim);
-long ulimit_linux(int cmd, long newval);
+// Disabled wrapper: long getrlimit_linux(unsigned int resource, rlimit_linux *rlim);
+// Disabled wrapper: long setrlimit_linux(unsigned int resource, rlimit_linux *rlim);
+long prlimit64_linux(int pid, unsigned int resource, const rlimit64_linux *new_rlim, rlimit64_linux *old_rlim);
+// Disabled wrapper: long ugetrlimit_linux(unsigned int resource, rlimit_linux *rlim);
+// Disabled wrapper: long ulimit_linux(int cmd, long newval);
 // 20b. Getting resource usage and time statistics
 long getrusage_linux(int who, rusage_linux *ru);
-long times_linux(tms *tbuf);
+long times_linux(tms_linux *tbuf);
 // 20c. System-wide process accounting
 long acct_linux(const char *name);
 //
@@ -5659,7 +5768,7 @@ long acct_linux(const char *name);
 //
 long unshare_linux(unsigned long unshare_flags);
 long setns_linux(int fd, int nstype);
-long listns_linux(const ns_id_req *req, unsigned long long *ns_ids, unsigned long nr_ns_ids, unsigned int flags);
+long listns_linux(const ns_id_req_linux *req, unsigned long long *ns_ids, unsigned long nr_ns_ids, unsigned int flags);
 //
 // 22. PROCESS INSPECTION & CONTROL
 //
@@ -5673,7 +5782,7 @@ long pidfd_send_signal_linux(int pidfd, int sig, siginfo_t_linux *info, unsigned
 long process_vm_readv_linux(int pid, const iovec_linux *lvec, unsigned long liovcnt, const iovec_linux *rvec, unsigned long riovcnt, unsigned long flags);
 long process_vm_writev_linux(int pid, const iovec_linux *lvec, unsigned long liovcnt, const iovec_linux *rvec, unsigned long riovcnt, unsigned long flags);
 // 22d. Process tracing
-long ptrace_linux(long request, long pid, unsigned long addr, unsigned long data);
+long ptrace_linux(long op, int pid, void *addr, void *data);
 //
 // 23. SYSTEM INFORMATION
 //
@@ -7866,26 +7975,18 @@ long keyctl_linux(int cmd, unsigned long arg2, unsigned long arg3, unsigned long
 // 20. RESOURCE LIMITS & ACCOUNTING
 //
 // 20a. Getting and setting process resource limits
-long getrlimit_linux(unsigned int resource, rlimit *rlim) {
-  return Syscall2_linux(NR_getrlimit_linux, resource, rlim, 0);
-}
-long setrlimit_linux(unsigned int resource, rlimit *rlim) {
-  return Syscall2_linux(NR_setrlimit_linux, resource, rlim, 0);
-}
-long prlimit64_linux(int pid, unsigned int resource, const rlimit64 *new_rlim, rlimit64 *old_rlim) {
+// Disabled wrapper: long getrlimit_linux(unsigned int resource, rlimit_linux *rlim);
+// Disabled wrapper: long setrlimit_linux(unsigned int resource, rlimit_linux *rlim);
+long prlimit64_linux(int pid, unsigned int resource, const rlimit64_linux *new_rlim, rlimit64_linux *old_rlim) {
   return Syscall4_linux(NR_prlimit64_linux, pid, resource, new_rlim, old_rlim, 0);
 }
-long ugetrlimit_linux(unsigned int resource, rlimit *rlim) {
-  return Syscall2_linux(NR_ugetrlimit_linux, resource, rlim, 0);
-}
-long ulimit_linux(int cmd, long newval) {
-  return Syscall2_linux(NR_ulimit_linux, cmd, newval, 0);
-}
+// Disabled wrapper: long ugetrlimit_linux(unsigned int resource, rlimit_linux *rlim);
+// Disabled wrapper: long ulimit_linux(int cmd, long newval);
 // 20b. Getting resource usage and time statistics
 long getrusage_linux(int who, rusage_linux *ru) {
   return Syscall2_linux(NR_getrusage_linux, who, ru, 0);
 }
-long times_linux(tms *tbuf) {
+long times_linux(tms_linux *tbuf) {
   return Syscall1_linux(NR_times_linux, tbuf, 0);
 }
 // 20c. System-wide process accounting
@@ -7901,7 +8002,7 @@ long unshare_linux(unsigned long unshare_flags) {
 long setns_linux(int fd, int nstype) {
   return Syscall2_linux(NR_setns_linux, fd, nstype, 0);
 }
-long listns_linux(const ns_id_req *req, unsigned long long *ns_ids, unsigned long nr_ns_ids, unsigned int flags) {
+long listns_linux(const ns_id_req_linux *req, unsigned long long *ns_ids, unsigned long nr_ns_ids, unsigned int flags) {
   return Syscall4_linux(NR_listns_linux, req, ns_ids, nr_ns_ids, flags, 0);
 }
 //
@@ -7929,8 +8030,8 @@ long process_vm_writev_linux(int pid, const iovec_linux *lvec, unsigned long lio
   return Syscall6_linux(NR_process_vm_writev_linux, pid, lvec, liovcnt, rvec, riovcnt, flags, 0);
 }
 // 22d. Process tracing
-long ptrace_linux(long request, long pid, unsigned long addr, unsigned long data) {
-  return Syscall4_linux(NR_ptrace_linux, request, pid, addr, data, 0);
+long ptrace_linux(long op, int pid, void *addr, void *data) {
+  return Syscall4_linux(NR_ptrace_linux, op, pid, addr, data, 0);
 }
 //
 // 23. SYSTEM INFORMATION
