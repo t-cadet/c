@@ -800,10 +800,6 @@
 /*║                                          23d. Getting CPU and NUMA node information                                          ║*/
 /*╟──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╢*/
 /*║*/ #define NR_getcpu_linux                       BY_ARCH_linux(      309,      168,      168,      318,      345,      168) /*║*/
-/*╟──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╢*/
-/*║                                         23e. Kernel filesystem information interface                                         ║*/
-/*╟──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╢*/
-/*║*/ #define NR_sysfs_linux                        BY_ARCH_linux(      139,     void,     void,      135,      135,     void) /*║*/
 /*╠══════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════╣*/
 /*║                                                      24. KERNEL MODULES                                                      ║*/
 /*║                                       Loading, unloading, and querying kernel modules                                        ║*/
@@ -866,13 +862,7 @@
 /*║*/ #define NR_ioprio_set_linux                   BY_ARCH_linux(      251,       30,       30,      289,      314,       30) /*║*/
 /*║*/ #define NR_ioprio_get_linux                   BY_ARCH_linux(      252,       31,       31,      290,      315,       31) /*║*/
 /*╟──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╢*/
-/*║                                             27c. PCI device configuration access                                             ║*/
-/*╟──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╢*/
-/*║*/ #define NR_pciconfig_read_linux               BY_ARCH_linux(     void,     void,     void,     void,      272,     void) /*║*/
-/*║*/ #define NR_pciconfig_write_linux              BY_ARCH_linux(     void,     void,     void,     void,      273,     void) /*║*/
-/*║*/ #define NR_pciconfig_iobase_linux             BY_ARCH_linux(     void,     void,     void,     void,      271,     void) /*║*/
-/*╟──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╢*/
-/*║                                              27d. CPU cache control operations                                               ║*/
+/*║                                              27c. CPU cache control operations                                               ║*/
 /*╟──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╢*/
 /*║*/ #define NR_cacheflush_linux                   BY_ARCH_linux(     void,     void,     void,     void, 0x0f0002,     void) /*║*/
 /*║*/ #define NR_cachestat_linux                    BY_ARCH_linux(      451,      451,      451,      451,      451,      451) /*║*/
@@ -897,10 +887,6 @@
 /*╟──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╢*/
 /*║*/ #define NR_riscv_flush_icache_linux           BY_ARCH_linux(     void,     void,      259,     void,     void,      259) /*║*/
 /*║*/ #define NR_riscv_hwprobe_linux                BY_ARCH_linux(     void,     void,      258,     void,     void,      258) /*║*/
-/*╟──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╢*/
-/*║                                             28d. Intel MPX support (deprecated)                                              ║*/
-/*╟──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╢*/
-/*║*/ #define NR_mpx_linux                          BY_ARCH_linux(     void,     void,     void,       56,     void,     void) /*║*/
 /*╠══════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════╣*/
 /*║                                                29. ADVANCED EXECUTION CONTROL                                                ║*/
 /*╠══════════════════════════════════════════════════════════════╦═════════╤═════════╤═════════╤═════════╤═════════╤═════════════╣*/
@@ -920,6 +906,11 @@
 /*╠══════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════╣*/
 /*║                                             30. LEGACY, OBSOLETE & UNIMPLEMENTED                                             ║*/
 /*╠══════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════╣*/
+/*║*/ #define NR_mpx_linux                          BY_ARCH_linux(     void,     void,     void,       56,     void,     void) /*║*/
+/*║*/ #define NR_pciconfig_read_linux               BY_ARCH_linux(     void,     void,     void,     void,      272,     void) /*║*/
+/*║*/ #define NR_pciconfig_write_linux              BY_ARCH_linux(     void,     void,     void,     void,      273,     void) /*║*/
+/*║*/ #define NR_pciconfig_iobase_linux             BY_ARCH_linux(     void,     void,     void,     void,      271,     void) /*║*/
+/*║*/ #define NR_sysfs_linux                        BY_ARCH_linux(      139,     void,     void,      135,      135,     void) /*║*/
 /*║*/ #define NR__sysctl_linux                      BY_ARCH_linux(      156,     void,     void,      149,      149,     void) /*║*/
 /*║*/ #define NR_ipc_linux                          BY_ARCH_linux(     void,     void,     void,      117,     void,     void) /*║*/
 /*║*/ #define NR_profil_linux                       BY_ARCH_linux(     void,     void,     void,       98,     void,     void) /*║*/
@@ -976,7 +967,105 @@
 #define EPIPE_linux            32
 #define EDOM_linux             33
 #define ERANGE_linux           34
+#define EDEADLK_linux          35
+#define ENAMETOOLONG_linux     36
+#define ENOLCK_linux           37
 #define ENOSYS_linux           38
+#define ENOTEMPTY_linux        39
+#define ELOOP_linux            40
+#define EWOULDBLOCK_linux      EAGAIN_linux
+#define ENOMSG_linux           42
+#define EIDRM_linux            43
+#define ECHRNG_linux           44
+#define EL2NSYNC_linux         45
+#define EL3HLT_linux           46
+#define EL3RST_linux           47
+#define ELNRNG_linux           48
+#define EUNATCH_linux          49
+#define ENOCSI_linux           50
+#define EL2HLT_linux           51
+#define EBADE_linux            52
+#define EBADR_linux            53
+#define EXFULL_linux           54
+#define ENOANO_linux           55
+#define EBADRQC_linux          56
+#define EBADSLT_linux          57
+#define EDEADLOCK_linux        EDEADLK_linux
+#define EBFONT_linux           59
+#define ENOSTR_linux           60
+#define ENODATA_linux          61
+#define ETIME_linux            62
+#define ENOSR_linux            63
+#define ENONET_linux           64
+#define ENOPKG_linux           65
+#define EREMOTE_linux          66
+#define ENOLINK_linux          67
+#define EADV_linux             68
+#define ESRMNT_linux           69
+#define ECOMM_linux            70
+#define EPROTO_linux           71
+#define EMULTIHOP_linux        72
+#define EDOTDOT_linux          73
+#define EBADMSG_linux          74
+#define EOVERFLOW_linux        75
+#define ENOTUNIQ_linux         76
+#define EBADFD_linux           77
+#define EREMCHG_linux          78
+#define ELIBACC_linux          79
+#define ELIBBAD_linux          80
+#define ELIBSCN_linux          81
+#define ELIBMAX_linux          82
+#define ELIBEXEC_linux         83
+#define EILSEQ_linux           84
+#define ERESTART_linux         85
+#define ESTRPIPE_linux         86
+#define EUSERS_linux           87
+#define ENOTSOCK_linux         88
+#define EDESTADDRREQ_linux     89
+#define EMSGSIZE_linux         90
+#define EPROTOTYPE_linux       91
+#define ENOPROTOOPT_linux      92
+#define EPROTONOSUPPORT_linux  93
+#define ESOCKTNOSUPPORT_linux  94
+#define EOPNOTSUPP_linux       95
+#define EPFNOSUPPORT_linux     96
+#define EAFNOSUPPORT_linux     97
+#define EADDRINUSE_linux       98
+#define EADDRNOTAVAIL_linux    99
+#define ENETDOWN_linux         100
+#define ENETUNREACH_linux      101
+#define ENETRESET_linux        102
+#define ECONNABORTED_linux     103
+#define ECONNRESET_linux       104
+#define ENOBUFS_linux          105
+#define EISCONN_linux          106
+#define ENOTCONN_linux         107
+#define ESHUTDOWN_linux        108
+#define ETOOMANYREFS_linux     109
+#define ETIMEDOUT_linux        110
+#define ECONNREFUSED_linux     111
+#define EHOSTDOWN_linux        112
+#define EHOSTUNREACH_linux     113
+#define EALREADY_linux         114
+#define EINPROGRESS_linux      115
+#define ESTALE_linux           116
+#define EUCLEAN_linux          117
+#define ENOTNAM_linux          118
+#define ENAVAIL_linux          119
+#define EISNAM_linux           120
+#define EREMOTEIO_linux        121
+#define EDQUOT_linux           122
+#define ENOMEDIUM_linux        123
+#define EMEDIUMTYPE_linux      124
+#define ECANCELED_linux        125
+#define ENOKEY_linux           126
+#define EKEYEXPIRED_linux      127
+#define EKEYREVOKED_linux      128
+#define EKEYREJECTED_linux     129
+#define EOWNERDEAD_linux       130
+#define ENOTRECOVERABLE_linux  131
+#define ERFKILL_linux          132
+#define EHWPOISON_linux        133
 
 #define CSIGNAL_linux              0x000000ff
 #define CLONE_VM_linux             0x00000100
@@ -3498,6 +3587,133 @@ enum {
 #define PTRACE_O_EXITKILL_linux        (1 << 20)
 #define PTRACE_O_SUSPEND_SECCOMP_linux (1 << 21)
 
+#define NEW_UTS_LEN_linux             64
+
+#define SYSLOG_ACTION_CLOSE_linux         0
+#define SYSLOG_ACTION_OPEN_linux          1
+#define SYSLOG_ACTION_READ_linux          2
+#define SYSLOG_ACTION_READ_ALL_linux      3
+#define SYSLOG_ACTION_READ_CLEAR_linux    4
+#define SYSLOG_ACTION_CLEAR_linux         5
+#define SYSLOG_ACTION_CONSOLE_OFF_linux   6
+#define SYSLOG_ACTION_CONSOLE_ON_linux    7
+#define SYSLOG_ACTION_CONSOLE_LEVEL_linux 8
+#define SYSLOG_ACTION_SIZE_UNREAD_linux   9
+#define SYSLOG_ACTION_SIZE_BUFFER_linux   10
+
+#define SYSFS_GETFSIND_linux           1
+#define SYSFS_GETFSTYP_linux           2
+#define SYSFS_GETNFSTYP_linux          3
+
+#define MODULE_INIT_IGNORE_MODVERSIONS_linux 1
+#define MODULE_INIT_IGNORE_VERMAGIC_linux    2
+#define MODULE_INIT_COMPRESSED_FILE_linux    4
+
+#define DELETE_MODULE_NONBLOCK_linux         O_NONBLOCK_linux
+#define DELETE_MODULE_TRUNC_linux            O_TRUNC_linux
+
+#define QM_MODULES_linux                     1
+#define QM_DEPS_linux                        2
+#define QM_REFS_linux                        3
+#define QM_SYMBOLS_linux                     4
+#define QM_INFO_linux                        5
+
+#define LINUX_REBOOT_MAGIC1_linux      0xfee1dead
+#define LINUX_REBOOT_MAGIC2_linux      672274793
+#define LINUX_REBOOT_MAGIC2A_linux     85072278
+#define LINUX_REBOOT_MAGIC2B_linux     369367448
+#define LINUX_REBOOT_MAGIC2C_linux     537993216
+
+#define LINUX_REBOOT_CMD_RESTART_linux    0x01234567
+#define LINUX_REBOOT_CMD_HALT_linux       0xCDEF0123
+#define LINUX_REBOOT_CMD_CAD_ON_linux     0x89ABCDEF
+#define LINUX_REBOOT_CMD_CAD_OFF_linux    0x00000000
+#define LINUX_REBOOT_CMD_POWER_OFF_linux  0x4321FEDC
+#define LINUX_REBOOT_CMD_RESTART2_linux   0xA1B2C3D4
+#define LINUX_REBOOT_CMD_SW_SUSPEND_linux 0xD000FCE2
+#define LINUX_REBOOT_CMD_KEXEC_linux      0x45584543
+
+#define SWAP_FLAG_PREFER_linux         0x8000
+#define SWAP_FLAG_PRIO_MASK_linux      0x7fff
+#define SWAP_FLAG_DISCARD_linux        0x10000
+#define SWAP_FLAG_DISCARD_ONCE_linux   0x20000
+#define SWAP_FLAG_DISCARD_PAGES_linux  0x40000
+
+#define KEXEC_ON_CRASH_linux           0x00000001
+#define KEXEC_FILE_UNLOAD_linux        0x00000001
+#define KEXEC_FILE_ON_CRASH_linux      0x00000002
+#define KEXEC_FILE_NO_INITRAMFS_linux  0x00000004
+#define KEXEC_FILE_DEBUG_linux         0x00000008
+#define KEXEC_FILE_NO_CMA_linux        0x00000010
+#define KEXEC_FILE_FORCE_DTB_linux     0x00000020
+
+#define PERF_TYPE_HARDWARE_linux      0
+#define PERF_TYPE_SOFTWARE_linux      1
+#define PERF_TYPE_TRACEPOINT_linux    2
+#define PERF_TYPE_HW_CACHE_linux      3
+#define PERF_TYPE_RAW_linux           4
+#define PERF_TYPE_BREAKPOINT_linux    5
+
+#define PERF_FLAG_FD_NO_GROUP_linux   (1UL << 0)
+#define PERF_FLAG_FD_OUTPUT_linux     (1UL << 1)
+#define PERF_FLAG_PID_CGROUP_linux    (1UL << 2)
+#define PERF_FLAG_FD_CLOEXEC_linux    (1UL << 3)
+
+#define BPF_MAP_CREATE_linux          0
+#define BPF_MAP_LOOKUP_ELEM_linux     1
+#define BPF_MAP_UPDATE_ELEM_linux     2
+#define BPF_MAP_DELETE_ELEM_linux     3
+#define BPF_MAP_GET_NEXT_KEY_linux    4
+#define BPF_PROG_LOAD_linux           5
+#define BPF_OBJ_PIN_linux             6
+#define BPF_OBJ_GET_linux             7
+
+#define IOPRIO_CLASS_NONE_linux       0
+#define IOPRIO_CLASS_RT_linux         1
+#define IOPRIO_CLASS_BE_linux         2
+#define IOPRIO_CLASS_IDLE_linux       3
+
+#define IOPRIO_WHO_PROCESS_linux      1
+#define IOPRIO_WHO_PGRP_linux         2
+#define IOPRIO_WHO_USER_linux         3
+
+#define ICACHE_linux                  1
+#define DCACHE_linux                  2
+#define BCACHE_linux                  (ICACHE_linux | DCACHE_linux)
+
+#ifdef __x86_64__
+#define ARCH_SET_GS_linux             0x1001
+#define ARCH_SET_FS_linux             0x1002
+#define ARCH_GET_FS_linux             0x1003
+#define ARCH_GET_GS_linux             0x1004
+#define ARCH_GET_CPUID_linux          0x1011
+#define ARCH_SET_CPUID_linux          0x1012
+#endif
+
+#ifdef __i386__
+#define VM86_SCREEN_BITMAP_linux      0x0001
+#endif
+
+#ifdef __riscv
+#define RISCV_HWPROBE_KEY_MVENDORID_linux         0
+#define RISCV_HWPROBE_KEY_MARCHID_linux           1
+#define RISCV_HWPROBE_KEY_MIMPID_linux            2
+#define RISCV_HWPROBE_KEY_BASE_BEHAVIOR_linux     3
+#define RISCV_HWPROBE_KEY_IMA_EXT_0_linux         4
+#define RISCV_HWPROBE_KEY_CPUPERF_0_linux         5
+#define RISCV_HWPROBE_KEY_ZICBOZ_BLOCK_SIZE_linux 6
+
+#define SYS_RISCV_FLUSH_ICACHE_LOCAL_linux        1UL
+#define SYS_RISCV_FLUSH_ICACHE_ALL_linux          1UL
+#endif
+
+#define RSEQ_CPU_ID_UNINITIALIZED_linux        (-1)
+#define RSEQ_CPU_ID_REGISTRATION_FAILED_linux  (-2)
+
+#define RSEQ_CS_FLAG_NO_RESTART_ON_PREEMPT_linux (1U << 0)
+#define RSEQ_CS_FLAG_NO_RESTART_ON_SIGNAL_linux  (1U << 1)
+#define RSEQ_CS_FLAG_NO_RESTART_ON_MIGRATE_linux (1U << 2)
+
 typedef struct {
   unsigned long long flags;
   unsigned long long pidfd;
@@ -5208,6 +5424,422 @@ typedef struct {
   unsigned int toff;
 } kcmp_epoll_slot_linux;
 
+typedef struct {
+  char sysname[NEW_UTS_LEN_linux + 1];
+  char nodename[NEW_UTS_LEN_linux + 1];
+  char release[NEW_UTS_LEN_linux + 1];
+  char version[NEW_UTS_LEN_linux + 1];
+  char machine[NEW_UTS_LEN_linux + 1];
+  char domainname[NEW_UTS_LEN_linux + 1];
+} utsname_linux;
+
+typedef struct {
+  char sysname[65];
+  char nodename[65];
+  char release[65];
+  char version[65];
+  char machine[65];
+} old_utsname_linux;
+
+typedef struct {
+  char sysname[9];
+  char nodename[9];
+  char release[9];
+  char version[9];
+  char machine[9];
+} oldold_utsname_linux;
+
+typedef struct {
+  long uptime;
+  unsigned long loads[3];
+  unsigned long totalram;
+  unsigned long freeram;
+  unsigned long sharedram;
+  unsigned long bufferram;
+  unsigned long totalswap;
+  unsigned long freeswap;
+  unsigned short procs;
+  unsigned short pad;
+  unsigned long totalhigh;
+  unsigned long freehigh;
+  unsigned int mem_unit;
+  char _f[20 - 2 * sizeof(long) - sizeof(unsigned int)];
+} sysinfo_t_linux;
+
+typedef struct {
+  unsigned long blob[128 / sizeof(long)];
+} getcpu_cache_linux;
+
+typedef struct {
+  unsigned long value;
+  char name[60];
+} kernel_sym_linux;
+
+typedef struct {
+  const void *buf;
+  unsigned long bufsz;
+  const void *mem;
+  unsigned long memsz;
+} kexec_segment_linux;
+
+typedef struct {
+  unsigned int type;
+  unsigned int size;
+  unsigned long long config;
+  union {
+    unsigned long long sample_period;
+    unsigned long long sample_freq;
+  };
+  unsigned long long sample_type;
+  unsigned long long read_format;
+  unsigned long long disabled       :  1,
+                     inherit        :  1,
+                     pinned         :  1,
+                     exclusive      :  1,
+                     exclude_user   :  1,
+                     exclude_kernel :  1,
+                     exclude_hv     :  1,
+                     exclude_idle   :  1,
+                     mmap           :  1,
+                     comm           :  1,
+                     freq           :  1,
+                     inherit_stat   :  1,
+                     enable_on_exec :  1,
+                     task           :  1,
+                     watermark      :  1,
+                     precise_ip     :  2,
+                     mmap_data      :  1,
+                     sample_id_all  :  1,
+                     exclude_host   :  1,
+                     exclude_guest  :  1,
+                     exclude_callchain_kernel : 1,
+                     exclude_callchain_user   : 1,
+                     mmap2          :  1,
+                     comm_exec      :  1,
+                     use_clockid    :  1,
+                     context_switch :  1,
+                     write_backward :  1,
+                     namespaces     :  1,
+                     ksymbol        :  1,
+                     bpf_event      :  1,
+                     aux_output     :  1,
+                     cgroup         :  1,
+                     text_poke      :  1,
+                     build_id       :  1,
+                     inherit_thread :  1,
+                     remove_on_exec :  1,
+                     sigtrap        :  1,
+                     __reserved_1   : 26;
+  union {
+    unsigned int wakeup_events;
+    unsigned int wakeup_watermark;
+  };
+  unsigned int bp_type;
+  union {
+    unsigned long long bp_addr;
+    unsigned long long kprobe_func;
+    unsigned long long uprobe_path;
+    unsigned long long config1;
+  };
+  union {
+    unsigned long long bp_len;
+    unsigned long long kprobe_addr;
+    unsigned long long probe_offset;
+    unsigned long long config2;
+  };
+  unsigned long long branch_sample_type;
+  unsigned long long sample_regs_user;
+  unsigned int sample_stack_user;
+  int clockid;
+  unsigned long long sample_regs_intr;
+  unsigned int aux_watermark;
+  unsigned short sample_max_stack;
+  unsigned short __reserved_2;
+  unsigned int aux_sample_size;
+  unsigned int __reserved_3;
+  unsigned long long sig_data;
+  unsigned long long config3;
+  unsigned long long config4;
+} perf_event_attr_linux;
+
+typedef union {
+  struct {
+    unsigned int map_type;
+    unsigned int key_size;
+    unsigned int value_size;
+    unsigned int max_entries;
+    unsigned int map_flags;
+    unsigned int inner_map_fd;
+    unsigned int numa_node;
+    char map_name[16];
+    unsigned int map_ifindex;
+    unsigned int btf_fd;
+    unsigned int btf_key_type_id;
+    unsigned int btf_value_type_id;
+    unsigned int btf_vmlinux_value_type_id;
+    unsigned long long map_extra;
+    int value_type_btf_obj_fd;
+    int map_token_fd;
+    unsigned long long excl_prog_hash;
+    unsigned int excl_prog_hash_size;
+  };
+  struct {
+    unsigned int map_fd;
+    unsigned long long key;
+    union {
+      unsigned long long value;
+      unsigned long long next_key;
+    };
+    unsigned long long flags;
+  };
+  struct {
+    unsigned long long in_batch;
+    unsigned long long out_batch;
+    unsigned long long keys;
+    unsigned long long values;
+    unsigned int count;
+    unsigned int map_fd;
+    unsigned long long elem_flags;
+    unsigned long long flags;
+  } batch;
+  struct {
+    unsigned int prog_type;
+    unsigned int insn_cnt;
+    unsigned long long insns;
+    unsigned long long license;
+    unsigned int log_level;
+    unsigned int log_size;
+    unsigned long long log_buf;
+    unsigned int kern_version;
+    unsigned int prog_flags;
+    char prog_name[16];
+    unsigned int prog_ifindex;
+    unsigned int expected_attach_type;
+    unsigned int prog_btf_fd;
+    unsigned int func_info_rec_size;
+    unsigned long long func_info;
+    unsigned int func_info_cnt;
+    unsigned int line_info_rec_size;
+    unsigned long long line_info;
+    unsigned int line_info_cnt;
+    unsigned int attach_btf_id;
+    union {
+      unsigned int attach_prog_fd;
+      unsigned int attach_btf_obj_fd;
+    };
+    unsigned int core_relo_cnt;
+    unsigned long long fd_array;
+    unsigned long long core_relos;
+    unsigned int core_relo_rec_size;
+    unsigned int log_true_size;
+    int prog_token_fd;
+    unsigned int fd_array_cnt;
+    unsigned long long signature;
+    unsigned int signature_size;
+    int keyring_id;
+  };
+  struct {
+    unsigned long long pathname;
+    unsigned int bpf_fd;
+    unsigned int file_flags;
+    int path_fd;
+  };
+  struct {
+    union {
+      unsigned int target_fd;
+      unsigned int target_ifindex;
+    };
+    unsigned int attach_bpf_fd;
+    unsigned int attach_type;
+    unsigned int attach_flags;
+    unsigned int replace_bpf_fd;
+    union {
+      unsigned int relative_fd;
+      unsigned int relative_id;
+    };
+    unsigned long long expected_revision;
+  };
+  struct {
+    unsigned int prog_fd;
+    unsigned int retval;
+    unsigned int data_size_in;
+    unsigned int data_size_out;
+    unsigned long long data_in;
+    unsigned long long data_out;
+    unsigned int repeat;
+    unsigned int duration;
+    unsigned int ctx_size_in;
+    unsigned int ctx_size_out;
+    unsigned long long ctx_in;
+    unsigned long long ctx_out;
+    unsigned int flags;
+    unsigned int cpu;
+    unsigned int batch_size;
+  } test;
+  struct {
+    union {
+      unsigned int start_id;
+      unsigned int prog_id;
+      unsigned int map_id;
+      unsigned int btf_id;
+      unsigned int link_id;
+    };
+    unsigned int next_id;
+    unsigned int open_flags;
+    int fd_by_id_token_fd;
+  };
+  struct {
+    unsigned int bpf_fd;
+    unsigned int info_len;
+    unsigned long long info;
+  } info;
+  struct {
+    union {
+      unsigned int target_fd;
+      unsigned int target_ifindex;
+    };
+    unsigned int attach_type;
+    unsigned int query_flags;
+    unsigned int attach_flags;
+    unsigned long long prog_ids;
+    union {
+      unsigned int prog_cnt;
+      unsigned int count;
+    };
+    unsigned int __pad;
+    unsigned long long prog_attach_flags;
+    unsigned long long link_ids;
+    unsigned long long link_attach_flags;
+    unsigned long long revision;
+  } query;
+  struct {
+    unsigned long long name;
+    unsigned int prog_fd;
+    unsigned int __pad;
+    unsigned long long cookie;
+  } raw_tracepoint;
+  struct {
+    unsigned long long btf;
+    unsigned long long btf_log_buf;
+    unsigned int btf_size;
+    unsigned int btf_log_size;
+    unsigned int btf_log_level;
+    unsigned int btf_log_true_size;
+    unsigned int btf_flags;
+    int btf_token_fd;
+  };
+  struct {
+    unsigned int pid;
+    unsigned int fd;
+    unsigned int flags;
+    unsigned int buf_len;
+    unsigned long long buf;
+    unsigned int prog_id;
+    unsigned int fd_type;
+    unsigned long long probe_offset;
+    unsigned long long probe_addr;
+  } task_fd_query;
+  struct {
+    union {
+      unsigned int prog_fd;
+      unsigned int map_fd;
+    };
+    union {
+      unsigned int target_fd;
+      unsigned int target_ifindex;
+    };
+    unsigned int attach_type;
+    unsigned int flags;
+    union {
+      unsigned int target_btf_id;
+      struct {
+        unsigned long long iter_info;
+        unsigned int iter_info_len;
+      };
+      unsigned long long perf_event_cookie;
+      unsigned int kprobe_multi_flags;
+      unsigned int uprobe_multi_flags;
+    };
+  } link_create;
+  struct {
+    unsigned int link_fd;
+    unsigned int new_prog_fd;
+    unsigned int flags;
+    unsigned int old_prog_fd;
+  } link_update;
+  struct {
+    unsigned int link_fd;
+  };
+  struct {
+    unsigned int prog_fd;
+    unsigned int map_fd;
+    unsigned int flags;
+  } prog_bind_map;
+  struct {
+    unsigned int flags;
+    unsigned int bpffs_fd;
+  } token_create;
+} bpf_attr_linux;
+
+typedef struct {
+  unsigned long long off;
+  unsigned long long len;
+} cachestat_range_linux;
+
+typedef struct {
+  unsigned long long nr_cache;
+  unsigned long long nr_dirty;
+  unsigned long long nr_writeback;
+  unsigned long long nr_evicted;
+  unsigned long long nr_recently_evicted;
+} cachestat_t_linux;
+
+#ifdef __i386__
+typedef struct {
+  long ebx, ecx, edx, esi, edi, ebp, eax;
+  long __null_ds, __null_es, __null_fs, __null_gs;
+  long orig_eax, eip;
+  unsigned short cs, __csh;
+  long eflags, esp;
+  unsigned short ss, __ssh;
+  unsigned short es, __esh;
+  unsigned short ds, __dsh;
+  unsigned short fs, __fsh;
+  unsigned short gs, __gsh;
+} vm86_regs_linux;
+
+typedef struct {
+  vm86_regs_linux regs;
+  unsigned long flags;
+  unsigned long screen_bitmap;
+  unsigned long cpu_type;
+  struct { unsigned long __map[8]; } int_revectored;
+  struct { unsigned long __map[8]; } int21_revectored;
+} vm86_struct_linux;
+#endif
+
+typedef struct {
+  long long key;
+  unsigned long long value;
+} riscv_hwprobe_linux;
+
+typedef struct {
+  unsigned int version;
+  unsigned int flags;
+  unsigned long long start_ip;
+  unsigned long long post_commit_offset;
+  unsigned long long abort_ip;
+} rseq_cs_linux;
+
+typedef struct {
+  unsigned int cpu_id_start;
+  unsigned int cpu_id;
+  unsigned long long rseq_cs;
+  unsigned int flags;
+  unsigned int node_id;
+  unsigned int mm_cid;
+} rseq_t_linux;
+
 #define Syscall0_linux(number, ret2)                   _Syscall0_linux(number, (long*)(ret2))
 #define Syscall1_linux(number, a, ret2)                _Syscall1_linux(number, (long)(a), (long*)(ret2))
 #define Syscall2_linux(number, a, b, ret2)             _Syscall2_linux(number, (long)(a), (long)(b), (long*)(ret2))
@@ -5748,7 +6380,6 @@ long landlock_restrict_self_linux(int ruleset_fd, unsigned int flags);
 long add_key_linux(const char *_type, const char *_description, const void *_payload, unsigned long plen, int destringid);
 long request_key_linux(const char *_type, const char *_description, const char *_callout_info, int destringid);
 long keyctl_linux(int cmd, unsigned long arg2, unsigned long arg3, unsigned long arg4, unsigned long arg5);
-#if 0 // WIP
 //
 // 20. RESOURCE LIMITS & ACCOUNTING
 //
@@ -5787,91 +6418,99 @@ long ptrace_linux(long op, int pid, void *addr, void *data);
 // 23. SYSTEM INFORMATION
 //
 // 23a. System name and domain information
-long uname_linux(old_utsname *);
-long olduname_linux(oldold_utsname *);
-long oldolduname_linux(oldold_utsname *name);
-long gethostname_linux(char *name, int len);
-long sethostname_linux(char *name, int len);
-long setdomainname_linux(char *name, int len);
+long uname_linux(utsname_linux *name);
+// Disabled wrapper: long olduname_linux(old_utsname *name);
+// Disabled wrapper: long oldolduname_linux(oldold_utsname *name);
+long gethostname_linux(char *name, unsigned long len);
+long sethostname_linux(const char *name, unsigned long len);
+long setdomainname_linux(const char *name, unsigned long len);
 // 23b. Overall system information and statistics
-long sysinfo_linux(sysinfo *info);
+long sysinfo_linux(sysinfo_t_linux *info);
 // 23c. Reading kernel log messages
 long syslog_linux(int type, char *buf, int len);
 // 23d. Getting CPU and NUMA node information
-long getcpu_linux(unsigned *cpu, unsigned *node, getcpu_cache *cache);
-// 23e. Kernel filesystem information interface
-long sysfs_linux(int option, unsigned long arg1, unsigned long arg2);
+long getcpu_linux(unsigned int *cpu, unsigned int *node, getcpu_cache_linux *cache);
 //
 // 24. KERNEL MODULES
 //
-long create_module_linux(const char *name, unsigned long size);
-long init_module_linux(void *umod, unsigned long len, const char *uargs);
+// Disabled wrapper: long create_module_linux(const char *name, unsigned long size);
+long init_module_linux(const void *umod, unsigned long len, const char *uargs);
 long finit_module_linux(int fd, const char *uargs, int flags);
 long delete_module_linux(const char *name_user, unsigned int flags);
-long query_module_linux(const char *name, int which, void *buf, unsigned long bufsize, unsigned long *ret);
-long get_kernel_syms_linux(kernel_sym *table);
+// Disabled wrapper: long query_module_linux(const char *name, int which, void *buf, unsigned long bufsize, unsigned long *ret);
+// Disabled wrapper: long get_kernel_syms_linux(kernel_sym_linux *table);
 //
 // 25. SYSTEM CONTROL & ADMINISTRATION
 //
 // 25a. Rebooting and shutting down the system
-long reboot_linux(int magic1, int magic2, unsigned int cmd, void *arg);
+long reboot_linux(int magic1, int magic2, unsigned int cmd, const void *arg);
 // 25b. Enabling and disabling swap areas
 long swapon_linux(const char *specialfile, int swap_flags);
 long swapoff_linux(const char *specialfile);
 // 25c. Loading and executing new kernels
-long kexec_load_linux(unsigned long entry, unsigned long nr_segments, kexec_segment *segments, unsigned long flags);
+long kexec_load_linux(unsigned long entry, unsigned long nr_segments, const kexec_segment_linux *segments, unsigned long flags);
+#if !defined(__i386__)
 long kexec_file_load_linux(int kernel_fd, int initrd_fd, unsigned long cmdline_len, const char *cmdline_ptr, unsigned long flags);
+#endif
 // 25d. Other system administration operations
 long vhangup_linux(void);
 //
 // 26. PERFORMANCE MONITORING & TRACING
 //
 // 26a. Hardware and software performance monitoring
-long perf_event_open_linux(perf_event_attr *attr_uptr, int pid, int cpu, int group_fd, unsigned long flags);
+long perf_event_open_linux(const perf_event_attr_linux *attr_uptr, int pid, int cpu, int group_fd, unsigned long flags);
 // 26b. Userspace dynamic tracing
+#if defined(__x86_64__)
 long uprobe_linux(void);
 long uretprobe_linux(void);
+#endif
 // 26c. Programmable Kernel Extensions (eBPF)
-long bpf_linux(int cmd, union bpf_attr *attr, unsigned int size);
+long bpf_linux(int cmd, bpf_attr_linux *attr, unsigned int size);
 //
 // 27. DEVICE & HARDWARE ACCESS
 //
 // 27a. Direct hardware I/O port access
+#if defined(__x86_64__) || defined(__i386__)
 long ioperm_linux(unsigned long from, unsigned long num, int on);
 long iopl_linux(unsigned int level);
+#endif
 // 27b. Setting I/O scheduling priority
 long ioprio_set_linux(int which, int who, int ioprio);
 long ioprio_get_linux(int which, int who);
-// 27c. PCI device configuration access
-long pciconfig_read_linux(unsigned long bus, unsigned long dfn, unsigned long off, unsigned long len, void *buf);
-long pciconfig_write_linux(unsigned long bus, unsigned long dfn, unsigned long off, unsigned long len, void *buf);
-long pciconfig_iobase_linux(long which, unsigned long bus, unsigned long devfn);
-// 27d. CPU cache control operations
-long cacheflush_linux(unsigned long start, unsigned long end, int flags);
-long cachestat_linux(unsigned int fd, cachestat_range *cstat_range, cachestat *cstat, unsigned int flags);
+// 27c. CPU cache control operations
+#if defined(__arm__)
+long cacheflush_linux(void *start, void *end, int flags);
+#endif
+long cachestat_linux(unsigned int fd, const cachestat_range_linux *cstat_range, cachestat_t_linux *cstat, unsigned int flags);
 //
 // 28. ARCHITECTURE-SPECIFIC OPERATIONS
 //
 // 28a. x86 architecture operations
+#if defined(__x86_64__) || defined(__i386__)
 long arch_prctl_linux(int option, unsigned long addr);
 long modify_ldt_linux(int func, void *ptr, unsigned long bytecount);
-long set_thread_area_linux(user_desc *u_info);
-long get_thread_area_linux(user_desc *u_info);
+long set_thread_area_linux(const user_desc_linux *u_info);
+long get_thread_area_linux(user_desc_linux *u_info);
+#endif
+#if defined(__i386__)
 long vm86_linux(unsigned long cmd, unsigned long arg);
-long vm86old_linux(vm86_struct *user_vm86);
+// Disabled wrapper: long vm86old_linux(vm86_struct_linux *user_vm86);
+#endif
 // 28b. ARM architecture operations
+#if defined(__arm__)
 long set_tls_linux(unsigned long val);
 long get_tls_linux(void);
+#endif
 // 28c. RISC-V architecture operations
-long riscv_flush_icache_linux(uintptr_t start, uintptr_t end, uintptr_t flags);
-long riscv_hwprobe_linux(riscv_hwprobe *pairs, unsigned long pair_count, unsigned long cpu_count, unsigned long *cpumask, unsigned int flags);
-// 28d. Intel MPX support (deprecated)
-long mpx_linux(void);
+#if defined(__riscv)
+long riscv_flush_icache_linux(void *start, void *end, unsigned long flags);
+long riscv_hwprobe_linux(riscv_hwprobe_linux *pairs, unsigned long pair_count, unsigned long cpu_count, unsigned long *cpumask, unsigned int flags);
+#endif
 //
 // 29. ADVANCED EXECUTION CONTROL
 //
 // 29a. Restartable sequences
-long rseq_linux(rseq *rseq, uint32_t rseq_len, int flags, uint32_t sig);
+long rseq_linux(rseq_t_linux *rseq, unsigned int rseq_len, int flags, unsigned int sig);
 // 29b. Restart syscall
 long restart_syscall_linux(void);
 // 29c. Directory entry cache
@@ -5879,25 +6518,29 @@ long lookup_dcookie_linux(unsigned long long cookie64, char *buf, unsigned long 
 //
 // 30. LEGACY, OBSOLETE & UNIMPLEMENTED
 //
-long _sysctl_linux(__sysctl_args *args);
-long ipc_linux(unsigned int call, int first, unsigned long second, unsigned long third, void *ptr, long fifth);
-long profil_linux(unsigned short *sample_buffer, unsigned long size, unsigned long offset, unsigned int scale);
-long prof_linux(void);
-long afs_syscall_linux(void);
-long break_linux(void);
-long ftime_linux(void);
-long gtty_linux(void);
-long idle_linux(void);
-long lock_linux(void);
-long nfsservctl_linux(int cmd, nfsctl_arg *arg, union nfsctl_res *res);
-long getpmsg_linux(int fd, strbuf *ctlptr, strbuf *dataptr, int *bandp, int *flagsp);
-long putpmsg_linux(int fd, strbuf *ctlptr, strbuf *dataptr, int band, int flags);
-long stty_linux(void);
-long tuxcall_linux(void);
-long vserver_linux(void);
-long bdflush_linux(int func, long data);
-long uselib_linux(const char *library);
-#endif // WIP
+// Disabled wrapper: long mpx_linux(void);
+// Disabled wrapper: long pciconfig_read_linux(unsigned long bus, unsigned long dfn, unsigned long off, unsigned long len, void *buf);
+// Disabled wrapper: long pciconfig_write_linux(unsigned long bus, unsigned long dfn, unsigned long off, unsigned long len, void *buf);
+// Disabled wrapper: long pciconfig_iobase_linux(long which, unsigned long bus, unsigned long devfn);
+// Disabled wrapper: long sysfs_linux(int option, unsigned long arg1, unsigned long arg2);
+// Disabled wrapper: long _sysctl_linux(__sysctl_args *args);
+// Disabled wrapper: long ipc_linux(unsigned int call, int first, unsigned long second, unsigned long third, void *ptr, long fifth);
+// Disabled wrapper: long profil_linux(unsigned short *sample_buffer, unsigned long size, unsigned long offset, unsigned int scale);
+// Disabled wrapper: long prof_linux(void);
+// Disabled wrapper: long afs_syscall_linux(void);
+// Disabled wrapper: long break_linux(void);
+// Disabled wrapper: long ftime_linux(void);
+// Disabled wrapper: long gtty_linux(void);
+// Disabled wrapper: long idle_linux(void);
+// Disabled wrapper: long lock_linux(void);
+// Disabled wrapper: long nfsservctl_linux(int cmd, nfsctl_arg *arg, nfsctl_res *res);
+// Disabled wrapper: long getpmsg_linux(int fd, strbuf *ctlptr, strbuf *dataptr, int *bandp, int *flagsp);
+// Disabled wrapper: long putpmsg_linux(int fd, strbuf *ctlptr, strbuf *dataptr, int band, int flags);
+// Disabled wrapper: long stty_linux(void);
+// Disabled wrapper: long tuxcall_linux(void);
+// Disabled wrapper: long vserver_linux(void);
+// Disabled wrapper: long bdflush_linux(int func, long data);
+// Disabled wrapper: long uselib_linux(const char *library);
 
 #endif // C_LINUX_HEADER
 #ifdef C_LINUX_IMPLEMENTATION
@@ -7970,7 +8613,6 @@ long request_key_linux(const char *_type, const char *_description, const char *
 long keyctl_linux(int cmd, unsigned long arg2, unsigned long arg3, unsigned long arg4, unsigned long arg5) {
   return Syscall5_linux(NR_keyctl_linux, cmd, arg2, arg3, arg4, arg5, 0);
 }
-#if 0 // WIP
 //
 // 20. RESOURCE LIMITS & ACCOUNTING
 //
@@ -8037,26 +8679,36 @@ long ptrace_linux(long op, int pid, void *addr, void *data) {
 // 23. SYSTEM INFORMATION
 //
 // 23a. System name and domain information
-long uname_linux(old_utsname *) {
-  return Syscall1_linux(NR_uname_linux, , 0);
+long uname_linux(utsname_linux *name) {
+  return Syscall1_linux(NR_uname_linux, name, 0);
 }
-long olduname_linux(oldold_utsname *) {
-  return Syscall1_linux(NR_olduname_linux, , 0);
+// Disabled wrapper: long olduname_linux(old_utsname *name);
+// Disabled wrapper: long oldolduname_linux(oldold_utsname *name);
+long gethostname_linux(char *name, unsigned long len) {
+  utsname_linux uts;
+  long res = uname_linux(&uts);
+  if (res < 0) return res;
+  long i = 0;
+  while (i < len && uts.nodename[i]) {
+    name[i] = uts.nodename[i];
+    ++i;
+  }
+  if (i < len) {
+    name[i] = '\0';
+    return 0;
+  } else if (len > 0) {
+    name[len - 1] = '\0';
+  }
+  return -ENAMETOOLONG_linux;
 }
-long oldolduname_linux(oldold_utsname *name) {
-  return Syscall1_linux(NR_oldolduname_linux, name, 0);
-}
-long gethostname_linux(char *name, int len) {
-  return Syscall2_linux(NR_gethostname_linux, name, len, 0);
-}
-long sethostname_linux(char *name, int len) {
+long sethostname_linux(const char *name, unsigned long len) {
   return Syscall2_linux(NR_sethostname_linux, name, len, 0);
 }
-long setdomainname_linux(char *name, int len) {
+long setdomainname_linux(const char *name, unsigned long len) {
   return Syscall2_linux(NR_setdomainname_linux, name, len, 0);
 }
 // 23b. Overall system information and statistics
-long sysinfo_linux(sysinfo *info) {
+long sysinfo_linux(sysinfo_t_linux *info) {
   return Syscall1_linux(NR_sysinfo_linux, info, 0);
 }
 // 23c. Reading kernel log messages
@@ -8064,20 +8716,14 @@ long syslog_linux(int type, char *buf, int len) {
   return Syscall3_linux(NR_syslog_linux, type, buf, len, 0);
 }
 // 23d. Getting CPU and NUMA node information
-long getcpu_linux(unsigned *cpu, unsigned *node, getcpu_cache *cache) {
+long getcpu_linux(unsigned int *cpu, unsigned int *node, getcpu_cache_linux *cache) {
   return Syscall3_linux(NR_getcpu_linux, cpu, node, cache, 0);
-}
-// 23e. Kernel filesystem information interface
-long sysfs_linux(int option, unsigned long arg1, unsigned long arg2) {
-  return Syscall3_linux(NR_sysfs_linux, option, arg1, arg2, 0);
 }
 //
 // 24. KERNEL MODULES
 //
-long create_module_linux(const char *name, unsigned long size) {
-  return Syscall2_linux(NR_create_module_linux, name, size, 0);
-}
-long init_module_linux(void *umod, unsigned long len, const char *uargs) {
+// Disabled wrapper: long create_module_linux(const char *name, unsigned long size);
+long init_module_linux(const void *umod, unsigned long len, const char *uargs) {
   return Syscall3_linux(NR_init_module_linux, umod, len, uargs, 0);
 }
 long finit_module_linux(int fd, const char *uargs, int flags) {
@@ -8086,17 +8732,13 @@ long finit_module_linux(int fd, const char *uargs, int flags) {
 long delete_module_linux(const char *name_user, unsigned int flags) {
   return Syscall2_linux(NR_delete_module_linux, name_user, flags, 0);
 }
-long query_module_linux(const char *name, int which, void *buf, unsigned long bufsize, unsigned long *ret) {
-  return Syscall5_linux(NR_query_module_linux, name, which, buf, bufsize, ret, 0);
-}
-long get_kernel_syms_linux(kernel_sym *table) {
-  return Syscall1_linux(NR_get_kernel_syms_linux, table, 0);
-}
+// Disabled wrapper: long query_module_linux(const char *name, int which, void *buf, unsigned long bufsize, unsigned long *ret);
+// Disabled wrapper: long get_kernel_syms_linux(kernel_sym_linux *table);
 //
 // 25. SYSTEM CONTROL & ADMINISTRATION
 //
 // 25a. Rebooting and shutting down the system
-long reboot_linux(int magic1, int magic2, unsigned int cmd, void *arg) {
+long reboot_linux(int magic1, int magic2, unsigned int cmd, const void *arg) {
   return Syscall4_linux(NR_reboot_linux, magic1, magic2, cmd, arg, 0);
 }
 // 25b. Enabling and disabling swap areas
@@ -8107,12 +8749,14 @@ long swapoff_linux(const char *specialfile) {
   return Syscall1_linux(NR_swapoff_linux, specialfile, 0);
 }
 // 25c. Loading and executing new kernels
-long kexec_load_linux(unsigned long entry, unsigned long nr_segments, kexec_segment *segments, unsigned long flags) {
+long kexec_load_linux(unsigned long entry, unsigned long nr_segments, const kexec_segment_linux *segments, unsigned long flags) {
   return Syscall4_linux(NR_kexec_load_linux, entry, nr_segments, segments, flags, 0);
 }
+#if !defined(__i386__)
 long kexec_file_load_linux(int kernel_fd, int initrd_fd, unsigned long cmdline_len, const char *cmdline_ptr, unsigned long flags) {
   return Syscall5_linux(NR_kexec_file_load_linux, kernel_fd, initrd_fd, cmdline_len, cmdline_ptr, flags, 0);
 }
+#endif
 // 25d. Other system administration operations
 long vhangup_linux(void) {
   return Syscall0_linux(NR_vhangup_linux, 0);
@@ -8121,30 +8765,34 @@ long vhangup_linux(void) {
 // 26. PERFORMANCE MONITORING & TRACING
 //
 // 26a. Hardware and software performance monitoring
-long perf_event_open_linux(perf_event_attr *attr_uptr, int pid, int cpu, int group_fd, unsigned long flags) {
+long perf_event_open_linux(const perf_event_attr_linux *attr_uptr, int pid, int cpu, int group_fd, unsigned long flags) {
   return Syscall5_linux(NR_perf_event_open_linux, attr_uptr, pid, cpu, group_fd, flags, 0);
 }
 // 26b. Userspace dynamic tracing
+#if defined(__x86_64__)
 long uprobe_linux(void) {
   return Syscall0_linux(NR_uprobe_linux, 0);
 }
 long uretprobe_linux(void) {
   return Syscall0_linux(NR_uretprobe_linux, 0);
 }
+#endif
 // 26c. Programmable Kernel Extensions (eBPF)
-long bpf_linux(int cmd, union bpf_attr *attr, unsigned int size) {
+long bpf_linux(int cmd, bpf_attr_linux *attr, unsigned int size) {
   return Syscall3_linux(NR_bpf_linux, cmd, attr, size, 0);
 }
 //
 // 27. DEVICE & HARDWARE ACCESS
 //
 // 27a. Direct hardware I/O port access
+#if defined(__x86_64__) || defined(__i386__)
 long ioperm_linux(unsigned long from, unsigned long num, int on) {
   return Syscall3_linux(NR_ioperm_linux, from, num, on, 0);
 }
 long iopl_linux(unsigned int level) {
   return Syscall1_linux(NR_iopl_linux, level, 0);
 }
+#endif
 // 27b. Setting I/O scheduling priority
 long ioprio_set_linux(int which, int who, int ioprio) {
   return Syscall3_linux(NR_ioprio_set_linux, which, who, ioprio, 0);
@@ -8152,68 +8800,62 @@ long ioprio_set_linux(int which, int who, int ioprio) {
 long ioprio_get_linux(int which, int who) {
   return Syscall2_linux(NR_ioprio_get_linux, which, who, 0);
 }
-// 27c. PCI device configuration access
-long pciconfig_read_linux(unsigned long bus, unsigned long dfn, unsigned long off, unsigned long len, void *buf) {
-  return Syscall5_linux(NR_pciconfig_read_linux, bus, dfn, off, len, buf, 0);
-}
-long pciconfig_write_linux(unsigned long bus, unsigned long dfn, unsigned long off, unsigned long len, void *buf) {
-  return Syscall5_linux(NR_pciconfig_write_linux, bus, dfn, off, len, buf, 0);
-}
-long pciconfig_iobase_linux(long which, unsigned long bus, unsigned long devfn) {
-  return Syscall3_linux(NR_pciconfig_iobase_linux, which, bus, devfn, 0);
-}
-// 27d. CPU cache control operations
-long cacheflush_linux(unsigned long start, unsigned long end, int flags) {
+// 27c. CPU cache control operations
+#if defined(__arm__)
+long cacheflush_linux(void *start, void *end, int flags) {
   return Syscall3_linux(NR_cacheflush_linux, start, end, flags, 0);
 }
-long cachestat_linux(unsigned int fd, cachestat_range *cstat_range, cachestat *cstat, unsigned int flags) {
+#endif
+long cachestat_linux(unsigned int fd, const cachestat_range_linux *cstat_range, cachestat_t_linux *cstat, unsigned int flags) {
   return Syscall4_linux(NR_cachestat_linux, fd, cstat_range, cstat, flags, 0);
 }
 //
 // 28. ARCHITECTURE-SPECIFIC OPERATIONS
 //
 // 28a. x86 architecture operations
+#if defined(__x86_64__) || defined(__i386__)
 long arch_prctl_linux(int option, unsigned long addr) {
   return Syscall2_linux(NR_arch_prctl_linux, option, addr, 0);
 }
 long modify_ldt_linux(int func, void *ptr, unsigned long bytecount) {
   return Syscall3_linux(NR_modify_ldt_linux, func, ptr, bytecount, 0);
 }
-long set_thread_area_linux(user_desc *u_info) {
+long set_thread_area_linux(const user_desc_linux *u_info) {
   return Syscall1_linux(NR_set_thread_area_linux, u_info, 0);
 }
-long get_thread_area_linux(user_desc *u_info) {
+long get_thread_area_linux(user_desc_linux *u_info) {
   return Syscall1_linux(NR_get_thread_area_linux, u_info, 0);
 }
+#endif
+#if defined(__i386__)
 long vm86_linux(unsigned long cmd, unsigned long arg) {
   return Syscall2_linux(NR_vm86_linux, cmd, arg, 0);
 }
-long vm86old_linux(vm86_struct *user_vm86) {
-  return Syscall1_linux(NR_vm86old_linux, user_vm86, 0);
-}
+// Disabled wrapper: long vm86old_linux(vm86_struct_linux *user_vm86);
+#endif
 // 28b. ARM architecture operations
+#if defined(__arm__)
 long set_tls_linux(unsigned long val) {
   return Syscall1_linux(NR_set_tls_linux, val, 0);
 }
 long get_tls_linux(void) {
   return Syscall0_linux(NR_get_tls_linux, 0);
 }
+#endif
 // 28c. RISC-V architecture operations
-long riscv_flush_icache_linux(uintptr_t start, uintptr_t end, uintptr_t flags) {
+#if defined(__riscv)
+long riscv_flush_icache_linux(void *start, void *end, unsigned long flags) {
   return Syscall3_linux(NR_riscv_flush_icache_linux, start, end, flags, 0);
 }
-long riscv_hwprobe_linux(riscv_hwprobe *pairs, unsigned long pair_count, unsigned long cpu_count, unsigned long *cpumask, unsigned int flags) {
+long riscv_hwprobe_linux(riscv_hwprobe_linux *pairs, unsigned long pair_count, unsigned long cpu_count, unsigned long *cpumask, unsigned int flags) {
   return Syscall5_linux(NR_riscv_hwprobe_linux, pairs, pair_count, cpu_count, cpumask, flags, 0);
 }
-// 28d. Intel MPX support (deprecated)
-long mpx_linux(void) {
-  return Syscall0_linux(NR_mpx_linux, 0);
-}
+#endif
 //
 // 29. ADVANCED EXECUTION CONTROL
 //
 // 29a. Restartable sequences
-long rseq_linux(rseq *rseq, uint32_t rseq_len, int flags, uint32_t sig) {
+long rseq_linux(rseq_t_linux *rseq, unsigned int rseq_len, int flags, unsigned int sig) {
   return Syscall4_linux(NR_rseq_linux, rseq, rseq_len, flags, sig, 0);
 }
 // 29b. Restart syscall
@@ -8222,66 +8864,38 @@ long restart_syscall_linux(void) {
 }
 // 29c. Directory entry cache
 long lookup_dcookie_linux(unsigned long long cookie64, char *buf, unsigned long len) {
+#if defined(__x86_64__) || defined(__aarch64__) || (defined(__riscv) && (__riscv_xlen == 64))
   return Syscall3_linux(NR_lookup_dcookie_linux, cookie64, buf, len, 0);
+#else
+  return Syscall4_linux(NR_lookup_dcookie_linux, LO32_bits(cookie64), HI32_bits(cookie64), buf, len);
+#endif
 }
 //
 // 30. LEGACY, OBSOLETE & UNIMPLEMENTED
 //
-long _sysctl_linux(__sysctl_args *args) {
-  return Syscall1_linux(NR__sysctl_linux, args, 0);
-}
-long ipc_linux(unsigned int call, int first, unsigned long second, unsigned long third, void *ptr, long fifth) {
-  return Syscall6_linux(NR_ipc_linux, call, first, second, third, ptr, fifth, 0);
-}
-long profil_linux(unsigned short *sample_buffer, unsigned long size, unsigned long offset, unsigned int scale) {
-  return Syscall4_linux(NR_profil_linux, sample_buffer, size, offset, scale, 0);
-}
-long prof_linux(void) {
-  return Syscall0_linux(NR_prof_linux, 0);
-}
-long afs_syscall_linux(void) {
-  return Syscall0_linux(NR_afs_syscall_linux, 0);
-}
-long break_linux(void) {
-  return Syscall0_linux(NR_break_linux, 0);
-}
-long ftime_linux(void) {
-  return Syscall0_linux(NR_ftime_linux, 0);
-}
-long gtty_linux(void) {
-  return Syscall0_linux(NR_gtty_linux, 0);
-}
-long idle_linux(void) {
-  return Syscall0_linux(NR_idle_linux, 0);
-}
-long lock_linux(void) {
-  return Syscall0_linux(NR_lock_linux, 0);
-}
-long nfsservctl_linux(int cmd, nfsctl_arg *arg, union nfsctl_res *res) {
-  return Syscall3_linux(NR_nfsservctl_linux, cmd, arg, res, 0);
-}
-long getpmsg_linux(int fd, strbuf *ctlptr, strbuf *dataptr, int *bandp, int *flagsp) {
-  return Syscall5_linux(NR_getpmsg_linux, fd, ctlptr, dataptr, bandp, flagsp, 0);
-}
-long putpmsg_linux(int fd, strbuf *ctlptr, strbuf *dataptr, int band, int flags) {
-  return Syscall5_linux(NR_putpmsg_linux, fd, ctlptr, dataptr, band, flags, 0);
-}
-long stty_linux(void) {
-  return Syscall0_linux(NR_stty_linux, 0);
-}
-long tuxcall_linux(void) {
-  return Syscall0_linux(NR_tuxcall_linux, 0);
-}
-long vserver_linux(void) {
-  return Syscall0_linux(NR_vserver_linux, 0);
-}
-long bdflush_linux(int func, long data) {
-  return Syscall2_linux(NR_bdflush_linux, func, data, 0);
-}
-long uselib_linux(const char *library) {
-  return Syscall1_linux(NR_uselib_linux, library, 0);
-}
-#endif // WIP
+// Disabled wrapper: long mpx_linux(void);
+// Disabled wrapper: long pciconfig_read_linux(unsigned long bus, unsigned long dfn, unsigned long off, unsigned long len, void *buf);
+// Disabled wrapper: long pciconfig_write_linux(unsigned long bus, unsigned long dfn, unsigned long off, unsigned long len, void *buf);
+// Disabled wrapper: long pciconfig_iobase_linux(long which, unsigned long bus, unsigned long devfn);
+// Disabled wrapper: long sysfs_linux(int option, unsigned long arg1, unsigned long arg2);
+// Disabled wrapper: long _sysctl_linux(__sysctl_args *args);
+// Disabled wrapper: long ipc_linux(unsigned int call, int first, unsigned long second, unsigned long third, void *ptr, long fifth);
+// Disabled wrapper: long profil_linux(unsigned short *sample_buffer, unsigned long size, unsigned long offset, unsigned int scale);
+// Disabled wrapper: long prof_linux(void);
+// Disabled wrapper: long afs_syscall_linux(void);
+// Disabled wrapper: long break_linux(void);
+// Disabled wrapper: long ftime_linux(void);
+// Disabled wrapper: long gtty_linux(void);
+// Disabled wrapper: long idle_linux(void);
+// Disabled wrapper: long lock_linux(void);
+// Disabled wrapper: long nfsservctl_linux(int cmd, nfsctl_arg *arg, nfsctl_res *res);
+// Disabled wrapper: long getpmsg_linux(int fd, strbuf *ctlptr, strbuf *dataptr, int *bandp, int *flagsp);
+// Disabled wrapper: long putpmsg_linux(int fd, strbuf *ctlptr, strbuf *dataptr, int band, int flags);
+// Disabled wrapper: long stty_linux(void);
+// Disabled wrapper: long tuxcall_linux(void);
+// Disabled wrapper: long vserver_linux(void);
+// Disabled wrapper: long bdflush_linux(int func, long data);
+// Disabled wrapper: long uselib_linux(const char *library);
 
 #ifndef C_BITS
   #undef LO32_bits
