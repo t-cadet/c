@@ -9,6 +9,8 @@
 //   * Linux types                  (jump: clone_args_linux)
 //   * syscallN generic wrappers    (jump: Syscall0_linux)
 //   * syscall-specific wrappers    (jump: fork_linux)
+//
+//   Linux version: v6.19
 // 
 // Usage:
 //   linux.h is a libc-free & zero-dependency header-only library for C & C++
@@ -3296,6 +3298,15 @@ enum {
 #define IORING_OP_FUTEX_WAITV_linux      53
 #define IORING_OP_FIXED_FD_INSTALL_linux 54
 #define IORING_OP_FTRUNCATE_linux        55
+#define IORING_OP_BIND_linux             56
+#define IORING_OP_LISTEN_linux           57
+#define IORING_OP_RECV_ZC_linux          58
+#define IORING_OP_EPOLL_WAIT_linux       59
+#define IORING_OP_READV_FIXED_linux      60
+#define IORING_OP_WRITEV_FIXED_linux     61
+#define IORING_OP_PIPE_linux             62
+#define IORING_OP_NOP128_linux           63
+#define IORING_OP_URING_CMD128_linux     64
 
 #define IORING_ENTER_GETEVENTS_linux   (1U << 0)
 #define IORING_ENTER_SQ_WAKEUP_linux   (1U << 1)
@@ -3326,6 +3337,13 @@ enum {
 #define IORING_CQE_F_MORE_linux          (1U << 1)
 #define IORING_CQE_F_SOCK_NONEMPTY_linux (1U << 2)
 #define IORING_CQE_F_NOTIF_linux         (1U << 3)
+
+#define SOCKET_URING_OP_SIOCINQ_linux         0
+#define SOCKET_URING_OP_SIOCOUTQ_linux        1
+#define SOCKET_URING_OP_GETSOCKOPT_linux      2
+#define SOCKET_URING_OP_SETSOCKOPT_linux      3
+#define SOCKET_URING_OP_TX_TIMESTAMP_linux    4
+#define SOCKET_URING_OP_GETSOCKNAME_linux     5
 
 #define CLOCK_REALTIME_linux                  0
 #define CLOCK_MONOTONIC_linux                 1
@@ -3547,6 +3565,26 @@ enum {
 
 #define LISTNS_CURRENT_USER_linux     0xffffffffffffffffULL
 #define NS_ID_REQ_SIZE_VER0_linux     32
+
+#define TIME_NS_linux                  0x00000080
+#define MNT_NS_linux                   0x00020000
+#define CGROUP_NS_linux                0x02000000
+#define UTS_NS_linux                   0x04000000
+#define IPC_NS_linux                   0x08000000
+#define USER_NS_linux                  0x10000000
+#define PID_NS_linux                   0x20000000
+#define NET_NS_linux                   0x40000000
+
+enum {
+  IPC_NS_INIT_ID_linux    = 1ULL,
+  UTS_NS_INIT_ID_linux    = 2ULL,
+  USER_NS_INIT_ID_linux   = 3ULL,
+  PID_NS_INIT_ID_linux    = 4ULL,
+  CGROUP_NS_INIT_ID_linux = 5ULL,
+  TIME_NS_INIT_ID_linux   = 6ULL,
+  NET_NS_INIT_ID_linux    = 7ULL,
+  MNT_NS_INIT_ID_linux    = 8ULL,
+};
 
 #define KCMP_FILE_linux               0
 #define KCMP_VM_linux                 1
@@ -5421,6 +5459,12 @@ typedef struct {
     unsigned long long user_ns_id;
   };
 } ns_id_req_linux;
+
+typedef struct {
+  unsigned long long ns_id;
+  unsigned int ns_type;
+  unsigned int ns_inum;
+} nsfs_file_handle_linux;
 
 typedef struct {
   unsigned int efd;

@@ -6,7 +6,7 @@ A collection of standalone header-only C libraries for use in my libc-free proje
 
 (see the top of each header file for more details)
 
-* **linux.h**: (WIP) Cross-architecture Linux API
+* **linux.h**: Cross-architecture Linux API
 
 ## Getting Started
 
