@@ -4,10 +4,11 @@
 // === linux.h: Cross-architecture Linux API ===================================
 // 
 // Contents:
-//   * syscall number table                (jump: NR_fork_linux)
-//   * WIP: syscall API types & constants  (jump: CSIGNAL_linux)
-//   * syscallN generic wrappers           (jump: Syscall0_linux)
-//   * WIP: syscall-specific wrappers      (jump: fork_linux)
+//   * syscall number table         (jump: NR_fork_linux)
+//   * Linux constants              (jump: EPERM_linux)
+//   * Linux types                  (jump: clone_args_linux)
+//   * syscallN generic wrappers    (jump: Syscall0_linux)
+//   * syscall-specific wrappers    (jump: fork_linux)
 // 
 // Usage:
 //   linux.h is a libc-free & zero-dependency header-only library for C & C++
@@ -1848,6 +1849,10 @@
 #define MEMBARRIER_CMD_GET_REGISTRATIONS_linux                    (1 << 9)
 
 #define MEMBARRIER_CMD_FLAG_CPU_linux                             (1 << 0)
+
+#define STDIN_FILENO_linux            0
+#define STDOUT_FILENO_linux           1
+#define STDERR_FILENO_linux           2
 
 #define O_ACCMODE_linux             00000003
 #define O_RDONLY_linux              00000000
@@ -4892,7 +4897,7 @@ typedef struct {
 typedef struct {
 #if defined(__i386__) || defined(__arm__)
   union {
-    (void (*)(int)) sa_handler;
+    void (*sa_handler)(int);
     void (*sa_sigaction)(int, void *, void *);
   } _u;
   unsigned long long sa_mask;
@@ -5164,7 +5169,6 @@ typedef struct {
   const unsigned long long *sigmask;
   unsigned long sigsetsize;
 } aio_sigset_linux;
-
 
 typedef struct {
   unsigned char opcode;
@@ -5821,7 +5825,7 @@ typedef struct {
 typedef struct {
   long long key;
   unsigned long long value;
-} riscv_hwprobe_linux;
+} riscv_hwprobe_t_linux;
 
 typedef struct {
   unsigned int version;
@@ -6272,7 +6276,7 @@ long io_submit_linux(unsigned long ctx_id, long nr, iocb_linux *const *iocbpp);
 long io_cancel_linux(unsigned long ctx_id, const iocb_linux *iocb, io_event_linux *result);
 long io_getevents_linux(unsigned long ctx_id, long min_nr, long nr, io_event_linux *events, __kernel_timespec_linux *timeout);
 // Disabled wrapper: long io_pgetevents_linux(unsigned long ctx_id, long min_nr, long nr, io_event_linux *events, const __kernel_old_timespec_linux *timeout, const __aio_sigset *sig);
-long io_pgetevents_time64_linux(unsigned long ctx_id, long min_nr, long nr, io_event_linux *events, const __kernel_timespec_linux *timeout, unsigned long long sigmask);
+long io_pgetevents_time64_linux(unsigned long ctx_id, long min_nr, long nr, io_event_linux *events, const __kernel_timespec_linux *timeout, unsigned long long *sigmask);
 // 15b. io_uring: high-performance asynchronous I/O
 long io_uring_setup_linux(unsigned int entries, io_uring_params_linux *p);
 long io_uring_enter_linux(unsigned int fd, unsigned int to_submit, unsigned int min_complete, unsigned int flags, const void *argp, unsigned long argsz);
@@ -6504,7 +6508,7 @@ long get_tls_linux(void);
 // 28c. RISC-V architecture operations
 #if defined(__riscv)
 long riscv_flush_icache_linux(void *start, void *end, unsigned long flags);
-long riscv_hwprobe_linux(riscv_hwprobe_linux *pairs, unsigned long pair_count, unsigned long cpu_count, unsigned long *cpumask, unsigned int flags);
+long riscv_hwprobe_linux(riscv_hwprobe_t_linux *pairs, unsigned long pair_count, unsigned long cpu_count, unsigned long *cpumask, unsigned int flags);
 #endif
 //
 // 29. ADVANCED EXECUTION CONTROL
@@ -7587,7 +7591,7 @@ long fadvise64_64_linux(int fd, long long offset, long long len, int advice) {
 #elif defined(__arm__)
   return Syscall6_linux(NR_arm_fadvise64_64_linux, fd, advice, LO32_bits(offset), HI32_bits(offset), LO32_bits(len), HI32_bits(len), 0);
 #elif defined(__riscv) && (__riscv_xlen == 32)
-   return Syscall6_linux(NR_fadvise64_64_linux, fd, advice, 0, LO32_bits(offset), HI32_bits(offset), LO32_bits(len), HI32_bits(len), 0);
+   return Syscall6_linux(NR_fadvise64_64_linux, fd, advice, LO32_bits(offset), HI32_bits(offset), LO32_bits(len), HI32_bits(len), 0);
 #endif
 }
 // Disabled wrapper: long arm_fadvise64_64_linux(int fd, int advice, long long offset, long long len);
@@ -8287,13 +8291,13 @@ long io_cancel_linux(unsigned long ctx_id, const iocb_linux *iocb, io_event_linu
   return Syscall3_linux(NR_io_cancel_linux, ctx_id, iocb, result, 0);
 }
 long io_getevents_linux(unsigned long ctx_id, long min_nr, long nr, io_event_linux *events, __kernel_timespec_linux *timeout) {
-  return Syscall5_linux(NR_io_getevents_linux, ctx_id, min_nr, nr, events, timeout, 0);
+  return io_pgetevents_time64_linux(ctx_id, min_nr, nr, events, timeout, 0);
 }
 // Disabled wrapper: long io_pgetevents_linux(unsigned long ctx_id, long min_nr, long nr, io_event_linux *events, const __kernel_old_timespec_linux *timeout, const __aio_sigset *sig);
-long io_pgetevents_time64_linux(unsigned long ctx_id, long min_nr, long nr, io_event_linux *events, const __kernel_timespec_linux *timeout, unsigned long long sigmask) {
+long io_pgetevents_time64_linux(unsigned long ctx_id, long min_nr, long nr, io_event_linux *events, const __kernel_timespec_linux *timeout, unsigned long long *sigmask) {
   aio_sigset_linux sig;
-  sig.sigmask = &sigmask;
-  sig.sigsetsize = sizeof(sigmask);
+  sig.sigmask = sigmask;
+  sig.sigsetsize = sizeof(*sigmask);
 #if defined(__x86_64__) || defined(__aarch64__) || (defined(__riscv) && (__riscv_xlen == 64))
   return Syscall6_linux(NR_io_pgetevents_linux, ctx_id, min_nr, nr, events, timeout, &sig, 0);
 #else
@@ -8685,19 +8689,21 @@ long uname_linux(utsname_linux *name) {
 // Disabled wrapper: long olduname_linux(old_utsname *name);
 // Disabled wrapper: long oldolduname_linux(oldold_utsname *name);
 long gethostname_linux(char *name, unsigned long len) {
-  utsname_linux uts;
-  long res = uname_linux(&uts);
-  if (res < 0) return res;
-  long i = 0;
-  while (i < len && uts.nodename[i]) {
-    name[i] = uts.nodename[i];
-    ++i;
-  }
-  if (i < len) {
-    name[i] = '\0';
-    return 0;
-  } else if (len > 0) {
-    name[len - 1] = '\0';
+  if (name) {
+    utsname_linux uts;
+    long res = uname_linux(&uts);
+    if (res < 0) return res;
+    long i = 0;
+    while (i < len && uts.nodename[i]) {
+      name[i] = uts.nodename[i];
+      ++i;
+    }
+    if (i < len) {
+      name[i] = '\0';
+      return 0;
+    } else if (len > 0) {
+      name[len - 1] = '\0';
+    }
   }
   return -ENAMETOOLONG_linux;
 }
@@ -8847,7 +8853,7 @@ long get_tls_linux(void) {
 long riscv_flush_icache_linux(void *start, void *end, unsigned long flags) {
   return Syscall3_linux(NR_riscv_flush_icache_linux, start, end, flags, 0);
 }
-long riscv_hwprobe_linux(riscv_hwprobe_linux *pairs, unsigned long pair_count, unsigned long cpu_count, unsigned long *cpumask, unsigned int flags) {
+long riscv_hwprobe_linux(riscv_hwprobe_t_linux *pairs, unsigned long pair_count, unsigned long cpu_count, unsigned long *cpumask, unsigned int flags) {
   return Syscall5_linux(NR_riscv_hwprobe_linux, pairs, pair_count, cpu_count, cpumask, flags, 0);
 }
 #endif
@@ -8867,7 +8873,7 @@ long lookup_dcookie_linux(unsigned long long cookie64, char *buf, unsigned long 
 #if defined(__x86_64__) || defined(__aarch64__) || (defined(__riscv) && (__riscv_xlen == 64))
   return Syscall3_linux(NR_lookup_dcookie_linux, cookie64, buf, len, 0);
 #else
-  return Syscall4_linux(NR_lookup_dcookie_linux, LO32_bits(cookie64), HI32_bits(cookie64), buf, len);
+  return Syscall4_linux(NR_lookup_dcookie_linux, LO32_bits(cookie64), HI32_bits(cookie64), buf, len, 0);
 #endif
 }
 //

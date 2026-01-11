@@ -2,14 +2,13 @@
 // 
 // Cross-compilation:
 // 
-// clang --target=aarch64-linux-gnu -nostdlib -static -fuse-ld=lld -ffreestanding -o linux_demo linux_demo.c -e main
-// qemu-aarch64 ./linux_demo
+// clang --target=aarch64-linux-gnu -nostdlib -static -fuse-ld=lld -ffreestanding -o linux_demo linux_demo.c -e main && qemu-aarch64 ./linux_demo
+// clang --target=riscv64-linux-gnu -nostdlib -static -fuse-ld=lld -ffreestanding -o linux_demo linux_demo.c -e main && qemu-riscv64 ./linux_demo
 // 
-// clang --target=riscv32-linux-gnu -nostdlib -static -fuse-ld=lld -ffreestanding -o linux_demo linux_demo.c -e main
-// qemu-riscv32 ./linux_demo
+// clang --target=i386-linux-gnu -nostdlib -static -fuse-ld=lld -ffreestanding -o linux_demo linux_demo.c -e main && qemu-i386 ./linux_demo
+// clang --target=arm-linux-gnueabihf -nostdlib -static -fuse-ld=lld -ffreestanding -o linux_demo linux_demo.c -e main && qemu-arm ./linux_demo
+// clang --target=riscv32-linux-gnu -nostdlib -static -fuse-ld=lld -ffreestanding -o linux_demo linux_demo.c -e main && qemu-riscv32 ./linux_demo
 // 
-// clang --target=i386-linux-gnu -nostdlib -static -fuse-ld=lld -ffreestanding -o linux_demo linux_demo.c -e main
-// qemu-i386 ./linux_demo
 
 #define C_LINUX_IMPLEMENTATION
 #include "linux.h"
@@ -28,80 +27,12 @@
   #define ARCHNAME "riscv32"
 #endif
 
-char *hello = "Hello from " ARCHNAME ", libc-free world!\n";
-
-// Constants
-#define AT_FDCWD  -100
-#define O_RDONLY    00
-#define O_WRONLY    01
-#define O_RDWR      02
-#define O_CREAT     0100
-#define O_TRUNC     01000
-#define SEEK_SET    0
+char *hello = "Demo: Hello from " ARCHNAME ", libc-free world!\n";
 
 #define true        1
 #define false       0
 
 #define NULL 0
-
-#define STDOUT 1
-#define STDERR 2
-
-#define EINVAL 22
-
-#define LO32(x) (x & 0xFFFFFFFF)
-#define HI32(x) (x >> 32)
-
-// Wrappers
-long close(int fd) {
-  return Syscall1_linux(NR_close_linux, fd, 0);
-}
-
-long read(int fd, void *buf, unsigned long count) {
-  return Syscall3_linux(NR_read_linux, fd, buf, count, 0);
-}
-
-long write(int fd, const void *buf, unsigned long count) {
-  return Syscall3_linux(NR_write_linux, fd, buf, count, 0);
-}
-
-int unlink(const char* path) {
-  return Syscall3_linux(NR_unlinkat_linux, AT_FDCWD, path, 0, 0);
-}
-
-int open(const char *path, int flags, int mode) {
-  return Syscall4_linux(NR_openat_linux, AT_FDCWD, path, flags, mode, 0);
-}
-
-int fsync(int fd) {
-  return Syscall1_linux(NR_fsync_linux, fd, 0);
-}
-
-long llseek(int fd, long long offset, int whence) {
-  #if (defined(__riscv) && __riscv_xlen == 32)
-    // TODO: There seems to be an issue with the
-    // syscall number data coming from glibc, it
-    // seems there is no llseek but only _llseek
-    #undef NR__llseek_linux
-    #define NR__llseek_linux NR_llseek_linux
-  #endif
-  #if (defined(__riscv) && __riscv_xlen == 32) || defined(__i386__) || defined(__arm__)
-    long long result;
-    long ret = Syscall5_linux(
-        NR__llseek_linux,
-        fd,
-        HI32(offset),
-        LO32(offset),
-        &result,
-        whence,
-        0
-    );
-    if (ret < 0) return ret;
-    return result;
-#else
-  return Syscall3_linux(NR_lseek_linux, fd, offset, whence, 0);
-#endif
-}
 
 // Helpers
 unsigned long Size_chars(const char* chars) {
@@ -114,7 +45,7 @@ unsigned long Size_chars(const char* chars) {
 
 void _Assert(int condition, const char* message) {
   if (!condition) {
-    write(STDERR, message, Size_chars(message));
+    write_linux(STDERR_FILENO_linux, message, Size_chars(message));
     exit_linux(1);
   }
 }
@@ -136,16 +67,16 @@ int Eq_chars(const char* a, const char* b) {
 
 long Print(int fd, const char* data) {
   unsigned long stringSize = Size_chars(data);
-  long count = write(fd, data, stringSize);
+  long count = write_linux(fd, data, stringSize);
   Assert(count == stringSize); 
   return count;
 }
 
 void Cleanup(const char *f1, const char *f2, int fd1, int fd2) {
-    if (fd1 >= 0) close(fd1);
-    if (fd2 >= 0) close(fd2);
-    unlink(f1);
-    unlink(f2);
+    if (fd1 >= 0) close_linux(fd1);
+    if (fd2 >= 0) close_linux(fd2);
+    unlink_linux(f1);
+    unlink_linux(f2);
 }
 
 void Syscall6_test() {
@@ -154,37 +85,35 @@ void Syscall6_test() {
   const char *content = "abcdefghijHello, Syscall6 World!";
   unsigned long len = Size_chars(content);
 
-  int fdIn = open(srcname, O_RDWR | O_CREAT | O_TRUNC, 0644);
+  int fdIn = open_linux(srcname, O_RDWR_linux | O_CREAT_linux | O_TRUNC_linux, 0644);
   Assert(fdIn > 0);
   Print(fdIn, content);
 
-  fsync(fdIn);
+  fsync_linux(fdIn);
 
-  int fdOut = open(dstname, O_RDWR | O_CREAT | O_TRUNC, 0644);
+  int fdOut = open_linux(dstname, O_RDWR_linux | O_CREAT_linux | O_TRUNC_linux, 0644);
   Assert(fdOut > 0);
   Print(fdOut, "abcdefghij");
 
   {
-    Print(STDERR, "Test A: Sending invalid flags (expecting failure)...\n");
+    Print(STDERR_FILENO_linux, "Test A: Sending invalid flags (expecting failure)...\n");
     long long offIn = 10;
     long long offOut = 10;
-    long retFail = Syscall6_linux(
-        NR_copy_file_range_linux,
+    long retFail = copy_file_range_linux(
         fdIn,
         &offIn,
         fdOut,
         &offOut,
         len - 10,
-        0xFF, // no flags is supported so this should fail
-        0     // ret2 pointer
+        0xFF // no flags is supported so this should fail
     );
-    if (retFail == -EINVAL) {
-        Print(STDERR, "Test A: Passed: Kernel received flag 0xFF and rejected it.\n");
+    if (retFail == -EINVAL_linux) {
+        Print(STDERR_FILENO_linux, "Test A: Passed: Kernel received flag 0xFF and rejected it.\n");
     } else if (retFail >= 0) {
-        Print(STDERR, "Test A: FAILED: Syscall succeeded! Arg 6 was likely lost/zeroed.\n");
+        Print(STDERR_FILENO_linux, "Test A: FAILED: Syscall succeeded! Arg 6 was likely lost/zeroed.\n");
         exit_linux(1);
     } else {
-        Print(STDERR, "Test A: warning: Failed with unexpected error: ");
+        Print(STDERR_FILENO_linux, "Test A: warning: Failed with unexpected error: ");
         exit_linux(retFail);
     }
   }
@@ -193,46 +122,45 @@ void Syscall6_test() {
     long long offIn = 10;
     long long offOut = 10;
 
-    Print(STDERR, "Test B: Sending valid flags (expecting success)...\n");
-    long ret = Syscall6_linux(
-        NR_copy_file_range_linux,
+    Print(STDERR_FILENO_linux, "Test B: Sending valid flags (expecting success)...\n");
+    long ret = copy_file_range_linux(
         fdIn,
         &offIn,
         fdOut,
         &offOut,
         len - 10,
-        0,                        // Arg 6: flags
-        0                         // ret2 pointer
+        0                        // Arg 6: flags
     );
 
     if (ret < 0) {
-        Print(STDERR, "Test B: Syscall failed\n");
+        Print(STDERR_FILENO_linux, "Test B: Syscall failed\n");
         Cleanup(srcname, dstname, fdIn, fdOut);
         exit_linux(1);
     } else if (ret != len - 10) {
-        Print(STDERR, "Test B: Syscall succeeded but copied incomplete bytes\n");
+        Print(STDERR_FILENO_linux, "Test B: Syscall succeeded but copied incomplete bytes\n");
     } else {
-        Print(STDERR, "Test B: Success!\n");
+        Print(STDERR_FILENO_linux, "Test B: Success!\n");
     }
 
     char buf[100];
-    llseek(fdOut, 0, SEEK_SET);
+    long long result = 0;
+    llseek_linux(fdOut, 0, &result, SEEK_SET_linux);
   
-    long readLen = read(fdOut, buf, sizeof(buf));
+    long readLen = read_linux(fdOut, buf, sizeof(buf));
     if (readLen > 0) {
         buf[readLen] = 0;
         if (Eq_chars(buf, content)) {
-            Print(STDERR, "Test B: Content check passed.\n");
+            Print(STDERR_FILENO_linux, "Test B: Content check passed.\n");
         } else {
-            Print(STDERR, "Test B: Content check FAILED.\n");
+            Print(STDERR_FILENO_linux, "Test B: Content check FAILED.\n");
 
-            Print(STDERR, "Test B: Expected: ");
-            Print(STDERR, content);
-            Print(STDERR, "\n");
+            Print(STDERR_FILENO_linux, "Test B: Expected: ");
+            Print(STDERR_FILENO_linux, content);
+            Print(STDERR_FILENO_linux, "\n");
 
-            Print(STDERR, "Test B: Got: ");
-            Print(STDERR, buf);
-            Print(STDERR, "\n");
+            Print(STDERR_FILENO_linux, "Test B: Got: ");
+            Print(STDERR_FILENO_linux, buf);
+            Print(STDERR_FILENO_linux, "\n");
         }
     }
   }
@@ -241,15 +169,13 @@ void Syscall6_test() {
 }
 
 void SyscallWrapper_demo() {
-  // TODO: use linux.h wrappers
-  #define write_linux write
-  long ret = write_linux(STDOUT, hello, Size_chars(hello));
+  long ret = write_linux(STDOUT_FILENO_linux, hello, Size_chars(hello));
   Assert(ret == Size_chars(hello));
 }
 
 void SyscallN_demo() {
   long ret = Syscall3_linux(NR_write_linux, // syscall number
-               STDOUT,                      // arg1
+               STDOUT_FILENO_linux,                      // arg1
                hello,                       // arg2
                Size_chars(hello),           // arg3
                NULL);                       // ret2 pointer (some syscalls have 2 return values e.g., pipe() on MIPS/Alpha).
@@ -259,14 +185,12 @@ void SyscallN_demo() {
 int main(void) {
   SyscallWrapper_demo();
   SyscallN_demo();
-  // TODO: CompatibilityWrappersForUnimplementedSyscalls_demo();
 
-  Print(STDOUT, "\n");
+  Print(STDOUT_FILENO_linux, "\n");
 
   Syscall6_test();
   exit_linux(42);
-
-  SyscallWrapper_demo();
+  Syscall6_test();
 
   return 0;
 }
